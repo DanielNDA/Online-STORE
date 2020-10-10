@@ -14,6 +14,7 @@ public class ProductModel {
     private String thumbnail;
 
     private double price;
+
     @OneToMany(fetch = FetchType.LAZY)
     private ManufacturerModel manufacturerModel;
 
