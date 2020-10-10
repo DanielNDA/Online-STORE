@@ -1,6 +1,10 @@
 package com.sda.onlinestore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "address")
@@ -20,6 +24,13 @@ public class AddressModel {
 
     @OneToOne(mappedBy = "addressModel")
     private UserModel userModel;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private OrderModel order;
+    
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonIgnoreProperties("deliveryAddress")
+    private List<OrderModel> orders = new ArrayList<>();
 
     public Long getId() {
         return id;

@@ -17,9 +17,11 @@ public class OrderModel {
 
     private Double total;
 
-    private String deliveryAddress;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private AddressModel deliveryAddress;
 
-    private String userAddress;
+    @OneToOne(cascade = CascadeType.ALL)
+    private AddressModel userAddress;
 
     private Date dateOfOrder;
 

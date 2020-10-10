@@ -63,6 +63,12 @@ public class OrderController {
         orderLine.setProductModel(productModel);
         orderLine.setPrice(productModel.getPrice() * quantity);
         orderLineService.save(orderLine);
+    return orderLine;
+    }
+
+    @DeleteMapping("/orders/shopping-cart/{id}")
+    public void removeOrderLine(@PathVariable (name = "id") Long id){
+        orderLineService.deleteById(id);
 
     }
 }
