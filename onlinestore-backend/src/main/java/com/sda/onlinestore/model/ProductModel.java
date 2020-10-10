@@ -14,8 +14,12 @@ public class ProductModel {
     private String thumbnail;
 
     private double price;
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private ManufacturerModel manufacturerModel;
+
+    @OneToOne(mappedBy = "productModel")
+    private OrderLineModel orderLine;
 
     public Long getId() {
         return id;
@@ -55,5 +59,13 @@ public class ProductModel {
 
     public void setManufacturerModel(ManufacturerModel manufacturerModel) {
         this.manufacturerModel = manufacturerModel;
+    }
+
+    public OrderLineModel getOrderLine() {
+        return orderLine;
+    }
+
+    public void setOrderLine(OrderLineModel orderLine) {
+        this.orderLine = orderLine;
     }
 }
