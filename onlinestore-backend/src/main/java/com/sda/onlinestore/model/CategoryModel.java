@@ -1,5 +1,7 @@
 package com.sda.onlinestore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +17,11 @@ public class CategoryModel {
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("subCategories")
     private CategoryModel categoryModelParent;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryModelParent")
+    @JsonIgnoreProperties("categoryModelParent")
     private List<CategoryModel> subCategories = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryModel")
