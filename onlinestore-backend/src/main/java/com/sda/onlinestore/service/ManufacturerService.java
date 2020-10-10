@@ -29,4 +29,8 @@ public class ManufacturerService {
         manufacturerRepository.save(manufacturerModel);
     }
 
+    public ManufacturerModel findById(Long id){
+        return manufacturerRepository.findById(id).orElse(null);
+    }
+
 }
