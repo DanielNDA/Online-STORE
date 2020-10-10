@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class AddressService {
 
@@ -27,5 +28,9 @@ public class AddressService {
 
     public void update(AddressModel addressModel) {
         addressRepository.save(addressModel);
+    }
+
+    public AddressModel findById(Long id) {
+        return addressRepository.findById(id).orElse(null);
     }
 }

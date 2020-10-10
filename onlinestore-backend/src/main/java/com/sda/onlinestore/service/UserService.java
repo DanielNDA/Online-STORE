@@ -1,5 +1,6 @@
 package com.sda.onlinestore.service;
 
+import com.sda.onlinestore.model.AddressModel;
 import com.sda.onlinestore.model.UserModel;
 import com.sda.onlinestore.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,9 @@ public class UserService {
 
     public void update(UserModel userModel) {
         userRepository.save(userModel);
+    }
+
+    public UserModel findById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 }

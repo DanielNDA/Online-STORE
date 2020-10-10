@@ -1,5 +1,6 @@
 package com.sda.onlinestore.service;
 
+import com.sda.onlinestore.model.AddressModel;
 import com.sda.onlinestore.model.CategoryModel;
 import com.sda.onlinestore.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,9 @@ public class CategoryService {
 
     public void update(CategoryModel categoryModel) {
         categoryRepository.save(categoryModel);
+    }
+
+    public CategoryModel findById(Long id) {
+        return categoryRepository.findById(id).orElse(null);
     }
 }
