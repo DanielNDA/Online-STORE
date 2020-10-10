@@ -1,5 +1,6 @@
 package com.sda.onlinestore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -31,8 +32,9 @@ public class UserModel {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userList")
     private List<RoleModel> roleList = new ArrayList<>();
 
-    @OneToOne(mappedBy = "customer")
-    private OrderModel order;
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonIgnoreProperties("customer")
+    private List<OrderModel> orders;
 
     public Long getId() {
         return id;
@@ -90,11 +92,11 @@ public class UserModel {
         this.roleList = roleList;
     }
 
-    public OrderModel getOrder() {
-        return order;
+    public List<OrderModel> getOrders() {
+        return orders;
     }
 
-    public void setOrder(OrderModel order) {
-        this.order = order;
+    public void setOrders(List<OrderModel> orders) {
+        this.orders = orders;
     }
 }

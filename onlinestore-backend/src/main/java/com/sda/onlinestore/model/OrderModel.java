@@ -29,7 +29,7 @@ public class OrderModel {
     @JsonIgnoreProperties("orderModel")
     private List<OrderLineModel> orderLines = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private UserModel customer;
 
     @Enumerated(EnumType.STRING)
@@ -108,4 +108,5 @@ public class OrderModel {
     public void setCustomer(UserModel customer) {
         this.customer = customer;
     }
+    
 }

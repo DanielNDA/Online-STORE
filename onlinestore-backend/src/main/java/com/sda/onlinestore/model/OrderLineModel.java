@@ -11,9 +11,6 @@ public class OrderLineModel {
     @OneToOne(cascade = CascadeType.ALL)
     private ProductModel productModel;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private OrderModel orderModel;
-
     private Integer quantity;
 
     private Double price;
@@ -48,13 +45,5 @@ public class OrderLineModel {
 
     public void setProductModel(ProductModel productModel) {
         this.productModel = productModel;
-    }
-
-    public OrderModel getOrderModel() {
-        return orderModel;
-    }
-
-    public void setOrderModel(OrderModel orderModel) {
-        this.orderModel = orderModel;
     }
 }
