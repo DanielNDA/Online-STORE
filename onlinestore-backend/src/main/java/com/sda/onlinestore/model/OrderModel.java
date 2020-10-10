@@ -59,13 +59,7 @@ public class OrderModel {
         this.total = total;
     }
 
-    public String getDeliveryAddress() {
-        return deliveryAddress;
-    }
 
-    public void setDeliveryAddress(String deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
-    }
 
     public Date getDateOfOrder() {
         return dateOfOrder;
@@ -83,11 +77,19 @@ public class OrderModel {
         this.status = status;
     }
 
-    public String getUserAddress() {
+    public AddressModel getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(AddressModel deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
+    public AddressModel getUserAddress() {
         return userAddress;
     }
 
-    public void setUserAddress(String userAddress) {
+    public void setUserAddress(AddressModel userAddress) {
         this.userAddress = userAddress;
     }
 

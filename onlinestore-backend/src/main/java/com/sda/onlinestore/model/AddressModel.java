@@ -27,7 +27,7 @@ public class AddressModel {
 
     @OneToOne(cascade = CascadeType.ALL)
     private OrderModel order;
-    
+
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnoreProperties("deliveryAddress")
     private List<OrderModel> orders = new ArrayList<>();
@@ -70,5 +70,29 @@ public class AddressModel {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public UserModel getUserModel() {
+        return userModel;
+    }
+
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
+    }
+
+    public OrderModel getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderModel order) {
+        this.order = order;
+    }
+
+    public List<OrderModel> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderModel> orders) {
+        this.orders = orders;
     }
 }
