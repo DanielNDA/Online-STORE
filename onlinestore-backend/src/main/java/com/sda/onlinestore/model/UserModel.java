@@ -3,6 +3,7 @@ package com.sda.onlinestore.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,7 +29,7 @@ public class UserModel {
     private AddressModel addressModel;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userList")
-    private List<RoleModel> roleList;
+    private List<RoleModel> roleList = new ArrayList<>();
 
     public Long getId() {
         return id;
