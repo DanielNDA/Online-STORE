@@ -14,10 +14,7 @@ public class ProductModel {
     private String thumbnail;
 
     private double price;
-<<<<<<< HEAD
 
-=======
->>>>>>> 073115a781428a205113c46f75e7dace247e8b48
     @ManyToOne(fetch = FetchType.LAZY)
     private ManufacturerModel manufacturerModel;
 
