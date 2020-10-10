@@ -18,7 +18,7 @@ public class AddressModel {
 
     private String country;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "addressModel")
     private UserModel userModel;
 
     public Long getId() {
