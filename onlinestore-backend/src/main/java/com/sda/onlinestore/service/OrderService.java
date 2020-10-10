@@ -29,15 +29,6 @@ public class OrderService {
     }
 
     public void update(OrderModel order){
-        OrderModel orderToBeUpdated = orderRepository.findById(order.getId()).orElse(null);
-        orderToBeUpdated.setCustomer(order.getCustomer());
-        orderToBeUpdated.setDateOfOrder(order.getDateOfOrder());
-        orderToBeUpdated.setUserName(order.getUserName());
-        orderToBeUpdated.setUserAddress(order.getUserAddress());
-        orderToBeUpdated.setStatus(order.getStatus());
-        orderToBeUpdated.setOrderLines(order.getOrderLines());
-        orderToBeUpdated.setTotal(order.getTotal());
-        orderToBeUpdated.setDeliveryAddress(order.getDeliveryAddress());
-        orderRepository.save(orderToBeUpdated);
+        orderRepository.save(order);
     }
 }
