@@ -1,5 +1,7 @@
 package com.sda.onlinestore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +23,8 @@ public class OrderModel {
 
     private Date dateOfOrder;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "orderModel")
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonIgnoreProperties("orderModel")
     private List<OrderLineModel> orderLines = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)

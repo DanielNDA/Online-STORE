@@ -20,6 +20,9 @@ public class CategoryModel {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryModelParent")
     private List<CategoryModel> subCategories = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryModel")
+    private List<ProductModel> products = new ArrayList<>();
+
     public Long getId() {
         return id;
     }

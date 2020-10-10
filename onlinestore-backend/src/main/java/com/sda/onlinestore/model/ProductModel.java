@@ -71,4 +71,12 @@ public class ProductModel {
     public void setOrderLine(OrderLineModel orderLine) {
         this.orderLine = orderLine;
     }
+
+    public CategoryModel getCategoryModel() {
+        return categoryModel;
+    }
+
+    public void setCategoryModel(CategoryModel categoryModel) {
+        this.categoryModel = categoryModel;
+    }
 }
