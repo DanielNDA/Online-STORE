@@ -31,6 +31,9 @@ public class UserModel {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userList")
     private List<RoleModel> roleList = new ArrayList<>();
 
+    @OneToOne(mappedBy = "customer")
+    private OrderModel order;
+
     public Long getId() {
         return id;
     }
@@ -85,5 +88,13 @@ public class UserModel {
 
     public void setRoleList(List<RoleModel> roleList) {
         this.roleList = roleList;
+    }
+
+    public OrderModel getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderModel order) {
+        this.order = order;
     }
 }
