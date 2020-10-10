@@ -2,8 +2,10 @@ package com.sda.onlinestore.controller;
 
 import com.sda.onlinestore.model.OrderLineModel;
 import com.sda.onlinestore.model.OrderModel;
+import com.sda.onlinestore.model.ProductModel;
 import com.sda.onlinestore.service.OrderLineService;
 import com.sda.onlinestore.service.OrderService;
+import com.sda.onlinestore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,9 @@ public class OrderController {
 
     @Autowired
     private OrderLineService orderLineService;
+
+    @Autowired
+    private ProductService productService;
 
     @PostMapping("/orders")
     public void save(@RequestBody OrderModel order){
@@ -51,5 +56,13 @@ public class OrderController {
     }
 
     @PostMapping("/orders/shopping-cart/{id}")
-    public void addProductToOrderLine(@PathVariable)
+    public OrderLineModel addProductToOrderLine(@PathVariable (name = "id") Long id, @RequestParam(name="quantity") Integer quantity){
+        ProductModel productModel = productService.findById(id);
+        OrderLineModel orderLine = new OrderLineModel();
+        orderLine.setQuantity(quantity);
+        orderLine.setProductModel(productModel);
+        orderLine.setPrice(productModel.getPrice() * quantity);
+        orderLineService.save(orderLine);
+
+    }
 }
