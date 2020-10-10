@@ -1,6 +1,7 @@
 package com.sda.onlinestore.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ public class CategoryModel {
     private CategoryModel categoryModelParent;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryModelParent")
-    private List<CategoryModel> subCategories;
+    private List<CategoryModel> subCategories = new ArrayList<>();
 
     public Long getId() {
         return id;

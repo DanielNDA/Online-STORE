@@ -1,6 +1,7 @@
 package com.sda.onlinestore.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class PrivilegeModel {
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "privilegeList" )
-    private List<RoleModel> roleList;
+    private List<RoleModel> roleList = new ArrayList<>();
 
 
     public List<RoleModel> getRoleList() {

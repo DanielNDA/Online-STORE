@@ -1,6 +1,7 @@
 package com.sda.onlinestore.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ public class RoleModel {
                     name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "privilege_id", referencedColumnName = "id"))
-    private List<PrivilegeModel> privilegeList;
+    private List<PrivilegeModel> privilegeList = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -28,7 +29,7 @@ public class RoleModel {
                     name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "user_id", referencedColumnName = "id"))
-    private List<UserModel> userList;
+    private List<UserModel> userList = new ArrayList<>();
 
     public List<UserModel> getUserList() {
         return userList;
