@@ -1,7 +1,6 @@
 package com.sda.onlinestore.service;
 
 import com.sda.onlinestore.model.OrderLineModel;
-import com.sda.onlinestore.model.OrderModel;
 import com.sda.onlinestore.repository.OrderLineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

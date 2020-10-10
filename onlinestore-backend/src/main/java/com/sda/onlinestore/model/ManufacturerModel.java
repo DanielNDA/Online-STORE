@@ -1,7 +1,6 @@
 package com.sda.onlinestore.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +13,7 @@ public class ManufacturerModel {
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "manufacturerModel")
-    private List<ProductModel> products = new ArrayList<>();
+    private List<ProductModel> products;
 
     public Long getId() {
         return id;

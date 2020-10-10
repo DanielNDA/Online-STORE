@@ -1,7 +1,6 @@
 package com.sda.onlinestore.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class OrderModel {
     private Date dateOfOrder;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "orderModel")
-    private List<OrderLineModel> orderLines = new ArrayList<>();
+    private List<OrderLineModel> orderLines;
 
     @OneToOne(cascade = CascadeType.ALL)
     private UserModel customer;

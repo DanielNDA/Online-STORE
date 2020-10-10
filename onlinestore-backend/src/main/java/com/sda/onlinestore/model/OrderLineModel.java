@@ -41,20 +41,4 @@ public class OrderLineModel {
     public void setPrice(Double price) {
         this.price = price;
     }
-
-    public ProductModel getProductModel() {
-        return productModel;
-    }
-
-    public void setProductModel(ProductModel productModel) {
-        this.productModel = productModel;
-    }
-
-    public OrderModel getOrderModel() {
-        return orderModel;
-    }
-
-    public void setOrderModel(OrderModel orderModel) {
-        this.orderModel = orderModel;
-    }
 }
