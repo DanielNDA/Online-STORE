@@ -21,6 +21,9 @@ public class ProductModel {
     @OneToOne(mappedBy = "productModel")
     private OrderLineModel orderLine;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private CategoryModel categoryModel;
+
     public Long getId() {
         return id;
     }
