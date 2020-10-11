@@ -45,10 +45,9 @@ public class OrderController {
     }
 
     @GetMapping("/orders/shopping-cart/{id}")
-    public List<OrderLineModel> getOrderLines(@PathVariable(name = "id") Long id){
+    public OrderModel getOrderLines(@PathVariable(name = "id") Long id){
       OrderModel order = orderService.findById(id);
-      List<OrderLineModel> orderLines = order.getOrderLines();
-        return orderLines;
+        return order;
     }
 
     @PostMapping("/orders/shopping-cart/{id}")
