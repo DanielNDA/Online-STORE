@@ -29,12 +29,22 @@ public class UserModel {
     @OneToOne(cascade = CascadeType.ALL)
     private AddressModel addressModel;
 
+    private String channel;
+
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userList")
     private List<RoleModel> roleList = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnoreProperties("customer")
     private List<OrderModel> orders;
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
 
     public Long getId() {
         return id;
