@@ -17,9 +17,9 @@ public class OrderController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping("/orders")
-    public void save(@RequestBody OrderDTO orderDTO){
-        orderService.save(orderDTO);
+    @PostMapping("/add-to-cart")
+    public void save(@PathVariable(name = "username") String username, @PathVariable(name = "productID") Long productID){
+        orderService.addToCart(username, productID);
     }
 
     @GetMapping("/orders/{id}")

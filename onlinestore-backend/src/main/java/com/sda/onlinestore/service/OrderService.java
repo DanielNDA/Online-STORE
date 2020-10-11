@@ -21,27 +21,40 @@ public class OrderService {
     @Autowired
     private ProductRepository productRepository;
 
-    public void save(String username, Long productID){
+    public void addToCart(String username, Long productID){
         Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserName(username);
-        OrderModel order = new OrderModel();
-        ProductModel productModel = new ProductModel();
+        OrderModel order;
 
+        boolean isAlreadyInBasket = false;
         if(orderModelOptional.isPresent()) {
             order  = orderModelOptional.get();
             List<OrderLineModel> orderLineModels = order.getOrderLines();
             for (OrderLineModel olm: orderLineModels) {
                 if(olm.getProductModel().getId() == productID){
                    olm.setQuantity(olm.getQuantity() + 1);
+                   isAlreadyInBasket = true;
                 }
             }
+            if(!isAlreadyInBasket){
+                OrderLineModel orderLineModel = new OrderLineModel();
+                orderLineModel.setQuantity(1);
+                orderLineModel.setProductModel(productRepository.findById(productID).orElse(null));
+                orderLineModel.setPrice(orderLineModel.getQuantity() * orderLineModel.getProductModel().getPrice());
+                order.getOrderLines().add(orderLineModel);
+                order.setTotal(totalPrice(order.getOrderLines()));
+                orderRepository.save(order);
+            }
+            order.setTotal(totalPrice(order.getOrderLines()));
             orderRepository.save(order);
         }
         else{
+            order = new OrderModel();
             OrderLineModel orderLineModel = new OrderLineModel();
             orderLineModel.setQuantity(1);
             orderLineModel.setProductModel(productRepository.findById(productID).orElse(null));
             orderLineModel.setPrice(orderLineModel.getQuantity() * orderLineModel.getProductModel().getPrice());
             order.getOrderLines().add(orderLineModel);
+            order.setTotal(totalPrice(order.getOrderLines()));
             orderRepository.save(order);
 
         }
