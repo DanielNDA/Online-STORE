@@ -17,9 +17,9 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public ProductDto getProductById(Long id){
+    public ProductDto getProductById(Long id) {
         Optional<ProductModel> productModelOptional = productRepository.findById(id);
-        if(productModelOptional.isPresent()){
+        if (productModelOptional.isPresent()) {
             ProductModel productModel = productModelOptional.get();
             ProductDto productDto = new ProductDto();
             productDto.setId(productModel.getId());
@@ -31,7 +31,7 @@ public class ProductService {
         return null;
     }
 
-    public void addProduct(ProductDto productDto){
+    public void addProduct(ProductDto productDto) {
         ProductModel productModel = new ProductModel();
         productModel.setId(productDto.getId());
         productModel.setName(productDto.getName());
@@ -42,11 +42,11 @@ public class ProductService {
         productRepository.save(productModel);
     }
 
-    public List<ProductDto> getProducts(){
+    public List<ProductDto> getProducts() {
         List<ProductModel> productModelList = productRepository.findAll();
         List<ProductDto> productDtoList = new ArrayList<>();
 
-        for(ProductModel productModel : productModelList){
+        for (ProductModel productModel : productModelList) {
             ProductDto productDto = new ProductDto();
             productDto.setId(productModel.getId());
             productDto.setName(productModel.getName());
@@ -58,14 +58,14 @@ public class ProductService {
         return productDtoList;
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         productRepository.deleteById(id);
     }
 
 
-    public void update(ProductDto productDto){
+    public void update(ProductDto productDto) {
         Optional<ProductModel> productModelOptional = productRepository.findById(productDto.getId());
-        if(productModelOptional.isPresent()){
+        if (productModelOptional.isPresent()) {
             ProductModel productModel = productModelOptional.get();
             productModel.setName(productDto.getName());
             productModel.setDescription(productDto.getDescription());

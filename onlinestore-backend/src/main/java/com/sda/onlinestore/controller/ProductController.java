@@ -1,7 +1,6 @@
 package com.sda.onlinestore.controller;
 
 import com.sda.onlinestore.dto.ProductDto;
-import com.sda.onlinestore.model.ProductModel;
 import com.sda.onlinestore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,25 +15,27 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/products")
-    private void save(@RequestBody ProductDto productDto){
+    private void save(@RequestBody ProductDto productDto) {
         productService.addProduct(productDto);
     }
 
     @DeleteMapping("/products/{id}")
-    private void deleteById(@PathVariable(name = "id") Long id){
+    private void deleteById(@PathVariable(name = "id") Long id) {
         productService.deleteById(id);
     }
+
     @GetMapping("/products/{id}")
-    private ProductDto findById(@PathVariable(name = "id") Long id){
+    private ProductDto findById(@PathVariable(name = "id") Long id) {
         return productService.getProductById(id);
     }
+
     @GetMapping("/products")
-    private List<ProductDto> findAll(){
+    private List<ProductDto> findAll() {
         return productService.getProducts();
     }
 
     @PutMapping("/products/{id}")
-    public void update(@RequestBody ProductDto productDto){
+    public void update(@RequestBody ProductDto productDto) {
         productService.update(productDto);
     }
 }
