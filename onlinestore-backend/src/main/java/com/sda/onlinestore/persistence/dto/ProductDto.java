@@ -1,7 +1,7 @@
 package com.sda.onlinestore.persistence.dto;
 
 
-public class ProductDto {
+public class ProductDTO {
 
     private Long id;
     private String name;
@@ -9,7 +9,7 @@ public class ProductDto {
     private String thumbnail;
     private double price;
     private String productType;
-    private ManufacturerDto manufacturerDto;
+    private ManufacturerDTO manufacturerDto;
     private CategoryDTO categoryDTO;
 
     public String getName() {
@@ -60,11 +60,11 @@ public class ProductDto {
         this.productType = productType;
     }
 
-    public ManufacturerDto getManufacturerDto() {
+    public ManufacturerDTO getManufacturerDto() {
         return manufacturerDto;
     }
 
-    public void setManufacturerDto(ManufacturerDto manufacturerDto) {
+    public void setManufacturerDto(ManufacturerDTO manufacturerDto) {
         this.manufacturerDto = manufacturerDto;
     }
 

@@ -1,6 +1,6 @@
 package com.sda.onlinestore.persistence.dto;
 
-public class ManufacturerDto {
+public class ManufacturerDTO {
 
     private Long id;
     private String name;

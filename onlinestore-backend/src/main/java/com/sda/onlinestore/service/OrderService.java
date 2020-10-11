@@ -2,7 +2,7 @@ package com.sda.onlinestore.service;
 
 import com.sda.onlinestore.persistence.dto.OrderDTO;
 import com.sda.onlinestore.persistence.dto.OrderLineDTO;
-import com.sda.onlinestore.persistence.dto.ProductDto;
+import com.sda.onlinestore.persistence.dto.ProductDTO;
 import com.sda.onlinestore.model.*;
 import com.sda.onlinestore.persistence.model.OrderLineModel;
 import com.sda.onlinestore.persistence.model.OrderModel;
@@ -81,7 +81,7 @@ public class OrderService {
                 old.setPrice(ol.getPrice());
                 old.setQuantity(ol.getQuantity());
 
-                ProductDto productDto = new ProductDto();
+                ProductDTO productDto = new ProductDTO();
                 productDto.setId(ol.getProductModel().getId());
                 productDto.setName(ol.getProductModel().getName());
                 productDto.setPrice(ol.getProductModel().getPrice());
@@ -111,7 +111,7 @@ public class OrderService {
                 old.setPrice(ol.getPrice());
                 old.setQuantity(ol.getQuantity());
 
-                ProductDto productDto = new ProductDto();
+                ProductDTO productDto = new ProductDTO();
                 productDto.setId(ol.getProductModel().getId());
                 productDto.setName(ol.getProductModel().getName());
                 productDto.setPrice(ol.getProductModel().getPrice());

@@ -4,7 +4,7 @@ public class OrderLineDTO {
     private Long id;
     private Integer quantity;
     private Double price;
-    private ProductDto productDTO;
+    private ProductDTO productDTO;
 
     public Long getId() {
         return id;
@@ -30,11 +30,11 @@ public class OrderLineDTO {
         this.price = price;
     }
 
-    public ProductDto getProductDTO() {
+    public ProductDTO getProductDTO() {
         return productDTO;
     }
 
-    public void setProductDTO(ProductDto productDTO) {
+    public void setProductDTO(ProductDTO productDTO) {
         this.productDTO = productDTO;
     }
 }

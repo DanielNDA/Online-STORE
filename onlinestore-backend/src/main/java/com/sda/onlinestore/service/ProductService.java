@@ -1,8 +1,8 @@
 package com.sda.onlinestore.service;
 
 import com.sda.onlinestore.persistence.dto.CategoryDTO;
-import com.sda.onlinestore.persistence.dto.ManufacturerDto;
-import com.sda.onlinestore.persistence.dto.ProductDto;
+import com.sda.onlinestore.persistence.dto.ManufacturerDTO;
+import com.sda.onlinestore.persistence.dto.ProductDTO;
 import com.sda.onlinestore.persistence.model.CategoryModel;
 import com.sda.onlinestore.persistence.model.ManufacturerModel;
 import com.sda.onlinestore.persistence.model.ProductModel;
@@ -28,11 +28,11 @@ public class ProductService {
     private ManufacturerRepository  manufacturerRepository;
 
 
-    public ProductDto getProductById(Long id) {
+    public ProductDTO getProductById(Long id) {
         Optional<ProductModel> productModelOptional = productRepository.findById(id);
         if (productModelOptional.isPresent()) {
             ProductModel productModel = productModelOptional.get();
-            ProductDto productDto = new ProductDto();
+            ProductDTO productDto = new ProductDTO();
             productDto.setId(productModel.getId());
             productDto.setName(productModel.getName());
             productDto.setDescription(productModel.getDescription());
@@ -42,7 +42,7 @@ public class ProductService {
         return null;
     }
 
-    public void addProduct(ProductDto productDto) {
+    public void addProduct(ProductDTO productDto) {
         ProductModel productModel = new ProductModel();
         productModel.setId(productDto.getId());
         productModel.setName(productDto.getName());
@@ -55,7 +55,7 @@ public class ProductService {
             CategoryModel categoryModel = categoryRepository.findById(categoryDTO.getId()).orElse(null);
             productModel.setCategoryModel(categoryModel);
         }
-        ManufacturerDto manufacturerDto = productDto.getManufacturerDto();
+        ManufacturerDTO manufacturerDto = productDto.getManufacturerDto();
         if(manufacturerDto != null){
             ManufacturerModel manufacturerModel = manufacturerRepository.findById(manufacturerDto.getId()).orElse(null);
             productModel.setManufacturerModel(manufacturerModel);
@@ -63,20 +63,20 @@ public class ProductService {
         productRepository.save(productModel);
     }
 
-    public List<ProductDto> getProducts() {
+    public List<ProductDTO> getProducts() {
         List<ProductModel> productModelList = productRepository.findAll();
-        List<ProductDto> productDtoList = new ArrayList<>();
+        List<ProductDTO> productDTOList = new ArrayList<>();
 
         for (ProductModel productModel : productModelList) {
-            ProductDto productDto = new ProductDto();
+            ProductDTO productDto = new ProductDTO();
             productDto.setId(productModel.getId());
             productDto.setName(productModel.getName());
             productDto.setThumbnail(productModel.getThumbnail());
             productDto.setDescription(productModel.getDescription());
             productDto.setPrice(productModel.getPrice());
-            productDtoList.add(productDto);
+            productDTOList.add(productDto);
         }
-        return productDtoList;
+        return productDTOList;
     }
 
     public void deleteById(Long id) {
@@ -84,7 +84,7 @@ public class ProductService {
     }
 
 
-    public void update(ProductDto productDto) {
+    public void update(ProductDTO productDto) {
         Optional<ProductModel> productModelOptional = productRepository.findById(productDto.getId());
         if (productModelOptional.isPresent()) {
             ProductModel productModel = productModelOptional.get();
