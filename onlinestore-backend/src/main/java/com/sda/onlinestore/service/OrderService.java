@@ -3,7 +3,6 @@ package com.sda.onlinestore.service;
 import com.sda.onlinestore.persistence.dto.OrderDTO;
 import com.sda.onlinestore.persistence.dto.OrderLineDTO;
 import com.sda.onlinestore.persistence.dto.ProductDTO;
-import com.sda.onlinestore.model.*;
 import com.sda.onlinestore.persistence.model.OrderLineModel;
 import com.sda.onlinestore.persistence.model.OrderModel;
 import com.sda.onlinestore.persistence.model.ProductModel;
