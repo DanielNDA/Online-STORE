@@ -2,14 +2,12 @@ package com.sda.onlinestore.service;
 
 import com.sda.onlinestore.dto.CategoryDTO;
 import com.sda.onlinestore.model.CategoryModel;
-import com.sda.onlinestore.model.UserModel;
 import com.sda.onlinestore.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -66,9 +64,7 @@ public class CategoryService {
             CategoryModel categoryModel = newCategory.get();
             categoryModel.setName(categoryDTO.getName());
 
-            if()
-
-            userRepository.save(userModel);
+            categoryRepository.save(categoryModel);
         }
     }
 
