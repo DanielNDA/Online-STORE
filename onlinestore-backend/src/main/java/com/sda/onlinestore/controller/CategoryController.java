@@ -1,5 +1,6 @@
 package com.sda.onlinestore.controller;
 
+import com.sda.onlinestore.dto.CategoryDTO;
 import com.sda.onlinestore.model.CategoryModel;
 import com.sda.onlinestore.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,25 +20,25 @@ public class CategoryController {
 //        categoryService.save(categoryModel);
 //    }
 
-    @DeleteMapping("/categories/{id}")
-    private void deleteById(@PathVariable(name = "id") Long id) {
-        categoryService.deleteById(id);
-    }
-
-    @GetMapping("/categories/{id}")
-    private CategoryModel findById(@PathVariable(name = "id") Long id) {
-        return categoryService.findById(id);
-    }
+//    @DeleteMapping("/categories/{id}")
+//    private void deleteById(@PathVariable(name = "id") Long id) {
+//        categoryService.deleteById(id);
+//    }
+//
+//    @GetMapping("/categories/{id}")
+//    private CategoryDTO findById(@PathVariable(name = "id") Long id) {
+//        return categoryService.findById(id);
+//    }
 
 //    @GetMapping("/categories")
 //    private List<CategoryModel> findAll() {
 //        return categoryService.findAll();
 //    }
 
-    @PutMapping("/categories/{id}")
-    private void update(@RequestBody CategoryModel categoryModel) {
-        CategoryModel newCategory = categoryService.findById(categoryModel.getId());
-        newCategory.setName(categoryModel.getName());
-        categoryService.update(newCategory);
-    }
+//    @PutMapping("/categories/{id}")
+//    private void update(@RequestBody CategoryModel categoryModel) {
+//        CategoryModel newCategory = categoryService.findById(categoryModel.getId());
+//        newCategory.setName(categoryModel.getName());
+//        categoryService.update(newCategory);
+//    }
 }

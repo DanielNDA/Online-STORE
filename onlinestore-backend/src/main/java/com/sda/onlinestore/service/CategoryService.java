@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class CategoryService {
@@ -22,11 +23,11 @@ public class CategoryService {
         categoryRepository.save(categoryModel);
     }
 
-    public List<CategoryDTO> getCategories() {
+    public List<CategoryDTO> findAll() {
         List<CategoryModel> categories = categoryRepository.findAll();
         List<CategoryDTO> categoriesDTO = new ArrayList<>();
 
-        for(CategoryModel categoryModel : categories) {
+        for (CategoryModel categoryModel : categories) {
             CategoryDTO categoryDTO = new CategoryDTO();
             categoryDTO.setId(categoryModel.getId());
             categoryDTO.setName(categoryModel.getName());
@@ -34,7 +35,7 @@ public class CategoryService {
             List<CategoryModel> subCategories = categoryModel.getSubCategories();
             List<CategoryDTO> subCategoriesDTO = new ArrayList<>();
 
-            for(CategoryModel subCategory : subCategories) {
+            for (CategoryModel subCategory : subCategories) {
                 CategoryDTO subCategoryDTO = new CategoryDTO();
 
                 subCategoryDTO.setId(subCategory.getId());
@@ -55,7 +56,26 @@ public class CategoryService {
         categoryRepository.save(categoryModel);
     }
 
-    public CategoryModel findById(Long id) {
-        return categoryRepository.findById(id).orElse(null);
+    public CategoryDTO findById(Long id) {
+        CategoryModel categoryModel = categoryRepository.findById(id).orElse(null);
+        CategoryDTO categoryDTO = new CategoryDTO();
+
+        if (categoryModel != null) {
+            categoryDTO.setId(categoryModel.getId());
+            categoryDTO.setName(categoryModel.getName());
+
+            List<CategoryModel> subCategories = categoryModel.getSubCategories();
+            List<CategoryDTO> subCategoriesDTO = new ArrayList<>();
+
+            for (CategoryModel subCategory : subCategories) {
+                CategoryDTO subCategoryDTO = new CategoryDTO();
+
+                subCategoryDTO.setId(subCategory.getId());
+                subCategoryDTO.setName(subCategory.getName());
+                subCategoriesDTO.add(subCategoryDTO);
+            }
+            categoryDTO.setSubCategories(subCategoriesDTO);
+        }
+        return categoryDTO;
     }
 }
