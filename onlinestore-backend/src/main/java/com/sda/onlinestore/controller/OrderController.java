@@ -13,52 +13,52 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class OrderController {
-    @Autowired
-    private OrderService orderService;
-
-    @Autowired
-    private ProductService productService;
-
-    @PostMapping("/orders")
-    public void save(@RequestBody OrderModel order){
-        orderService.save(order);
-    }
-
-    @GetMapping("/orders/{id}")
-    public OrderModel findById(@PathVariable(name = "id") Long id){
-        return orderService.findById(id);
-    }
-
-    @GetMapping("/orders")
-    public List<OrderModel> findAll(){
-        return orderService.findAll();
-    }
-
-    @DeleteMapping("/orders/{id}")
-    public void deleteById(@PathVariable(name = "id") Long id){
-        orderService.deleteById(id);
-    }
-
-    @PutMapping("/orders")
-    public void update(@RequestBody OrderModel order){
-        orderService.update(order);
-    }
-
-    @GetMapping("/orders/shopping-cart/{id}")
-    public OrderModel getOrderLines(@PathVariable(name = "id") Long id){
-      OrderModel order = orderService.findById(id);
-        return order;
-    }
-
-    @PostMapping("/orders/shopping-cart/{id}")
-    public OrderLineModel addProductToOrderLine(@PathVariable (name = "id") Long id, @RequestParam(name="quantity") Integer quantity){
-        ProductModel productModel = productService.findById(id);
-        OrderLineModel orderLine = new OrderLineModel();
-        orderLine.setQuantity(quantity);
-        orderLine.setProductModel(productModel);
-        orderLine.setPrice(productModel.getPrice() * quantity);
-    return orderLine;
-    }
+//    @Autowired
+//    private OrderService orderService;
+//
+//    @Autowired
+//    private ProductService productService;
+//
+//    @PostMapping("/orders")
+//    public void save(@RequestBody OrderModel order){
+//        orderService.save(order);
+//    }
+//
+//    @GetMapping("/orders/{id}")
+//    public OrderModel findById(@PathVariable(name = "id") Long id){
+//        return orderService.findById(id);
+//    }
+//
+//    @GetMapping("/orders")
+//    public List<OrderModel> findAll(){
+//        return orderService.findAll();
+//    }
+//
+//    @DeleteMapping("/orders/{id}")
+//    public void deleteById(@PathVariable(name = "id") Long id){
+//        orderService.deleteById(id);
+//    }
+//
+//    @PutMapping("/orders")
+//    public void update(@RequestBody OrderModel order){
+//        orderService.update(order);
+//    }
+//
+//    @GetMapping("/orders/shopping-cart/{id}")
+//    public OrderModel getOrderLines(@PathVariable(name = "id") Long id){
+//      OrderModel order = orderService.findById(id);
+//        return order;
+//    }
+//
+//    @PostMapping("/orders/shopping-cart/{id}")
+//    public OrderLineModel addProductToOrderLine(@PathVariable (name = "id") Long id, @RequestParam(name="quantity") Integer quantity){
+//        ProductModel productModel = productService.findById(id);
+//        OrderLineModel orderLine = new OrderLineModel();
+//        orderLine.setQuantity(quantity);
+//        orderLine.setProductModel(productModel);
+//        orderLine.setPrice(productModel.getPrice() * quantity);
+//    return orderLine;
+//    }
 
 //    @DeleteMapping("/orders/shopping-cart/{id}")
 //    public void removeOrderLine(@PathVariable (name = "id") Long id){

@@ -10,6 +10,28 @@ public class UserDTO {
 
     private AddressDTO addressDTO;
 
+    private String channel;
+
+    private String password;
+
+    private String newPassword;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
     public Long getId() {
         return id;
     }
@@ -40,5 +62,13 @@ public class UserDTO {
 
     public void setAddressDTO(AddressDTO addressDTO) {
         this.addressDTO = addressDTO;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
     }
 }

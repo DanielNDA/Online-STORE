@@ -26,6 +26,8 @@ public class UserModel {
 
     private String url;
 
+    private String channel;
+
     @OneToOne(cascade = CascadeType.ALL)
     private AddressModel addressModel;
 
@@ -35,6 +37,14 @@ public class UserModel {
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnoreProperties("customer")
     private List<OrderModel> orders;
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
 
     public Long getId() {
         return id;
