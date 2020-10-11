@@ -29,14 +29,11 @@ public class UserService {
             addressModel.setCity(addressDTO.getCity());
             addressModel.setStreet(addressDTO.getStreet());
             addressModel.setZipCode(addressDTO.getZipCode());
-
-            userModel.setAddressModel(addressModel);
         }
 
+        userModel.setAddressModel(addressModel);
         userModel.setId(userDTO.getId());
         userModel.setEmail(userDTO.getEmail());
-        userModel.setChannel(userDTO.getChannel());
-        userModel.setPassword(userDTO.getPassword());
 
         userRepository.save(userModel);
     }
@@ -56,7 +53,6 @@ public class UserService {
             userDTO.setId(userModel.getId());
             userDTO.setEmail(userModel.getEmail());
             userDTO.setUrl(userModel.getUrl());
-            userDTO.setChannel(userModel.getChannel());
 
             AddressModel addressModel = userModel.getAddressModel();
 
@@ -80,11 +76,6 @@ public class UserService {
             UserModel userModel = newUser.get();
             userModel.setEmail(userDTO.getEmail());
             userModel.setUrl(userDTO.getUrl());
-            userModel.setChannel(userDTO.getChannel());
-
-            if(userDTO.getNewPassword() != null && !userDTO.getNewPassword().equals("")) {
-                userDTO.setPassword(userDTO.getNewPassword());
-            }
             userRepository.save(userModel);
         }
     }
@@ -96,8 +87,6 @@ public class UserService {
         if(userModel.isPresent()) {
             userDTO.setId(userModel.get().getId());
             userDTO.setEmail(userModel.get().getEmail());
-            userDTO.setUrl(userModel.get().getUrl());
-            userDTO.setUrl(userModel.get().getChannel());
 
             AddressModel addressModel = userModel.get().getAddressModel();
             AddressDTO addressDTO = new AddressDTO();
