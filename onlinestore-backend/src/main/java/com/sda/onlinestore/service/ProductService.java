@@ -1,11 +1,14 @@
 package com.sda.onlinestore.service;
 
 import com.sda.onlinestore.dto.CategoryDTO;
+import com.sda.onlinestore.dto.ManufacturerDto;
 import com.sda.onlinestore.dto.ProductDto;
 import com.sda.onlinestore.model.CategoryModel;
+import com.sda.onlinestore.model.ManufacturerModel;
 import com.sda.onlinestore.model.ProductModel;
 import com.sda.onlinestore.model.ProductType;
 import com.sda.onlinestore.repository.CategoryRepository;
+import com.sda.onlinestore.repository.ManufacturerRepository;
 import com.sda.onlinestore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,8 @@ public class ProductService {
     private ProductRepository productRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private ManufacturerRepository  manufacturerRepository;
 
 
     public ProductDto getProductById(Long id) {
@@ -49,6 +54,11 @@ public class ProductService {
         if(categoryDTO != null){
             CategoryModel categoryModel = categoryRepository.findById(categoryDTO.getId()).orElse(null);
             productModel.setCategoryModel(categoryModel);
+        }
+        ManufacturerDto manufacturerDto = productDto.getManufacturerDto();
+        if(manufacturerDto != null){
+            ManufacturerModel manufacturerModel = manufacturerRepository.findById(categoryDTO.getId()).orElse(null);
+            productModel.setManufacturerModel(manufacturerModel);
         }
         productRepository.save(productModel);
     }
