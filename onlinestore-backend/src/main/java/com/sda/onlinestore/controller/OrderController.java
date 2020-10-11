@@ -3,7 +3,6 @@ package com.sda.onlinestore.controller;
 import com.sda.onlinestore.model.OrderLineModel;
 import com.sda.onlinestore.model.OrderModel;
 import com.sda.onlinestore.model.ProductModel;
-import com.sda.onlinestore.service.OrderLineService;
 import com.sda.onlinestore.service.OrderService;
 import com.sda.onlinestore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,6 @@ import java.util.List;
 public class OrderController {
     @Autowired
     private OrderService orderService;
-
-    @Autowired
-    private OrderLineService orderLineService;
 
     @Autowired
     private ProductService productService;
@@ -49,10 +45,9 @@ public class OrderController {
     }
 
     @GetMapping("/orders/shopping-cart/{id}")
-    public List<OrderLineModel> getOrderLines(@PathVariable(name = "id") Long id){
+    public OrderModel getOrderLines(@PathVariable(name = "id") Long id){
       OrderModel order = orderService.findById(id);
-      List<OrderLineModel> orderLines = order.getOrderLines();
-        return orderLines;
+        return order;
     }
 
     @PostMapping("/orders/shopping-cart/{id}")
@@ -62,13 +57,12 @@ public class OrderController {
         orderLine.setQuantity(quantity);
         orderLine.setProductModel(productModel);
         orderLine.setPrice(productModel.getPrice() * quantity);
-        orderLineService.save(orderLine);
     return orderLine;
     }
 
-    @DeleteMapping("/orders/shopping-cart/{id}")
-    public void removeOrderLine(@PathVariable (name = "id") Long id){
-        orderLineService.deleteById(id);
-
-    }
+//    @DeleteMapping("/orders/shopping-cart/{id}")
+//    public void removeOrderLine(@PathVariable (name = "id") Long id){
+//        orderLineService.deleteById(id);
+//
+//    }
 }

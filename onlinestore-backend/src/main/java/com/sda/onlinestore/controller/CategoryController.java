@@ -14,10 +14,10 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("/categories")
-    private void save(@RequestBody CategoryModel categoryModel) {
-        categoryService.save(categoryModel);
-    }
+//    @PostMapping("/categories")
+//    private void save(@RequestBody CategoryModel categoryModel) {
+//        categoryService.save(categoryModel);
+//    }
 
     @DeleteMapping("/categories/{id}")
     private void deleteById(@PathVariable(name = "id") Long id) {
@@ -29,10 +29,10 @@ public class CategoryController {
         return categoryService.findById(id);
     }
 
-    @GetMapping("/categories")
-    private List<CategoryModel> findAll() {
-        return categoryService.findAll();
-    }
+//    @GetMapping("/categories")
+//    private List<CategoryModel> findAll() {
+//        return categoryService.findAll();
+//    }
 
     @PutMapping("/categories/{id}")
     private void update(@RequestBody CategoryModel categoryModel) {
