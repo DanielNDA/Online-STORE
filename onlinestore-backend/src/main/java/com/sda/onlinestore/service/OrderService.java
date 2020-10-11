@@ -5,6 +5,7 @@ import com.sda.onlinestore.dto.OrderLineDTO;
 import com.sda.onlinestore.dto.ProductDto;
 import com.sda.onlinestore.model.*;
 import com.sda.onlinestore.repository.OrderRepository;
+import com.sda.onlinestore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,33 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    public void save(OrderDTO orderDTO){
+    @Autowired
+    private ProductRepository productRepository;
+
+    public void save(String username, Long productID){
+        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserName(username);
         OrderModel order = new OrderModel();
-        order.setTotal(order.getTotal());
-        orderRepository.save(order);
+        ProductModel productModel = new ProductModel();
+
+        if(orderModelOptional.isPresent()) {
+            order  = orderModelOptional.get();
+            List<OrderLineModel> orderLineModels = order.getOrderLines();
+            for (OrderLineModel olm: orderLineModels) {
+                if(olm.getProductModel().getId() == productID){
+                   olm.setQuantity(olm.getQuantity() + 1);
+                }
+            }
+            orderRepository.save(order);
+        }
+        else{
+            OrderLineModel orderLineModel = new OrderLineModel();
+            orderLineModel.setQuantity(1);
+            orderLineModel.setProductModel(productRepository.findById(productID).orElse(null));
+            orderLineModel.setPrice(orderLineModel.getQuantity() * orderLineModel.getProductModel().getPrice());
+            order.getOrderLines().add(orderLineModel);
+            orderRepository.save(order);
+
+        }
     }
 
     public void deleteById(Long id){
@@ -84,21 +108,32 @@ public class OrderService {
         return orderDTOS;
     }
 
-//    public void update(OrderDTO orderDTO){
-//        Optional<OrderModel> orderModelOptional = orderRepository.findById(orderDTO.getId());
-//        if(orderModelOptional.isPresent()){
-//            OrderModel orderModel = orderModelOptional.get();
-//            orderModel.setTotal(orderDTO.getTotal());
-//            List<OrderLineModel> orderlines = new ArrayList<>();
-//            for (OrderLineDTO orderLineDTO: orderDTO.getOrderLines()) {
-//                OrderLineModel orderLineModel = new OrderLineModel();
-//                orderLineModel.setQuantity(orderLineDTO.getQuantity());
-//
-//                ProductModel productModel = new ProductModel();
-//                productModel.setName(or);
-//            }
-//            orderModel.setOrderLines(orderlines);
-//            orderRepository.save(orderModel);
-//        }
-//    }
+    public void update(OrderDTO orderDTO){
+        Optional<OrderModel> orderModelOptional = orderRepository.findById(orderDTO.getId());
+        if(orderModelOptional.isPresent()){
+            OrderModel orderModel = orderModelOptional.get();
+            orderModel.setTotal(orderDTO.getTotal());
+            List<OrderLineModel> orderlines = new ArrayList<>();
+            for (OrderLineDTO orderLineDTO: orderDTO.getOrderLines()) {
+                OrderLineModel orderLineModel = new OrderLineModel();
+                orderLineModel.setQuantity(orderLineDTO.getQuantity());
+
+                ProductModel productModel = new ProductModel();
+                productModel.setName(orderLineDTO.getProductDTO().getName());
+                productModel.setPrice(orderLineDTO.getProductDTO().getPrice());
+                orderLineModel.setProductModel(productModel);
+                orderlines.add(orderLineModel);
+            }
+            orderModel.setOrderLines(orderlines);
+            orderRepository.save(orderModel);
+        }
+    }
+
+    public Double totalPrice(List<OrderLineModel> orderLineModels){
+        Double total = 0.0;
+        for (OrderLineModel olm: orderLineModels) {
+            total = total + olm.getProductModel().getPrice() * olm.getQuantity();
+        }
+        return total;
+    }
 }
