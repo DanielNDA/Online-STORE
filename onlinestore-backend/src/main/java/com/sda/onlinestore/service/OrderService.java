@@ -1,9 +1,12 @@
 package com.sda.onlinestore.service;
 
-import com.sda.onlinestore.dto.OrderDTO;
-import com.sda.onlinestore.dto.OrderLineDTO;
-import com.sda.onlinestore.dto.ProductDto;
+import com.sda.onlinestore.persistence.dto.OrderDTO;
+import com.sda.onlinestore.persistence.dto.OrderLineDTO;
+import com.sda.onlinestore.persistence.dto.ProductDto;
 import com.sda.onlinestore.model.*;
+import com.sda.onlinestore.persistence.model.OrderLineModel;
+import com.sda.onlinestore.persistence.model.OrderModel;
+import com.sda.onlinestore.persistence.model.ProductModel;
 import com.sda.onlinestore.repository.OrderRepository;
 import com.sda.onlinestore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;

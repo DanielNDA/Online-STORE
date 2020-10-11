@@ -1,4 +1,4 @@
-package com.sda.onlinestore.model;
+package com.sda.onlinestore.persistence.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

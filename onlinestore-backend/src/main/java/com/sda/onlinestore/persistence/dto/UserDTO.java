@@ -1,4 +1,4 @@
-package com.sda.onlinestore.dto;
+package com.sda.onlinestore.persistence.dto;
 
 public class UserDTO {
 

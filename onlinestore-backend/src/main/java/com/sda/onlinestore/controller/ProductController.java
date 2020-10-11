@@ -1,6 +1,6 @@
 package com.sda.onlinestore.controller;
 
-import com.sda.onlinestore.dto.ProductDto;
+import com.sda.onlinestore.persistence.dto.ProductDto;
 import com.sda.onlinestore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

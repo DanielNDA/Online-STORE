@@ -1,12 +1,12 @@
 package com.sda.onlinestore.service;
 
-import com.sda.onlinestore.dto.CategoryDTO;
-import com.sda.onlinestore.dto.ManufacturerDto;
-import com.sda.onlinestore.dto.ProductDto;
-import com.sda.onlinestore.model.CategoryModel;
-import com.sda.onlinestore.model.ManufacturerModel;
-import com.sda.onlinestore.model.ProductModel;
-import com.sda.onlinestore.model.ProductType;
+import com.sda.onlinestore.persistence.dto.CategoryDTO;
+import com.sda.onlinestore.persistence.dto.ManufacturerDto;
+import com.sda.onlinestore.persistence.dto.ProductDto;
+import com.sda.onlinestore.persistence.model.CategoryModel;
+import com.sda.onlinestore.persistence.model.ManufacturerModel;
+import com.sda.onlinestore.persistence.model.ProductModel;
+import com.sda.onlinestore.persistence.model.ProductType;
 import com.sda.onlinestore.repository.CategoryRepository;
 import com.sda.onlinestore.repository.ManufacturerRepository;
 import com.sda.onlinestore.repository.ProductRepository;

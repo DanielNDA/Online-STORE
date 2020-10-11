@@ -1,4 +1,4 @@
-package com.sda.onlinestore.model;
+package com.sda.onlinestore.persistence.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
