@@ -14,12 +14,12 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping("/products")
+    @PostMapping("/addProducts")
     private void save(@RequestBody ProductDto productDto) {
         productService.addProduct(productDto);
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/deleteProducts/{id}")
     private void deleteById(@PathVariable(name = "id") Long id) {
         productService.deleteById(id);
     }
