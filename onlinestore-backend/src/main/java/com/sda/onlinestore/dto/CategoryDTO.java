@@ -9,7 +9,17 @@ public class CategoryDTO {
 
     private String name;
 
+    private CategoryDTO parent;
+
     private List<CategoryDTO> subCategories = new ArrayList<>();
+
+    public CategoryDTO getParent() {
+        return parent;
+    }
+
+    public void setParent(CategoryDTO parent) {
+        this.parent = parent;
+    }
 
     public Long getId() {
         return id;

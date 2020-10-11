@@ -2,6 +2,7 @@ package com.sda.onlinestore.service;
 
 import com.sda.onlinestore.dto.CategoryDTO;
 import com.sda.onlinestore.model.CategoryModel;
+import com.sda.onlinestore.model.UserModel;
 import com.sda.onlinestore.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -18,8 +20,14 @@ public class CategoryService {
 
     public void save(CategoryDTO categoryDTO) {
         CategoryModel categoryModel = new CategoryModel();
-        categoryModel.setId(categoryDTO.getId());
         categoryModel.setName(categoryDTO.getName());
+
+        CategoryDTO parent = categoryDTO.getParent();
+        Optional<CategoryModel> parentCategoryModelOptional = categoryRepository.findById(parent.getId());
+        if(parentCategoryModelOptional.isPresent()) {
+            CategoryModel parentCategoryModel = parentCategoryModelOptional.get();
+            categoryModel.setCategoryModelParent(parentCategoryModel);
+        }
         categoryRepository.save(categoryModel);
     }
 
@@ -52,8 +60,16 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
-    public void update(CategoryModel categoryModel) {
-        categoryRepository.save(categoryModel);
+    public void update(CategoryDTO categoryDTO) {
+        Optional<CategoryModel> newCategory = categoryRepository.findById(categoryDTO.getId());
+        if(newCategory.isPresent()) {
+            CategoryModel categoryModel = newCategory.get();
+            categoryModel.setName(categoryDTO.getName());
+
+            if()
+
+            userRepository.save(userModel);
+        }
     }
 
     public CategoryDTO findById(Long id) {

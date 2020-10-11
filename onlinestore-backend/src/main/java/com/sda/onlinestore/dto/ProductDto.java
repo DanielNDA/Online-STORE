@@ -1,7 +1,6 @@
 package com.sda.onlinestore.dto;
 
 
-
 public class ProductDto {
 
     private Long id;

@@ -16,7 +16,7 @@ public class CategoryModel {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("subCategories")
     private CategoryModel categoryModelParent;
 
