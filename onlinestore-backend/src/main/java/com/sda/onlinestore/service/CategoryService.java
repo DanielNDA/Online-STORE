@@ -22,7 +22,7 @@ public class CategoryService {
 
         CategoryDTO parent = categoryDTO.getParent();
         Optional<CategoryModel> parentCategoryModelOptional = categoryRepository.findById(parent.getId());
-        if(parentCategoryModelOptional.isPresent()) {
+        if (parentCategoryModelOptional.isPresent()) {
             CategoryModel parentCategoryModel = parentCategoryModelOptional.get();
             categoryModel.setCategoryModelParent(parentCategoryModel);
         }
@@ -60,10 +60,17 @@ public class CategoryService {
 
     public void update(CategoryDTO categoryDTO) {
         Optional<CategoryModel> newCategory = categoryRepository.findById(categoryDTO.getId());
-        if(newCategory.isPresent()) {
+        if (newCategory.isPresent()) {
             CategoryModel categoryModel = newCategory.get();
             categoryModel.setName(categoryDTO.getName());
 
+            CategoryDTO parentDTO = categoryDTO.getParent();
+
+            Optional<CategoryModel> categoryParentOptional = categoryRepository.findById(parentDTO.getId());
+            if (categoryParentOptional.isPresent()) {
+                CategoryModel category = categoryParentOptional.get();
+                categoryModel.setCategoryModelParent(category);
+            }
             categoryRepository.save(categoryModel);
         }
     }
