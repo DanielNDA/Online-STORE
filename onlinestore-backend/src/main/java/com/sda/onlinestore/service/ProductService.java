@@ -57,7 +57,7 @@ public class ProductService {
         }
         ManufacturerDto manufacturerDto = productDto.getManufacturerDto();
         if(manufacturerDto != null){
-            ManufacturerModel manufacturerModel = manufacturerRepository.findById(categoryDTO.getId()).orElse(null);
+            ManufacturerModel manufacturerModel = manufacturerRepository.findById(manufacturerDto.getId()).orElse(null);
             productModel.setManufacturerModel(manufacturerModel);
         }
         productRepository.save(productModel);
