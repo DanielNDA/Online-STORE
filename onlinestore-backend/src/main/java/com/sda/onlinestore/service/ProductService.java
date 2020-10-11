@@ -43,7 +43,7 @@ public class ProductService {
     }
 
     public List<ProductDto> getProducts(){
-        List<ProductModel> productModelList = new ArrayList<>();
+        List<ProductModel> productModelList = productRepository.findAll();
         List<ProductDto> productDtoList = new ArrayList<>();
 
         for(ProductModel productModel : productModelList){
@@ -63,8 +63,16 @@ public class ProductService {
     }
 
 
-    public void update(ProductModel productModel){
-        productRepository.save(productModel);
+    public void update(ProductDto productDto){
+        Optional<ProductModel> productModelOptional = productRepository.findById(productDto.getId());
+        if(productModelOptional.isPresent()){
+            ProductModel productModel = productModelOptional.get();
+            productModel.setName(productDto.getName());
+            productModel.setDescription(productDto.getDescription());
+            productModel.setThumbnail(productDto.getThumbnail());
+            productModel.setPrice(productDto.getPrice());
+            productRepository.save(productModel);
+        }
     }
 
 }
