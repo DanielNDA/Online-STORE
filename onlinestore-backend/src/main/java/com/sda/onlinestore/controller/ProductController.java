@@ -11,29 +11,29 @@ import java.util.List;
 @CrossOrigin
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
-
-    @PostMapping("/products")
-    private void save(@RequestBody ProductModel productmodel){
-        productService.save(productmodel);
-    }
-
-    @DeleteMapping("/products/{id}")
-    private void deleteById(@PathVariable(name = "id") Long id){
-        productService.deleteById(id);
-    }
-    @GetMapping("/products/{id}")
-    private ProductModel findById(@PathVariable(name = "id") Long id){
-        return productService.findById(id);
-    }
-    @GetMapping("/products")
-    private List<ProductModel> findAll(){
-        return productService.findAll();
-    }
-
-    @PutMapping("/products/{id}")
-    public void update(@RequestBody ProductModel productModel){
-        productService.update(productModel);
-    }
+//    @Autowired
+//    private ProductService productService;
+//
+//    @PostMapping("/products")
+//    private void save(@RequestBody ProductModel productmodel){
+//        productService.save(productmodel);
+//    }
+//
+//    @DeleteMapping("/products/{id}")
+//    private void deleteById(@PathVariable(name = "id") Long id){
+//        productService.deleteById(id);
+//    }
+//    @GetMapping("/products/{id}")
+//    private ProductModel findById(@PathVariable(name = "id") Long id){
+//        return productService.findById(id);
+//    }
+//    @GetMapping("/products")
+//    private List<ProductModel> findAll(){
+//        return productService.findAll();
+//    }
+//
+//    @PutMapping("/products/{id}")
+//    public void update(@RequestBody ProductModel productModel){
+//        productService.update(productModel);
+//    }
 }
