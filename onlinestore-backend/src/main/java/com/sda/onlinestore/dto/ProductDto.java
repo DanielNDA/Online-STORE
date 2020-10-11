@@ -11,7 +11,7 @@ public class ProductDto {
     private double price;
     private String productType;
     private ManufacturerDto manufacturerDto;
-    private CategoryDto categoryDto;
+    private CategoryDTO categoryDTO;
 
     public String getName() {
         return name;
@@ -69,11 +69,11 @@ public class ProductDto {
         this.manufacturerDto = manufacturerDto;
     }
 
-    public CategoryDto getCategoryDto() {
-        return categoryDto;
+    public CategoryDTO getCategoryDTO() {
+        return categoryDTO;
     }
 
-    public void setCategoryDto(CategoryDto categoryDto) {
-        this.categoryDto = categoryDto;
+    public void setCategoryDTO(CategoryDTO categoryDTO) {
+        this.categoryDTO = categoryDTO;
     }
 }

@@ -7,6 +7,7 @@ import com.sda.onlinestore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,27 +33,38 @@ public class ProductService {
 
     public void addProduct(ProductDto productDto){
         ProductModel productModel = new ProductModel();
-        productModel.setName(productDto.getName());
-        productModel.setProductType(ProductType.valueOf(productDto.getProductType()));
         productModel.setId(productDto.getId());
-        productModel.setPrice(productDto.getPrice());
+        productModel.setName(productDto.getName());
         productModel.setThumbnail(productDto.getThumbnail());
+        productModel.setDescription(productDto.getDescription());
+        productModel.setProductType(ProductType.valueOf(productDto.getProductType()));
+        productModel.setPrice(productDto.getPrice());
         productRepository.save(productModel);
+    }
+
+    public List<ProductDto> getProducts(){
+        List<ProductModel> productModelList = new ArrayList<>();
+        List<ProductDto> productDtoList = new ArrayList<>();
+
+        for(ProductModel productModel : productModelList){
+            ProductDto productDto = new ProductDto();
+            productDto.setId(productModel.getId());
+            productDto.setName(productModel.getName());
+            productDto.setThumbnail(productModel.getThumbnail());
+            productDto.setDescription(productModel.getDescription());
+            productDto.setPrice(productModel.getPrice());
+            productDtoList.add(productDto);
+        }
+        return productDtoList;
     }
 
     public void deleteById(Long id){
         productRepository.deleteById(id);
     }
 
-    public List<ProductModel> findAll(){
-      return   productRepository.findAll();
-    }
 
     public void update(ProductModel productModel){
         productRepository.save(productModel);
     }
-
-
-
 
 }
