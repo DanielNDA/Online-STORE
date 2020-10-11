@@ -7,13 +7,10 @@ public class OrderLineModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private Integer quantity;
+    private Double price;
     @OneToOne(cascade = CascadeType.ALL)
     private ProductModel productModel;
-
-    private Integer quantity;
-
-    private Double price;
 
     public Long getId() {
         return id;

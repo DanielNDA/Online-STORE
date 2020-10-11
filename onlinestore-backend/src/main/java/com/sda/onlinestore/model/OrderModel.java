@@ -12,26 +12,19 @@ public class OrderModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String userName;
-
     private Double total;
+    private Date dateOfOrder;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private AddressModel deliveryAddress;
-
     @OneToOne(cascade = CascadeType.ALL)
     private AddressModel userAddress;
-
-    private Date dateOfOrder;
-
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnoreProperties("orderModel")
     private List<OrderLineModel> orderLines = new ArrayList<>();
-
     @ManyToOne(fetch = FetchType.LAZY)
     private UserModel customer;
-
     @Enumerated(EnumType.STRING)
     private Status status;
 
@@ -58,8 +51,6 @@ public class OrderModel {
     public void setTotal(Double total) {
         this.total = total;
     }
-
-
 
     public Date getDateOfOrder() {
         return dateOfOrder;
@@ -108,5 +99,5 @@ public class OrderModel {
     public void setCustomer(UserModel customer) {
         this.customer = customer;
     }
-    
+
 }
