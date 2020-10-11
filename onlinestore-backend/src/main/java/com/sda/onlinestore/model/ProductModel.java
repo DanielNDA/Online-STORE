@@ -9,11 +9,16 @@ public class ProductModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     private String description;
 
     private String thumbnail;
 
     private double price;
+
+    @Enumerated(EnumType.STRING)
+    private ProductType productType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ManufacturerModel manufacturerModel;
@@ -23,6 +28,22 @@ public class ProductModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private CategoryModel categoryModel;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
 
     public Long getId() {
         return id;
