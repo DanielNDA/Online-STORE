@@ -8,12 +8,23 @@ import { UserEditComponent } from './users/components/user-edit/user-edit.compon
 import { RegisterComponent } from './users/components/register/register.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {ProductAddComponent} from './products/components/product-add/product-add.component';
+import {ProductListComponent} from './products/components/product-list/product-list.component';
+import {ProductEditComponent} from './products/components/product-edit/product-edit.component';
+import {ProductViewComponent} from './products/components/product-view/product-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserEditComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductAddComponent,
+    ProductListComponent,
+    ProductEditComponent,
+    ProductViewComponent,
+    OrderListComponent,
+    OrderAddComponent,
+    OrderUsersComponent,
   ],
   imports: [
     BrowserModule,

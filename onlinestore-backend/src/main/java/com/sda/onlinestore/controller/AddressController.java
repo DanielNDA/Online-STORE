@@ -3,10 +3,7 @@ package com.sda.onlinestore.controller;
 import com.sda.onlinestore.persistence.dto.AddressDTO;
 import com.sda.onlinestore.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -18,5 +15,10 @@ public class AddressController {
     @PostMapping("/addresses")
     private void save(@RequestBody AddressDTO addressDTO) {
         addressService.save(addressDTO);
+    }
+
+    @GetMapping("/addresses/{id}")
+    private AddressDTO findById(@PathVariable(name = "id") Long id) {
+        return addressService.findById(id);
     }
 }

@@ -9,6 +9,8 @@ import com.sda.onlinestore.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AddressService {
 
@@ -18,13 +20,26 @@ public class AddressService {
     public void save(AddressDTO addressDTO) {
         AddressModel addressModel = new AddressModel();
 
-        if(addressDTO != null) {
-            addressModel.setId(addressDTO.getId());
-            addressModel.setCountry(addressDTO.getCountry());
-            addressModel.setCity(addressDTO.getCity());
-            addressModel.setStreet(addressDTO.getStreet());
-            addressModel.setZipCode(addressDTO.getZipCode());
-        }
+        addressModel.setId(addressDTO.getId());
+        addressModel.setCountry(addressDTO.getCountry());
+        addressModel.setCity(addressDTO.getCity());
+        addressModel.setStreet(addressDTO.getStreet());
+        addressModel.setZipCode(addressDTO.getZipCode());
+
         addressRepository.save(addressModel);
+    }
+
+    public AddressDTO findById(Long id) {
+        Optional<AddressModel> addressModel = addressRepository.findById(id);
+        AddressDTO addressDTO = new AddressDTO();
+
+        if (addressModel.isPresent()) {
+            addressDTO.setId(addressModel.get().getId());
+            addressDTO.setCountry(addressModel.get().getCountry());
+            addressDTO.setCity(addressModel.get().getCity());
+            addressDTO.setStreet(addressModel.get().getStreet());
+            addressDTO.setZipCode(addressModel.get().getZipCode());
+        }
+        return addressDTO;
     }
 }

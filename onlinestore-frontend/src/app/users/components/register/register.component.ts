@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../model/user';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../service/user.service';
@@ -15,21 +15,23 @@ export class RegisterComponent implements OnInit {
   user: User;
   id: number;
   matched = true;
-  addressModel: Address;
+  address: Address;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private userService: UserService,
               private addressService: AddressService) {
     this.user = new User();
-    this.addressModel = new Address();
+    this.address = new Address();
   }
 
   ngOnInit(): void {
   }
 
   onSubmit(): any {
-    this.user.addressModel = this.addressModel;
+    this.addressService.save(this.address).subscribe(data => {
+      this.user.addressModel = data;
+    });
     this.userService.save(this.user).subscribe(result => this.goToLogin());
   }
 
