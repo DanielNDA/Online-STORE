@@ -16,6 +16,9 @@ import {ProductEditComponent} from './products/components/product-edit/product-e
 import {ProductListComponent} from './products/components/product-list/product-list.component';
 import {ProductViewComponent} from './products/components/product-view/product-view.component';
 import { CategoryFormComponent } from './categories/components/category-form/category-form.component';
+import { ManufacturerComponent } from './manufacturer/components/manufacturer/manufacturer.component';
+import { ManufacturerListComponent } from './manufacturer/components/manufacturer-list/manufacturer-list.component';
+import { ManufacturerAddComponent } from './manufacturer/components/manufacturer-add/manufacturer-add.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { CategoryFormComponent } from './categories/components/category-form/cat
     ProductListComponent,
     ProductViewComponent,
     CategoryFormComponent,
+    ManufacturerComponent,
+    ManufacturerListComponent,
+    ManufacturerAddComponent,
   ],
   imports: [
     BrowserModule,
