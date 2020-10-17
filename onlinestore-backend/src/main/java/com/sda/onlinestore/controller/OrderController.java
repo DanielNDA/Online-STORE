@@ -42,8 +42,13 @@ public class OrderController {
     }
 
     @PutMapping("/update-order/{username}/{orderLineID}")
-    public void update(@PathVariable(name = "username") String username, @PathVariable(name = "orderLineID") Long orderLineID){
+    public void removeOrderLine(@PathVariable(name = "username") String username, @PathVariable(name = "orderLineID") Long orderLineID){
         orderService.removeOrderLine(username, orderLineID);
+    }
+
+    @GetMapping("/checkout/{id}")
+    public OrderDTO checkout(@PathVariable(name = "id") Long id){
+        return orderService.checkout(id);
     }
 
     @GetMapping("/orders/shopping-cart/{id}")
