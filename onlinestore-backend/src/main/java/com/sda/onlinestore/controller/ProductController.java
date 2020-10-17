@@ -15,22 +15,22 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/addProducts")
-    private void save(@RequestBody ProductDTO productDto) {
+    public void save(@RequestBody ProductDTO productDto) {
         productService.addProduct(productDto);
     }
 
     @DeleteMapping("/deleteProducts/{id}")
-    private void deleteById(@PathVariable(name = "id") Long id) {
+    public void deleteById(@PathVariable(name = "id") Long id) {
         productService.deleteById(id);
     }
 
     @GetMapping("/products/{id}")
-    private ProductDTO findById(@PathVariable(name = "id") Long id) {
+    public ProductDTO findById(@PathVariable(name = "id") Long id) {
         return productService.getProductById(id);
     }
 
     @GetMapping("/products")
-    private List<ProductDTO> findAll() {
+    public List<ProductDTO> findAll() {
         return productService.getProducts();
     }
 
