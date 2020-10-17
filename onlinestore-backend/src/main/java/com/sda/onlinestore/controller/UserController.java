@@ -20,11 +20,6 @@ public class UserController {
         userService.save(userDTO);
     }
 
-    @PostMapping("/users/{id}")
-    private void assignAddressToUser(@PathVariable(name = "id") Long userID, @RequestBody AddressDTO addressDTO) {
-        userService.assignAddressToUser(userID, addressDTO);
-    }
-
     @DeleteMapping("/users/{id}")
     private void deleteById(@PathVariable(name = "id") Long id) {
         userService.deleteById(id);

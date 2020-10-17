@@ -113,13 +113,4 @@ public class UserService {
         }
         return userDTO;
     }
-
-    public void assignAddressToUser(Long userID, AddressDTO addressDTO) {
-        UserModel userModel = userRepository.findById(userID).orElse(null);
-        AddressModel addressModel = addressRepository.findById(addressDTO.getId()).orElse(null);
-        if (userModel != null) {
-            userModel.setAddressModel(addressModel);
-            userRepository.save(userModel);
-        }
-    }
 }
