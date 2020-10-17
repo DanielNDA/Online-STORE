@@ -7,9 +7,12 @@ import {ProductListComponent} from './products/components/product-list/product-l
 import {ProductAddComponent} from './products/components/product-add/product-add.component';
 import {ProductEditComponent} from './products/components/product-edit/product-edit.component';
 import {ProductViewComponent} from './products/components/product-view/product-view.component';
+import {OrderListComponent} from './orders/components/order-list/order-list.component';
+
 
 const routes: Routes = [
   {path: 'register', component: RegisterComponent},
+  {path: 'view-cart', component: OrderListComponent},
   {path: 'category-add', component: CategoryFormComponent},
   {path: 'profile-edit/:id', component: UserEditComponent},
   {path: 'products', component: ProductListComponent},

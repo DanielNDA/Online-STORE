@@ -3,15 +3,14 @@ package com.sda.onlinestore.service;
 import com.sda.onlinestore.persistence.dto.OrderDTO;
 import com.sda.onlinestore.persistence.dto.OrderLineDTO;
 import com.sda.onlinestore.persistence.dto.ProductDTO;
-import com.sda.onlinestore.persistence.dto.UserDTO;
 import com.sda.onlinestore.persistence.model.OrderLineModel;
 import com.sda.onlinestore.persistence.model.OrderModel;
-import com.sda.onlinestore.persistence.model.ProductModel;
+import com.sda.onlinestore.persistence.model.Status;
 import com.sda.onlinestore.persistence.model.UserModel;
+import com.sda.onlinestore.repository.OrderLineRepository;
 import com.sda.onlinestore.repository.OrderRepository;
 import com.sda.onlinestore.repository.ProductRepository;
 import com.sda.onlinestore.repository.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +29,11 @@ public class OrderService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private OrderLineRepository orderLineRepository;
+
     public void addToCart(String username, Long productID){
-        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserName(username);
+        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserNameAndStatus_Hold(username);
         OrderModel order;
 
         boolean isAlreadyInBasket = false;
@@ -58,6 +60,7 @@ public class OrderService {
         }
         else{
             order = new OrderModel();
+            order.setStatus(Status.HOLD);
             order.setUserName(username);
             OrderLineModel orderLineModel = new OrderLineModel();
             orderLineModel.setQuantity(1);
@@ -73,7 +76,7 @@ public class OrderService {
     public void deleteById(Long id){
         OrderModel order = orderRepository.findById(id).orElse(null);
         UserModel user = order.getCustomer();
-               user.getOrders().removeIf(a->a.getId()==id);
+               user.getOrders().removeIf(a->a.getId().equals(id));
                userRepository.save(user);
         orderRepository.deleteById(id);
     }
@@ -102,7 +105,6 @@ public class OrderService {
             orderDTO.setOrderLines(orderLinesDTO);
         }
         return orderDTO;
-
     }
 
 
@@ -135,24 +137,27 @@ public class OrderService {
         return orderDTOS;
     }
 
-    public void update(OrderDTO orderDTO){
-        Optional<OrderModel> orderModelOptional = orderRepository.findById(orderDTO.getId());
-        if(orderModelOptional.isPresent()){
-            OrderModel orderModel = orderModelOptional.get();
-            orderModel.setTotal(orderDTO.getTotal());
-            List<OrderLineModel> orderlines = new ArrayList<>();
-            for (OrderLineDTO orderLineDTO: orderDTO.getOrderLines()) {
-                OrderLineModel orderLineModel = new OrderLineModel();
-                orderLineModel.setQuantity(orderLineDTO.getQuantity());
+    public void update(String username, Long orderLineID, int quantity){
+        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserNameAndStatus_Hold(username);
+        if(orderModelOptional.isPresent()) {
+            OrderModel order = orderModelOptional.get();
 
-                ProductModel productModel = new ProductModel();
-                productModel.setName(orderLineDTO.getProductDTO().getName());
-                productModel.setPrice(orderLineDTO.getProductDTO().getPrice());
-                orderLineModel.setProductModel(productModel);
-                orderlines.add(orderLineModel);
+            for (OrderLineModel olm: order.getOrderLines()) {
+                if(olm.getId().equals(orderLineID)){
+                    if(quantity == 0){
+                        order.getOrderLines().remove(olm);
+                        break;
+                    }
+                    else {
+                        olm.setQuantity(quantity);
+                        olm.setPrice(olm.getQuantity() * olm.getProductModel().getPrice());
+                        orderLineRepository.save(olm);
+                    }
+
+                }
             }
-            orderModel.setOrderLines(orderlines);
-            orderRepository.save(orderModel);
+            order.setTotal(totalPrice(order.getOrderLines()));
+            orderRepository.save(order);
         }
     }
 
@@ -162,5 +167,39 @@ public class OrderService {
             total = total + olm.getProductModel().getPrice() * olm.getQuantity();
         }
         return total;
+    }
+
+    public void removeOrderLine(String username, Long orderLineID){
+        update(username, orderLineID, 0);
+    }
+
+    public OrderDTO checkout(Long id){
+        Optional<OrderModel> order = orderRepository.findById(id);
+        OrderDTO orderDTO = new OrderDTO();
+        if (order.isPresent()) {
+            order.get().setStatus(Status.DELIVERED);
+            orderRepository.save(order.get());
+
+            orderDTO.setId(order.get().getId());
+            orderDTO.setTotal(order.get().getTotal());
+
+            List<OrderLineDTO> orderLinesDTO = new ArrayList<>();
+            for (OrderLineModel ol : order.get().getOrderLines()) {
+                OrderLineDTO old = new OrderLineDTO();
+                old.setId(ol.getId());
+                old.setPrice(ol.getPrice());
+                old.setQuantity(ol.getQuantity());
+
+                ProductDTO productDto = new ProductDTO();
+                productDto.setId(ol.getProductModel().getId());
+                productDto.setName(ol.getProductModel().getName());
+                productDto.setPrice(ol.getProductModel().getPrice());
+                old.setProductDTO(productDto);
+                orderLinesDTO.add(old);
+            }
+            orderDTO.setOrderLines(orderLinesDTO);
+            orderDTO.setStatus(order.get().getStatus().name());
+        }
+        return orderDTO;
     }
 }

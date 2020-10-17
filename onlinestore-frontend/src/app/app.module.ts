@@ -16,9 +16,15 @@ import {ProductEditComponent} from './products/components/product-edit/product-e
 import {ProductListComponent} from './products/components/product-list/product-list.component';
 import {ProductViewComponent} from './products/components/product-view/product-view.component';
 import { CategoryFormComponent } from './categories/components/category-form/category-form.component';
+
+// @ts-ignore
 import { ManufacturerComponent } from './manufacturer/components/manufacturer/manufacturer.component';
 import { ManufacturerListComponent } from './manufacturer/components/manufacturer-list/manufacturer-list.component';
 import { ManufacturerAddComponent } from './manufacturer/components/manufacturer-add/manufacturer-add.component';
+import { HomeComponent } from './common/home/home.component';
+import { NavbarComponent } from './common/navbar/navbar.component';
+import { SidebarComponent } from './common/sidebar/sidebar.component';
+import { FooterComponent } from './common/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -36,13 +42,17 @@ import { ManufacturerAddComponent } from './manufacturer/components/manufacturer
     ManufacturerComponent,
     ManufacturerListComponent,
     ManufacturerAddComponent,
+    HomeComponent,
+    NavbarComponent,
+    SidebarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
