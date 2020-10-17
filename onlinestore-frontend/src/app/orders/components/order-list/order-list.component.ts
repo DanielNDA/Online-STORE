@@ -32,4 +32,17 @@ export class OrderListComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
+  continueShopping() {
+    this.router.navigate(['/products']);
+  }
+
+  // tslint:disable-next-line:typedef
+  checkout() {
+    this.id = this.route.snapshot.params.id;
+    this.orderService.checkout(this.id).subscribe(data => {
+
+      this.router.navigate(['/products']);
+    });
+  }
 }
