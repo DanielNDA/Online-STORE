@@ -16,6 +16,10 @@ import {ProductEditComponent} from './products/components/product-edit/product-e
 import {ProductListComponent} from './products/components/product-list/product-list.component';
 import {ProductViewComponent} from './products/components/product-view/product-view.component';
 import { CategoryFormComponent } from './categories/components/category-form/category-form.component';
+import { HomeComponent } from './common/home/home.component';
+import { NavbarComponent } from './common/navbar/navbar.component';
+import { SidebarComponent } from './common/sidebar/sidebar.component';
+import { FooterComponent } from './common/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,10 @@ import { CategoryFormComponent } from './categories/components/category-form/cat
     ProductListComponent,
     ProductViewComponent,
     CategoryFormComponent,
+    HomeComponent,
+    NavbarComponent,
+    SidebarComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
