@@ -4,13 +4,13 @@ public class AddressDTO {
 
     private Long id;
 
-    private Long zipCode;
-
-    private String street;
+    private String country;
 
     private String city;
 
-    private String country;
+    private String street;
+
+    private Long zipCode;
 
     public Long getId() {
         return id;

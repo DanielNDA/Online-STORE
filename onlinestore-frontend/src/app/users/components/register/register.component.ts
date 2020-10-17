@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../model/user';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../service/user.service';
@@ -29,8 +29,13 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): any {
-    this.user.addressModel = this.addressModel;
-    this.userService.save(this.user).subscribe(result => this.goToLogin());
+    this.addressService.save(this.addressModel).subscribe(data1 => {
+      this.addressModel = data1;
+      this.userService.save(this.user).subscribe(data => {
+        this.user = data;
+        this.goToLogin();
+      });
+    });
   }
 
   goToLogin(): any {

@@ -1,5 +1,7 @@
 package com.sda.onlinestore.persistence.dto;
 
+import java.util.ArrayList;
+
 public class UserDTO {
 
     private Long id;

@@ -12,16 +12,6 @@
         <div [hidden]="email.valid" class="alert alert-danger">Email is required</div>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" [(ngModel)]="user.password"
-               class="form-control"
-               id="password"
-               name="password"
-               placeholder="Enter your password"
-               required #password="ngModel">
-        <div [hidden]="password.valid" class="alert alert-danger">Password is required</div>
-      </div>
-      <div class="form-group">
         <label for="channel">Channel</label>
         <input type="email" [(ngModel)]="user.channel"
                class="form-control"
@@ -72,7 +62,6 @@
              required #zipcode="ngModel">
       <div [hidden]="zipcode.valid" class="alert alert-danger">Zip code is required</div>
     </div>
-
       <div class="btn-group">
         <a (click)="goToLogin()"
            class="btn btn-secondary mx-1">Back
