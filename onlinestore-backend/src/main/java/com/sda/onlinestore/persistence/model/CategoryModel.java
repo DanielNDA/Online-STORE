@@ -27,6 +27,14 @@ public class CategoryModel {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryModel")
     private List<ProductModel> products = new ArrayList<>();
 
+    public List<ProductModel> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductModel> products) {
+        this.products = products;
+    }
+
     public Long getId() {
         return id;
     }

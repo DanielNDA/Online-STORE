@@ -12,16 +12,6 @@
         <div [hidden]="email.valid" class="alert alert-danger">Email is required</div>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" [(ngModel)]="user.password"
-               class="form-control"
-               id="password"
-               name="password"
-               placeholder="Enter your password"
-               required #password="ngModel">
-        <div [hidden]="password.valid" class="alert alert-danger">Password is required</div>
-      </div>
-      <div class="form-group">
         <label for="channel">Channel</label>
         <input type="email" [(ngModel)]="user.channel"
                class="form-control"
@@ -34,7 +24,7 @@
       </div>
       <div class="form-group">
         <label for="country">Country</label>
-        <input type="text" [(ngModel)]="address.country"
+        <input type="text" [(ngModel)]="addressModel.country"
                class="form-control"
                id="country"
                name="country"
@@ -44,7 +34,7 @@
       </div>
       <div class="form-group">
         <label for="city">City</label>
-        <input type="text" [(ngModel)]="address.city"
+        <input type="text" [(ngModel)]="addressModel.city"
                class="form-control"
                id="city"
                name="city"
@@ -54,7 +44,7 @@
       </div>
       <div class="form-group">
         <label for="street">Street</label>
-        <input type="text" [(ngModel)]="address.street"
+        <input type="text" [(ngModel)]="addressModel.street"
                class="form-control"
                id="street"
                name="street"
@@ -64,7 +54,7 @@
       </div>
       <div class="form-group">
       <label for="zipcode">Zip Code</label>
-      <input type="text" [(ngModel)]="address.zipCode"
+      <input type="text" [(ngModel)]="addressModel.zipCode"
              class="form-control"
              id="zipcode"
              name="zipcode"
@@ -72,7 +62,6 @@
              required #zipcode="ngModel">
       <div [hidden]="zipcode.valid" class="alert alert-danger">Zip code is required</div>
     </div>
-
       <div class="btn-group">
         <a (click)="goToLogin()"
            class="btn btn-secondary mx-1">Back

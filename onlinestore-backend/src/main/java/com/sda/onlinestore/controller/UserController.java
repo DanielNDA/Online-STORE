@@ -1,5 +1,6 @@
 package com.sda.onlinestore.controller;
 
+import com.sda.onlinestore.persistence.dto.AddressDTO;
 import com.sda.onlinestore.persistence.dto.UserDTO;
 import com.sda.onlinestore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ public class UserController {
     @PostMapping("/register")
     private void save(@RequestBody UserDTO userDTO) {
         userService.save(userDTO);
+    }
+
+    @PostMapping("/users/{id}")
+    private void assignAddressToUser(@PathVariable(name = "id") Long userID, @RequestBody AddressDTO addressDTO) {
+        userService.assignAddressToUser(userID, addressDTO);
     }
 
     @DeleteMapping("/users/{id}")

@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../model/user';
+import {Address} from '../../addresses/model/address';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,10 @@ export class UserService {
   // tslint:disable-next-line:typedef
   public getById(id: number): Observable<any> {
     return this.http.get(`${this.usersUrl}/${id}`);
+  }
+
+  // tslint:disable-next-line:typedef
+  public assignAddressToUser(id: number, address: Address) {
+    return this.http.post(`${this.usersUrl}/${id}`, address);
   }
 }
