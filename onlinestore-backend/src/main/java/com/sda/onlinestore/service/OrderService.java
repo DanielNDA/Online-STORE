@@ -3,15 +3,13 @@ package com.sda.onlinestore.service;
 import com.sda.onlinestore.persistence.dto.OrderDTO;
 import com.sda.onlinestore.persistence.dto.OrderLineDTO;
 import com.sda.onlinestore.persistence.dto.ProductDTO;
-import com.sda.onlinestore.persistence.dto.UserDTO;
 import com.sda.onlinestore.persistence.model.OrderLineModel;
 import com.sda.onlinestore.persistence.model.OrderModel;
-import com.sda.onlinestore.persistence.model.ProductModel;
 import com.sda.onlinestore.persistence.model.UserModel;
+import com.sda.onlinestore.repository.OrderLineRepository;
 import com.sda.onlinestore.repository.OrderRepository;
 import com.sda.onlinestore.repository.ProductRepository;
 import com.sda.onlinestore.repository.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +27,9 @@ public class OrderService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private OrderLineRepository orderLineRepository;
 
     public void addToCart(String username, Long productID){
         Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserName(username);
@@ -73,7 +74,7 @@ public class OrderService {
     public void deleteById(Long id){
         OrderModel order = orderRepository.findById(id).orElse(null);
         UserModel user = order.getCustomer();
-               user.getOrders().removeIf(a->a.getId()==id);
+               user.getOrders().removeIf(a->a.getId().equals(id));
                userRepository.save(user);
         orderRepository.deleteById(id);
     }
@@ -102,7 +103,6 @@ public class OrderService {
             orderDTO.setOrderLines(orderLinesDTO);
         }
         return orderDTO;
-
     }
 
 
@@ -135,24 +135,27 @@ public class OrderService {
         return orderDTOS;
     }
 
-    public void update(OrderDTO orderDTO){
-        Optional<OrderModel> orderModelOptional = orderRepository.findById(orderDTO.getId());
-        if(orderModelOptional.isPresent()){
-            OrderModel orderModel = orderModelOptional.get();
-            orderModel.setTotal(orderDTO.getTotal());
-            List<OrderLineModel> orderlines = new ArrayList<>();
-            for (OrderLineDTO orderLineDTO: orderDTO.getOrderLines()) {
-                OrderLineModel orderLineModel = new OrderLineModel();
-                orderLineModel.setQuantity(orderLineDTO.getQuantity());
+    public void update(String username, Long orderLineID, int quantity){
+        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserName(username);
+        if(orderModelOptional.isPresent()) {
+            OrderModel order = orderModelOptional.get();
 
-                ProductModel productModel = new ProductModel();
-                productModel.setName(orderLineDTO.getProductDTO().getName());
-                productModel.setPrice(orderLineDTO.getProductDTO().getPrice());
-                orderLineModel.setProductModel(productModel);
-                orderlines.add(orderLineModel);
+            for (OrderLineModel olm: order.getOrderLines()) {
+                if(olm.getId().equals(orderLineID)){
+                    if(quantity == 0){
+                        order.getOrderLines().remove(olm);
+                        break;
+                    }
+                    else {
+                        olm.setQuantity(quantity);
+                        olm.setPrice(olm.getQuantity() * olm.getProductModel().getPrice());
+                        orderLineRepository.save(olm);
+                    }
+
+                }
             }
-            orderModel.setOrderLines(orderlines);
-            orderRepository.save(orderModel);
+            order.setTotal(totalPrice(order.getOrderLines()));
+            orderRepository.save(order);
         }
     }
 
@@ -162,5 +165,9 @@ public class OrderService {
             total = total + olm.getProductModel().getPrice() * olm.getQuantity();
         }
         return total;
+    }
+
+    public void removeOrderLine(String username, Long orderLineID){
+        update(username, orderLineID, 0);
     }
 }

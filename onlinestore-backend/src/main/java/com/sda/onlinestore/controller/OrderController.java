@@ -16,9 +16,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @Autowired
-    private ProductService productService;
-
     @PostMapping("/add-to-cart/{username}/{productID}")
     public void save(@PathVariable(name = "username") String username, @PathVariable(name = "productID") Long productID){
         orderService.addToCart(username, productID);
@@ -39,9 +36,14 @@ public class OrderController {
         orderService.deleteById(id);
     }
 
-    @PutMapping("/update-order")
-    public void update(@RequestBody OrderDTO orderDTO){
-        orderService.update(orderDTO);
+    @PutMapping("/update-order/{username}/{orderLineID}/{quantity}")
+    public void update(@PathVariable(name = "username") String username, @PathVariable(name = "orderLineID") Long orderLineID, @PathVariable(name = "quantity") int quantity){
+        orderService.update(username, orderLineID, quantity);
+    }
+
+    @PutMapping("/update-order/{username}/{orderLineID}")
+    public void update(@PathVariable(name = "username") String username, @PathVariable(name = "orderLineID") Long orderLineID){
+        orderService.removeOrderLine(username, orderLineID);
     }
 
     @GetMapping("/orders/shopping-cart/{id}")
@@ -49,20 +51,4 @@ public class OrderController {
         OrderDTO orderDTO = orderService.findById(id);
         return orderDTO;
     }
-
-//    @PostMapping("/orders/shopping-cart/{id}")
-//    public OrderLineModel addProductToOrderLine(@PathVariable (name = "id") Long id, @RequestParam(name="quantity") Integer quantity){
-//        ProductModel productModel = productService.findById(id);
-//        OrderLineModel orderLine = new OrderLineModel();
-//        orderLine.setQuantity(quantity);
-//        orderLine.setProductModel(productModel);
-//        orderLine.setPrice(productModel.getPrice() * quantity);
-//    return orderLine;
-//    }
-
-//    @DeleteMapping("/orders/shopping-cart/{id}")
-//    public void removeOrderLine(@PathVariable (name = "id") Long id){
-//        orderLineService.deleteById(id);
-//
-//    }
 }
