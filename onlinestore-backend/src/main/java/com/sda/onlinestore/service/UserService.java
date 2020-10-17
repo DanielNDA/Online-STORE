@@ -33,12 +33,12 @@ public class UserService {
             addressModel.setCity(addressDTO.getCity());
             addressModel.setStreet(addressDTO.getStreet());
             addressModel.setZipCode(addressDTO.getZipCode());
-
             userModel.setAddressModel(addressModel);
         }
 
         userModel.setChannel(userDTO.getChannel());
         userModel.setEmail(userDTO.getEmail());
+        userModel.setUrl(userDTO.getUrl());
 
         userRepository.save(userModel);
     }
@@ -80,13 +80,23 @@ public class UserService {
         Optional<UserModel> newUser = userRepository.findById(userDTO.getId());
         if (newUser.isPresent()) {
             UserModel userModel = newUser.get();
+            userModel.setId(userDTO.getId());
             userModel.setEmail(userDTO.getEmail());
             userModel.setUrl(userDTO.getUrl());
             userModel.setChannel(userDTO.getChannel());
 
-            if (userDTO.getNewPassword() != null && !userDTO.getNewPassword().equals("")) {
-                userModel.setNewPassword(userDTO.getNewPassword());
-            }
+            AddressModel addressModel = new AddressModel();
+            AddressDTO addressDto = userDTO.getAddressDTO();
+            addressModel.setCountry(addressDto.getCountry());
+            addressModel.setCity(addressDto.getCity());
+            addressModel.setStreet(addressDto.getStreet());
+            addressModel.setZipCode(addressDto.getZipCode());
+
+
+//            if (userDTO.getNewPassword() != null && !userDTO.getNewPassword().equals("")) {
+//                userModel.setNewPassword(userDTO.getNewPassword());
+//            }
+            userModel.setAddressModel(addressModel);
             userRepository.save(userModel);
         }
     }
@@ -99,6 +109,7 @@ public class UserService {
             userDTO.setId(userModel.get().getId());
             userDTO.setEmail(userModel.get().getEmail());
             userDTO.setChannel(userModel.get().getChannel());
+            userDTO.setUrl(userModel.get().getUrl());
 
             AddressModel addressModel = userModel.get().getAddressModel();
             AddressDTO addressDTO = new AddressDTO();

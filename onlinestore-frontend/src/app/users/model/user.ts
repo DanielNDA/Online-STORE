@@ -6,5 +6,5 @@ export class User {
   channel: string;
   password: string;
   newPassword: string;
-  addressModel: Address;
+  addressDTO: Address;
 }

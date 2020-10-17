@@ -13,12 +13,12 @@ public class AddressController {
     private AddressService addressService;
 
     @PostMapping("/addresses")
-    private void save(@RequestBody AddressDTO addressDTO) {
+    public void save(@RequestBody AddressDTO addressDTO) {
         addressService.save(addressDTO);
     }
 
     @GetMapping("/addresses/{id}")
-    private AddressDTO findById(@PathVariable(name = "id") Long id) {
+    public AddressDTO findById(@PathVariable(name = "id") Long id) {
         return addressService.findById(id);
     }
 }

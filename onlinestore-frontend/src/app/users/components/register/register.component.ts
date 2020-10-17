@@ -15,26 +15,23 @@ export class RegisterComponent implements OnInit {
   user: User;
   id: number;
   matched = true;
-  addressModel: Address;
+  address: Address;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private userService: UserService,
-              private addressService: AddressService) {
+              private userService: UserService) {
     this.user = new User();
-    this.addressModel = new Address();
+    this.address = new Address();
+    this.user.addressDTO = this.address;
   }
 
   ngOnInit(): void {
   }
 
   onSubmit(): any {
-    this.addressService.save(this.addressModel).subscribe(data1 => {
-      this.addressModel = data1;
-      this.userService.save(this.user).subscribe(data => {
-        this.user = data;
-        this.goToLogin();
-      });
+    this.userService.save(this.user).subscribe(data => {
+      this.user = data;
+      this.goToLogin();
     });
   }
 
