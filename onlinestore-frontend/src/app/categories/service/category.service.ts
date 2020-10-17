@@ -38,8 +38,4 @@ export class CategoryService {
   public findAll(): Observable<Category[]> {
     return this.httpClient.get<Category[]>(this.categoriesUrl);
   }
-
-  public findAllParentNull(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(`${this.categoriesUrl}-by-parent`);
-  }
 }
