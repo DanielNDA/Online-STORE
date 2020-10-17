@@ -33,9 +33,7 @@ export class RegisterComponent implements OnInit {
       this.addressModel = data1;
       this.userService.save(this.user).subscribe(data => {
         this.user = data;
-        this.userService.assignAddressToUser(this.user.id, this.addressModel).subscribe(result => {
-          this.goToLogin();
-        });
+        this.goToLogin();
       });
     });
   }
