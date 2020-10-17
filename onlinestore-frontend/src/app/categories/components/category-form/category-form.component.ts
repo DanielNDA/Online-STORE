@@ -21,7 +21,7 @@ export class CategoryFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoryService.findAll().subscribe(data => {
+    this.categoryService.findAllParentNull().subscribe(data => {
       this.parents = data;
     });
   }

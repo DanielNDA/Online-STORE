@@ -34,6 +34,11 @@ public class CategoryController {
         return categoryService.findAll();
     }
 
+    @GetMapping("/categories-by-parent")
+    public List<CategoryDTO> findAllByParentNull() {
+        return categoryService.findAllByParentNull();
+    }
+
     @PutMapping("/categories/{id}")
     public void update(@RequestBody CategoryDTO categoryDTO) {
         categoryService.update(categoryDTO);

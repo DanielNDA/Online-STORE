@@ -20,6 +20,7 @@ import { HomeComponent } from './common/home/home.component';
 import { NavbarComponent } from './common/navbar/navbar.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { FooterComponent } from './common/footer/footer.component';
+import {CategoryListComponent} from './categories/components/category-list/category-list.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FooterComponent } from './common/footer/footer.component';
     NavbarComponent,
     SidebarComponent,
     FooterComponent,
+    CategoryListComponent,
   ],
   imports: [
     BrowserModule,

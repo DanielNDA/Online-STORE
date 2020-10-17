@@ -1,0 +1,11 @@
+<div class="card my-5 col">
+  <div class="card-body col">
+    <div ngbDropdown class="d-table-row" *ngFor="let parent of parents">
+      <button class="btn btn-success text-dark" id="dropdownBasic1" ngbDropdownToggle>{{parent.name}}</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button class="button" *ngFor="let subCategory of parent.subCategories" ngbDropdownItem>{{subCategory.name}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+

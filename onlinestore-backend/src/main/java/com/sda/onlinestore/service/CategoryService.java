@@ -56,6 +56,31 @@ public class CategoryService {
         return categoriesDTO;
     }
 
+    public List<CategoryDTO> findAllByParentNull() {
+        List<CategoryModel> categories = categoryRepository.findAllByCategoryModelParentIsNull();
+        List<CategoryDTO> categoriesDTO = new ArrayList<>();
+
+        for (CategoryModel categoryModel : categories) {
+            CategoryDTO categoryDTO = new CategoryDTO();
+            categoryDTO.setId(categoryModel.getId());
+            categoryDTO.setName(categoryModel.getName());
+
+            List<CategoryModel> subCategories = categoryModel.getSubCategories();
+            List<CategoryDTO> subCategoriesDTO = new ArrayList<>();
+
+            for (CategoryModel subCategory : subCategories) {
+                CategoryDTO subCategoryDTO = new CategoryDTO();
+
+                subCategoryDTO.setId(subCategory.getId());
+                subCategoryDTO.setName(subCategory.getName());
+                subCategoriesDTO.add(subCategoryDTO);
+            }
+            categoryDTO.setSubCategories(subCategoriesDTO);
+            categoriesDTO.add(categoryDTO);
+        }
+        return categoriesDTO;
+    }
+
     public void deleteById(Long id) {
         categoryRepository.deleteById(id);
     }
