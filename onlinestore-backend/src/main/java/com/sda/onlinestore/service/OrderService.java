@@ -3,11 +3,15 @@ package com.sda.onlinestore.service;
 import com.sda.onlinestore.persistence.dto.OrderDTO;
 import com.sda.onlinestore.persistence.dto.OrderLineDTO;
 import com.sda.onlinestore.persistence.dto.ProductDTO;
+import com.sda.onlinestore.persistence.dto.UserDTO;
 import com.sda.onlinestore.persistence.model.OrderLineModel;
 import com.sda.onlinestore.persistence.model.OrderModel;
 import com.sda.onlinestore.persistence.model.ProductModel;
+import com.sda.onlinestore.persistence.model.UserModel;
 import com.sda.onlinestore.repository.OrderRepository;
 import com.sda.onlinestore.repository.ProductRepository;
+import com.sda.onlinestore.repository.UserRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +26,9 @@ public class OrderService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public void addToCart(String username, Long productID){
         Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserName(username);
@@ -51,6 +58,7 @@ public class OrderService {
         }
         else{
             order = new OrderModel();
+            order.setUserName(username);
             OrderLineModel orderLineModel = new OrderLineModel();
             orderLineModel.setQuantity(1);
             orderLineModel.setProductModel(productRepository.findById(productID).orElse(null));
@@ -63,13 +71,17 @@ public class OrderService {
     }
 
     public void deleteById(Long id){
+        OrderModel order = orderRepository.findById(id).orElse(null);
+        UserModel user = order.getCustomer();
+               user.getOrders().removeIf(a->a.getId()==id);
+               userRepository.save(user);
         orderRepository.deleteById(id);
     }
 
     public OrderDTO findById(Long id) {
         Optional<OrderModel> order = orderRepository.findById(id);
         OrderDTO orderDTO = new OrderDTO();
-        if (order != null) {
+        if (order.isPresent()) {
             orderDTO.setId(order.get().getId());
             orderDTO.setTotal(order.get().getTotal());
 

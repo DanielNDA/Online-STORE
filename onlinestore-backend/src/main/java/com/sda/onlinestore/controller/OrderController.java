@@ -1,6 +1,8 @@
 package com.sda.onlinestore.controller;
 
 import com.sda.onlinestore.persistence.dto.OrderDTO;
+import com.sda.onlinestore.persistence.model.UserModel;
+import com.sda.onlinestore.repository.UserRepository;
 import com.sda.onlinestore.service.OrderService;
 import com.sda.onlinestore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +34,12 @@ public class OrderController {
         return orderService.findAll();
     }
 
-    @DeleteMapping("/orders/{id}")
+    @DeleteMapping("/delete-order/{id}")
     public void deleteById(@PathVariable(name = "id") Long id){
         orderService.deleteById(id);
     }
 
-    @PutMapping("/orders")
+    @PutMapping("/update-order")
     public void update(@RequestBody OrderDTO orderDTO){
         orderService.update(orderDTO);
     }

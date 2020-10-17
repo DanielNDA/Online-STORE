@@ -20,7 +20,7 @@ public class OrderModel {
     private AddressModel deliveryAddress;
     @OneToOne(cascade = CascadeType.ALL)
     private AddressModel userAddress;
-    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnoreProperties("orderModel")
     private List<OrderLineModel> orderLines = new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY)
