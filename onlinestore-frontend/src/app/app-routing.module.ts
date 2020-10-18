@@ -8,6 +8,7 @@ import {ProductAddComponent} from './products/components/product-add/product-add
 import {ProductEditComponent} from './products/components/product-edit/product-edit.component';
 import {ProductViewComponent} from './products/components/product-view/product-view.component';
 import {OrderListComponent} from './orders/components/order-list/order-list.component';
+import {UserViewComponent} from './users/components/user-view/user-view.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'product-add', component: ProductAddComponent},
   {path: 'product-edit', component: ProductEditComponent},
   {path: 'product-view', component: ProductViewComponent},
+  {path: 'view-profile/:id', component: UserViewComponent},
 ];
 
 @NgModule({

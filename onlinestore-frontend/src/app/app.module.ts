@@ -18,9 +18,9 @@ import {ProductViewComponent} from './products/components/product-view/product-v
 import { CategoryFormComponent } from './categories/components/category-form/category-form.component';
 import { HomeComponent } from './common/home/home.component';
 import { NavbarComponent } from './common/navbar/navbar.component';
-import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { FooterComponent } from './common/footer/footer.component';
 import {CategoryListComponent} from './categories/components/category-list/category-list.component';
+import {UserViewComponent} from './users/components/user-view/user-view.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +37,9 @@ import {CategoryListComponent} from './categories/components/category-list/categ
     CategoryFormComponent,
     HomeComponent,
     NavbarComponent,
-    SidebarComponent,
     FooterComponent,
     CategoryListComponent,
+    UserViewComponent
   ],
   imports: [
     BrowserModule,
