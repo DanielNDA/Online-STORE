@@ -21,6 +21,7 @@ import { NavbarComponent } from './common/navbar/navbar.component';
 import { FooterComponent } from './common/footer/footer.component';
 import {CategoryListComponent} from './categories/components/category-list/category-list.component';
 import {UserViewComponent} from './users/components/user-view/user-view.component';
+import { CategoryEditComponent } from './categories/components/category-edit/category-edit.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {UserViewComponent} from './users/components/user-view/user-view.componen
     NavbarComponent,
     FooterComponent,
     CategoryListComponent,
-    UserViewComponent
+    UserViewComponent,
+    CategoryEditComponent
   ],
   imports: [
     BrowserModule,

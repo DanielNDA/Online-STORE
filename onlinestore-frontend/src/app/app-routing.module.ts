@@ -9,12 +9,14 @@ import {ProductEditComponent} from './products/components/product-edit/product-e
 import {ProductViewComponent} from './products/components/product-view/product-view.component';
 import {OrderListComponent} from './orders/components/order-list/order-list.component';
 import {UserViewComponent} from './users/components/user-view/user-view.component';
+import {CategoryEditComponent} from './categories/components/category-edit/category-edit.component';
 
 
 const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'view-cart', component: OrderListComponent},
   {path: 'category-add', component: CategoryFormComponent},
+  {path: 'category-edit/:id', component: CategoryEditComponent},
   {path: 'profile-edit/:id', component: UserEditComponent},
   {path: 'products', component: ProductListComponent},
   {path: 'product-add', component: ProductAddComponent},

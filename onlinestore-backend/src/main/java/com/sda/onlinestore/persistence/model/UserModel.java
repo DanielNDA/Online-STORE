@@ -24,6 +24,10 @@ public class UserModel {
 
     private String email;
 
+    private String firstName;
+
+    private String lastName;
+
     private String url;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -37,6 +41,34 @@ public class UserModel {
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnoreProperties("customer")
     private List<OrderModel> orders;
+
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnoreProperties("user")
+    private ImageModelUser image;
+
+    public ImageModelUser getImage() {
+        return image;
+    }
+
+    public void setImage(ImageModelUser image) {
+        this.image = image;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 
     public String getChannel() {
         return channel;

@@ -37,8 +37,10 @@ public class UserService {
         }
 
         userModel.setChannel(userDTO.getChannel());
+        userModel.setFirstName(userDTO.getFirstName());
+        userModel.setLastName(userDTO.getLastName());
         userModel.setEmail(userDTO.getEmail());
-        userModel.setUrl(userDTO.getUrl());
+        userModel.setUrl(userDTO.getImage());
 
         userRepository.save(userModel);
     }
@@ -57,7 +59,9 @@ public class UserService {
 
             userDTO.setId(userModel.getId());
             userDTO.setEmail(userModel.getEmail());
-            userDTO.setUrl(userModel.getUrl());
+            userDTO.setFirstName(userModel.getFirstName());
+            userDTO.setLastName(userModel.getLastName());
+            userDTO.setImage(userModel.getImage().toString());
             userDTO.setChannel(userModel.getChannel());
 
             AddressModel addressModel = userModel.getAddressModel();
@@ -82,8 +86,10 @@ public class UserService {
             UserModel userModel = newUser.get();
             userModel.setId(userDTO.getId());
             userModel.setEmail(userDTO.getEmail());
-            userModel.setUrl(userDTO.getUrl());
+            userModel.setUrl(userDTO.getImage());
             userModel.setChannel(userDTO.getChannel());
+            userModel.setFirstName(userDTO.getFirstName());
+            userModel.setLastName(userDTO.getLastName());
 
             AddressModel addressModel = new AddressModel();
             AddressDTO addressDto = userDTO.getAddressDTO();
@@ -91,7 +97,6 @@ public class UserService {
             addressModel.setCity(addressDto.getCity());
             addressModel.setStreet(addressDto.getStreet());
             addressModel.setZipCode(addressDto.getZipCode());
-
 
 //            if (userDTO.getNewPassword() != null && !userDTO.getNewPassword().equals("")) {
 //                userModel.setNewPassword(userDTO.getNewPassword());
@@ -109,7 +114,9 @@ public class UserService {
             userDTO.setId(userModel.get().getId());
             userDTO.setEmail(userModel.get().getEmail());
             userDTO.setChannel(userModel.get().getChannel());
-            userDTO.setUrl(userModel.get().getUrl());
+            userDTO.setImage(userModel.get().getUrl());
+            userDTO.setFirstName(userModel.get().getFirstName());
+            userDTO.setLastName(userModel.get().getLastName());
 
             AddressModel addressModel = userModel.get().getAddressModel();
             AddressDTO addressDTO = new AddressDTO();

@@ -6,7 +6,7 @@ public class UserDTO {
 
     private String email;
 
-    private String url;
+    private String image;
 
     private String password;
 
@@ -15,6 +15,26 @@ public class UserDTO {
     private AddressDTO addressDTO;
 
     private String channel;
+
+    private String firstName;
+
+    private String lastName;
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
 
     public String getPassword() {
         return password;
@@ -56,12 +76,12 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getUrl() {
-        return url;
+    public String getImage() {
+        return image;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public AddressDTO getAddressDTO() {
