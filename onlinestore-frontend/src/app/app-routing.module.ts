@@ -10,6 +10,7 @@ import {ProductViewComponent} from './products/components/product-view/product-v
 import {OrderListComponent} from './orders/components/order-list/order-list.component';
 import {UserViewComponent} from './users/components/user-view/user-view.component';
 import {CategoryEditComponent} from './categories/components/category-edit/category-edit.component';
+import {CategoryListComponent} from './categories/components/category-list/category-list.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'view-cart', component: OrderListComponent},
   {path: 'category-add', component: CategoryFormComponent},
   {path: 'category-edit/:id', component: CategoryEditComponent},
+  {path: 'category-list', component: CategoryListComponent},
   {path: 'profile-edit/:id', component: UserEditComponent},
   {path: 'products', component: ProductListComponent},
   {path: 'product-add', component: ProductAddComponent},

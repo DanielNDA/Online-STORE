@@ -1,10 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../../users/model/user';
-import {Address} from '../../../addresses/model/address';
 import {Category} from '../../model/category';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../../users/service/user.service';
-import {AddressService} from '../../../addresses/service/address.service';
 import {CategoryService} from '../../service/category.service';
 
 @Component({
@@ -15,7 +11,6 @@ import {CategoryService} from '../../service/category.service';
 export class CategoryEditComponent implements OnInit {
 
   category: Category;
-  parent: Category;
   id: number;
   parents: Category[];
 
@@ -25,14 +20,18 @@ export class CategoryEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoryService.findAllParentNull().subscribe(data => {
-      this.parents = data;
-    });
     this.category = new Category();
-    this.parent = new Category();
     this.id = this.route.snapshot.params.id;
     this.categoryService.getById(this.id).subscribe(data => {
       this.category = data;
+      this.categoryService.findAll().subscribe(data1 => {
+        this.parents = data1;
+        this.parents.forEach(p => {
+          if (p.id === this.category.parent.id) {
+            this.category.parent = p;
+          }
+        });
+      });
     });
   }
 
@@ -43,7 +42,8 @@ export class CategoryEditComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
   goToCategoryList() {
-    this.router.navigate(['']);
+    this.router.navigate(['category-list']);
   }
 }

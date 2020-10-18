@@ -40,6 +40,47 @@ public class CategoryService {
             categoryDTO.setId(categoryModel.getId());
             categoryDTO.setName(categoryModel.getName());
 
+            CategoryDTO parent = new CategoryDTO();
+            CategoryModel parentModel = categoryModel.getCategoryModelParent();
+            if(parentModel != null) {
+                parent.setId(parentModel.getId());
+                parent.setName(parentModel.getName());
+                categoryDTO.setParent(parent);
+            }
+
+            List<CategoryModel> subCategories = categoryModel.getSubCategories();
+            List<CategoryDTO> subCategoriesDTO = new ArrayList<>();
+
+            for (CategoryModel subCategory : subCategories) {
+                CategoryDTO subCategoryDTO = new CategoryDTO();
+
+                subCategoryDTO.setId(subCategory.getId());
+                subCategoryDTO.setName(subCategory.getName());
+                subCategoriesDTO.add(subCategoryDTO);
+            }
+            categoryDTO.setSubCategories(subCategoriesDTO);
+            categoriesDTO.add(categoryDTO);
+        }
+        return categoriesDTO;
+    }
+
+    public List<CategoryDTO> findAllParentNotNull() {
+        List<CategoryModel> categories = categoryRepository.findAllByCategoryModelParentIsNotNull();
+        List<CategoryDTO> categoriesDTO = new ArrayList<>();
+
+        for (CategoryModel categoryModel : categories) {
+            CategoryDTO categoryDTO = new CategoryDTO();
+            categoryDTO.setId(categoryModel.getId());
+            categoryDTO.setName(categoryModel.getName());
+
+            CategoryDTO parent = new CategoryDTO();
+            CategoryModel parentModel = categoryModel.getCategoryModelParent();
+            if(parentModel != null) {
+                parent.setId(parentModel.getId());
+                parent.setName(parentModel.getName());
+                categoryDTO.setParent(parent);
+            }
+
             List<CategoryModel> subCategories = categoryModel.getSubCategories();
             List<CategoryDTO> subCategoriesDTO = new ArrayList<>();
 
@@ -107,23 +148,26 @@ public class CategoryService {
     public CategoryDTO findById(Long id) {
         CategoryModel categoryModel = categoryRepository.findById(id).orElse(null);
         CategoryDTO categoryDTO = new CategoryDTO();
+        CategoryDTO parent = new CategoryDTO();
+        CategoryModel parentModel = categoryModel.getCategoryModelParent();
+        parent.setId(parentModel.getId());
+        parent.setName(parentModel.getName());
 
-        if (categoryModel != null) {
-            categoryDTO.setId(categoryModel.getId());
-            categoryDTO.setName(categoryModel.getName());
+        categoryDTO.setId(categoryModel.getId());
+        categoryDTO.setName(categoryModel.getName());
+        categoryDTO.setParent(parent);
 
-            List<CategoryModel> subCategories = categoryModel.getSubCategories();
-            List<CategoryDTO> subCategoriesDTO = new ArrayList<>();
+        List<CategoryModel> subCategories = categoryModel.getSubCategories();
+        List<CategoryDTO> subCategoriesDTO = new ArrayList<>();
 
-            for (CategoryModel subCategory : subCategories) {
-                CategoryDTO subCategoryDTO = new CategoryDTO();
+        for (CategoryModel subCategory : subCategories) {
+            CategoryDTO subCategoryDTO = new CategoryDTO();
 
-                subCategoryDTO.setId(subCategory.getId());
-                subCategoryDTO.setName(subCategory.getName());
-                subCategoriesDTO.add(subCategoryDTO);
-            }
-            categoryDTO.setSubCategories(subCategoriesDTO);
+            subCategoryDTO.setId(subCategory.getId());
+            subCategoryDTO.setName(subCategory.getName());
+            subCategoriesDTO.add(subCategoryDTO);
         }
+        categoryDTO.setSubCategories(subCategoriesDTO);
         return categoryDTO;
     }
 }
