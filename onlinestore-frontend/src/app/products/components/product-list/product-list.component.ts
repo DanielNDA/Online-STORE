@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from '../model/product';
 import {ProductService} from '../service/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {OrderService} from '../../../orders/service/order.service';
 
 @Component({
   selector: 'app-product-list',
@@ -14,7 +15,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private orderService: OrderService) {
   }
 
   ngOnInit(): void {
@@ -34,12 +36,21 @@ export class ProductListComponent implements OnInit {
       this.getProducts();
     });
   }
+
   // tslint:disable-next-line:typedef
   editProduct(id: number) {
     this.router.navigate(['product-edit', id]);
   }
+
   // tslint:disable-next-line:typedef
   addProduct() {
     this.router.navigate(['product-add']);
+  }
+
+  // tslint:disable-next-line:typedef
+  addToCart(productID: number) {
+    this.orderService.addToCart('alisa', productID).subscribe(data => {
+      this.getProducts();
+    });
   }
 }

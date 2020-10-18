@@ -19,7 +19,6 @@ export class ProductEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.product = new Product();
     this.id = this.route.snapshot.params.id;
     this.productService.getById(this.id).subscribe(data => {
       this.product = data;
@@ -33,6 +32,6 @@ export class ProductEditComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   goToProductList() {
-    this.router.navigate(['/getProducts']);
+    this.router.navigate(['/products']);
   }
 }
