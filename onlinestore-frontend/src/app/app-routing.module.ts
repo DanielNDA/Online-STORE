@@ -8,6 +8,8 @@ import {ProductAddComponent} from './products/components/product-add/product-add
 import {ProductEditComponent} from './products/components/product-edit/product-edit.component';
 import {ProductViewComponent} from './products/components/product-view/product-view.component';
 import {OrderListComponent} from './orders/components/order-list/order-list.component';
+import {ManufacturerAddComponent} from './manufacturer/components/manufacturer-add/manufacturer-add.component';
+import {ManufacturerListComponent} from './manufacturer/components/manufacturer-list/manufacturer-list.component';
 
 
 const routes: Routes = [
@@ -19,6 +21,8 @@ const routes: Routes = [
   {path: 'product-add', component: ProductAddComponent},
   {path: 'product-edit', component: ProductEditComponent},
   {path: 'product-view', component: ProductViewComponent},
+  {path: 'manufacturer-add', component: ManufacturerAddComponent},
+  {path: 'manufacturer-list', component: ManufacturerListComponent},
 ];
 
 @NgModule({

@@ -21,6 +21,10 @@ import { NavbarComponent } from './common/navbar/navbar.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { FooterComponent } from './common/footer/footer.component';
 import {CategoryListComponent} from './categories/components/category-list/category-list.component';
+// @ts-ignore
+import {QuantityControlComponent} from './orders/components/order-list/quantity-control.component';
+import {ManufacturerListComponent} from './manufacturer/components/manufacturer-list/manufacturer-list.component';
+import {ManufacturerAddComponent} from './manufacturer/components/manufacturer-add/manufacturer-add.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,9 @@ import {CategoryListComponent} from './categories/components/category-list/categ
     SidebarComponent,
     FooterComponent,
     CategoryListComponent,
+    QuantityControlComponent,
+    ManufacturerListComponent,
+    ManufacturerAddComponent
   ],
   imports: [
     BrowserModule,
