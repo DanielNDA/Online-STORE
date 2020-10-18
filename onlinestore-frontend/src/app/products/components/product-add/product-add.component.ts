@@ -10,11 +10,12 @@ import {Product} from '../model/product';
 })
 export class ProductAddComponent implements OnInit {
 
-  product: Product = new Product();
+  product: Product;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productService: ProductService) {
+    this.product = new Product();
   }
 
   // tslint:disable-next-line:typedef
