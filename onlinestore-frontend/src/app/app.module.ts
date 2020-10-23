@@ -41,8 +41,8 @@ import {PrivilegeEditComponent} from './security/privileges/components/privilege
 import {PrivilegeFormComponent} from './security/privileges/components/privilege-form/privilege-form.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {ManufacturerAddComponent} from "./manufacturer/components/manufacturer-add/manufacturer-add.component";
-import {ManufacturerListComponent} from "./manufacturer/components/manufacturer-list/manufacturer-list.component";
+import {ManufacturerAddComponent} from './manufacturer/components/manufacturer-add/manufacturer-add.component';
+import {ManufacturerListComponent} from './manufacturer/components/manufacturer-list/manufacturer-list.component';
 
 @NgModule({
   declarations: [
