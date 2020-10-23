@@ -4,5 +4,5 @@ export class OrderLine {
   id: number;
   quantity: number;
   price: number;
-  productModel: Product;
+  productDTO: Product;
 }

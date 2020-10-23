@@ -23,7 +23,12 @@
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "bootstrap": "^4.5.0",
     "font-awesome": "^4.7.0",
+<<<<<<< Updated upstream
     "ngx-cookie-service": "^10.1.1",
+=======
+    "ng2-search-filter": "^0.5.1",
+    "ngx-pagination": "^5.0.0",
+>>>>>>> Stashed changes
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

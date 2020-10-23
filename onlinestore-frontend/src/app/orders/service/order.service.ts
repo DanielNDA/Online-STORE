@@ -38,8 +38,9 @@ export class OrderService {
   }
 
   // tslint:disable-next-line:typedef
-  public update(username: string, orderLineID: number, quantity: number) {
-    return this.http.put<Order>(`${this.updateURL}/${orderLineID}/${quantity}`, username);
+  public update(username: string, orderLineID: number, quantity: number): Observable<Order> {
+    return this.http.get<Order>(this.updateURL + '/' + username + '/' + orderLineID + '/' + quantity);
+
   }
 
   // tslint:disable-next-line:typedef
@@ -54,6 +55,11 @@ export class OrderService {
   // tslint:disable-next-line:typedef
   public getById(id: number): Observable<any> {
     return this.http.get(`${this.URL}/${id}`);
+  }
+
+  // tslint:disable-next-line:typedef
+  public getByUsername(username: string): Observable<any> {
+    return this.http.get(`${'http://localhost:8080/find-by-username'}/${username}`);
   }
 
   // tslint:disable-next-line:typedef
