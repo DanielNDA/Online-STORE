@@ -16,7 +16,6 @@ public class PrivilegeModel {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "privilegeList" )
     private List<RoleModel> roleList = new ArrayList<>();
 
-
     public List<RoleModel> getRoleList() {
         return roleList;
     }

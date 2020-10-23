@@ -11,20 +11,24 @@ import {OrderListComponent} from './orders/components/order-list/order-list.comp
 import {UserViewComponent} from './users/components/user-view/user-view.component';
 import {CategoryEditComponent} from './categories/components/category-edit/category-edit.component';
 import {CategoryListComponent} from './categories/components/category-list/category-list.component';
+import {LoginComponent} from './users/components/login/login.component';
+import {AuthGuardService} from './users/service/auth-guard.service';
 
 
 const routes: Routes = [
   {path: 'register', component: RegisterComponent},
-  {path: 'view-cart', component: OrderListComponent},
-  {path: 'category-add', component: CategoryFormComponent},
-  {path: 'category-edit/:id', component: CategoryEditComponent},
-  {path: 'category-list', component: CategoryListComponent},
-  {path: 'profile-edit/:id', component: UserEditComponent},
-  {path: 'products', component: ProductListComponent},
-  {path: 'product-add', component: ProductAddComponent},
-  {path: 'product-edit', component: ProductEditComponent},
-  {path: 'product-view', component: ProductViewComponent},
-  {path: 'view-profile/:id', component: UserViewComponent},
+  {path: '', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'view-cart', component: OrderListComponent, canActivate: [AuthGuardService]},
+  {path: 'category-add', component: CategoryFormComponent, canActivate: [AuthGuardService]},
+  {path: 'category-edit/:id', component: CategoryEditComponent, canActivate: [AuthGuardService]},
+  {path: 'category-list', component: CategoryListComponent, canActivate: [AuthGuardService]},
+  {path: 'profile-edit/:id', component: UserEditComponent, canActivate: [AuthGuardService]},
+  {path: 'products', component: ProductListComponent, canActivate: [AuthGuardService]},
+  {path: 'product-add', component: ProductAddComponent, canActivate: [AuthGuardService]},
+  {path: 'product-edit', component: ProductEditComponent, canActivate: [AuthGuardService]},
+  {path: 'product-view', component: ProductViewComponent, canActivate: [AuthGuardService]},
+  {path: 'view-profile/:id', component: UserViewComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({

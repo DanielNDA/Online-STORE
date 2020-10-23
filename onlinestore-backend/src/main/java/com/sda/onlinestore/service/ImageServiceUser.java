@@ -2,8 +2,8 @@ package com.sda.onlinestore.service;
 
 import com.sda.onlinestore.persistence.model.ImageModelUser;
 import com.sda.onlinestore.persistence.model.UserModel;
-import com.sda.onlinestore.repository.ImageRepositoryUser;
-import com.sda.onlinestore.repository.UserRepository;
+import com.sda.onlinestore.persistence.repository.ImageRepositoryUser;
+import com.sda.onlinestore.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

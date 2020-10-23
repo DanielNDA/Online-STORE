@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../model/user';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 import {UserService} from '../../service/user.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Observable} from 'rxjs';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-user-view',
@@ -13,22 +14,36 @@ import {Observable} from 'rxjs';
 export class UserViewComponent implements OnInit {
 
   id: number;
-  user: User;
+  currentUser: User;
   closeResult = '';
+  isLoggedIn = false;
   image: Observable<any>;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private authService: AuthService,
               private router: Router,
               private userService: UserService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private route: ActivatedRoute) {
+    this.currentUser = new User();
+    this.currentUser.email = '';
   }
 
   ngOnInit(): void {
-    this.user = new User();
-    this.id = this.route.snapshot.params.id;
-    this.userService.getById(this.id).subscribe(data => {
-      this.user = data;
-      this.user.image = this.getPhoto(this.id);
+    this.getCurrentUser();
+  }
+
+  // tslint:disable-next-line:typedef
+  getCurrentUser() {
+    this.authService.isLoggedIn.subscribe(data => {
+      this.isLoggedIn = data;
+      this.currentUser = new User();
+      if (this.isLoggedIn) {
+        this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
+        this.currentUser.url = this.userService.getUserImage(this.currentUser.id);
+        if (this.currentUser === null) {
+          this.currentUser = new User();
+        }
+      }
     });
   }
 
@@ -38,11 +53,6 @@ export class UserViewComponent implements OnInit {
       this.goToHomePage();
     });
   }
-
-  getPhoto(id: number): Observable<any> {
-    return this.userService.getUserImage(id);
-  }
-
 
   // tslint:disable-next-line:typedef
   open(content, id) {
@@ -66,6 +76,6 @@ export class UserViewComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   private goToHomePage() {
-    this.router.navigate(['']);
+    this.router.navigate(['products']);
   }
 }

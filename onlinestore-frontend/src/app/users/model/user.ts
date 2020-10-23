@@ -10,5 +10,5 @@ export class User {
   password: string;
   newPassword: string;
   addressDTO: Address;
-  image: Observable<any>;
+  url: Observable<any>;
 }

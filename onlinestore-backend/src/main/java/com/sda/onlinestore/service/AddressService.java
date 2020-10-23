@@ -1,11 +1,9 @@
 package com.sda.onlinestore.service;
 
 import com.sda.onlinestore.persistence.dto.AddressDTO;
-import com.sda.onlinestore.persistence.dto.UserDTO;
 import com.sda.onlinestore.persistence.model.AddressModel;
-import com.sda.onlinestore.persistence.model.UserModel;
-import com.sda.onlinestore.repository.AddressRepository;
-import com.sda.onlinestore.repository.UserRepository;
+import com.sda.onlinestore.persistence.repository.AddressRepository;
+import com.sda.onlinestore.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

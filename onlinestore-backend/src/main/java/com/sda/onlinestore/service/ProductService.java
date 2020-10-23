@@ -7,9 +7,10 @@ import com.sda.onlinestore.persistence.model.CategoryModel;
 import com.sda.onlinestore.persistence.model.ManufacturerModel;
 import com.sda.onlinestore.persistence.model.ProductModel;
 import com.sda.onlinestore.persistence.model.ProductType;
-import com.sda.onlinestore.repository.CategoryRepository;
-import com.sda.onlinestore.repository.ManufacturerRepository;
-import com.sda.onlinestore.repository.ProductRepository;
+
+import com.sda.onlinestore.persistence.repository.CategoryRepository;
+import com.sda.onlinestore.persistence.repository.ManufacturerRepository;
+import com.sda.onlinestore.persistence.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class ProductService {
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
-    private ManufacturerRepository  manufacturerRepository;
+    private ManufacturerRepository manufacturerRepository;
 
 
     public ProductDTO getProductById(Long id) {

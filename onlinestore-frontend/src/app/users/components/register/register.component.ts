@@ -12,7 +12,7 @@ import {HttpEventType, HttpResponse} from '@angular/common/http';
 })
 export class RegisterComponent implements OnInit {
 
-  user: User;
+  user: User = new User();
   id: number;
   matched = true;
   address: Address;
@@ -34,18 +34,17 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): any {
     this.userService.save(this.user).subscribe(data => {
-      this.user = data;
-    });
     this.upload();
     setTimeout(() =>
       {
         this.goToLogin();
       },
       3000);
+    });
   }
 
   goToLogin(): any {
-    this.router.navigate(['']);
+    this.router.navigate(['login']);
   }
 
   // tslint:disable-next-line:typedef

@@ -24,11 +24,11 @@ public class UserModel {
 
     private String email;
 
+    private String url;
+
     private String firstName;
 
     private String lastName;
-
-    private String url;
 
     @OneToOne(cascade = CascadeType.ALL)
     private AddressModel addressModel;
@@ -36,7 +36,7 @@ public class UserModel {
     private String channel;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userList")
-    private List<RoleModel> roleList = new ArrayList<>();
+    private List<RoleModel> roleList;
 
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnoreProperties("customer")
@@ -45,6 +45,22 @@ public class UserModel {
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "user")
     @JsonIgnoreProperties("user")
     private ImageModelUser image;
+
+    public List<RoleModel> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<RoleModel> roleList) {
+        this.roleList = roleList;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public ImageModelUser getImage() {
         return image;
@@ -110,28 +126,12 @@ public class UserModel {
         this.email = email;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public AddressModel getAddressModel() {
         return addressModel;
     }
 
     public void setAddressModel(AddressModel addressModel) {
         this.addressModel = addressModel;
-    }
-
-    public List<RoleModel> getRoleList() {
-        return roleList;
-    }
-
-    public void setRoleList(List<RoleModel> roleList) {
-        this.roleList = roleList;
     }
 
     public List<OrderModel> getOrders() {

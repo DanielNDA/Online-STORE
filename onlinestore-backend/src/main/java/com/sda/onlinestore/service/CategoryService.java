@@ -2,7 +2,7 @@ package com.sda.onlinestore.service;
 
 import com.sda.onlinestore.persistence.dto.CategoryDTO;
 import com.sda.onlinestore.persistence.model.CategoryModel;
-import com.sda.onlinestore.repository.CategoryRepository;
+import com.sda.onlinestore.persistence.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

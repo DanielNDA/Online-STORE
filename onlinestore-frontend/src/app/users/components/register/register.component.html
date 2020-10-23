@@ -119,42 +119,47 @@
               <form (ngSubmit)="onSubmit()" #userForm="ngForm">
                 <div class="form-group">
                   <label>First name</label>
-                  <input class="form-control form-control-md" type="text" name="firstName" [(ngModel)]="user.firstName"
+                  <input class="form-control form-control-md" type="text" name="firstName" id="firstName" [(ngModel)]="user.firstName"
                          placeholder="Enter your first name">
                 </div>
                 <div class="form-group">
                   <label>Last name</label>
-                  <input class="form-control form-control-md" type="text" name="lastName" [(ngModel)]="user.lastName"
+                  <input class="form-control form-control-md" type="text" name="lastName" id="lastName" [(ngModel)]="user.lastName"
                          placeholder="Enter your last name">
                 </div>
                 <div class="form-group">
                   <label>Email</label>
-                  <input class="form-control form-control-md" type="email" name="email" [(ngModel)]="user.email"
+                  <input class="form-control form-control-md" type="email" name="email" id="email" [(ngModel)]="user.email"
                          placeholder="Enter your email">
                 </div>
                 <div class="form-group">
+                  <label>Password</label>
+                  <input class="form-control form-control-md" type="password" name="password" id="password" [(ngModel)]="user.password"
+                         placeholder="Enter your password">
+                </div>
+                <div class="form-group">
                   <label>Channel</label>
-                  <input class="form-control form-control-md" type="email" name="channel" [(ngModel)]="user.channel"
+                  <input class="form-control form-control-md" type="email" name="channel" id="channel" [(ngModel)]="user.channel"
                          placeholder="Enter your preferred channel">
                 </div>
                 <div class="form-group">
                   <label>Country</label>
-                  <input class="form-control form-control-md" type="text" name="country"
+                  <input class="form-control form-control-md" type="text" name="country" id="country"
                          [(ngModel)]="user.addressDTO.country" placeholder="Enter your country">
                 </div>
                 <div class="form-group">
                   <label>City</label>
-                  <input class="form-control form-control-md" type="text" name="city" [(ngModel)]="user.addressDTO.city"
+                  <input class="form-control form-control-md" type="text" name="city" id="city" [(ngModel)]="user.addressDTO.city"
                          placeholder="Enter your city">
                 </div>
                 <div class="form-group">
                   <label>Street</label>
-                  <input class="form-control form-control-md" type="text" name="street"
+                  <input class="form-control form-control-md" type="text" name="street" id="street"
                          [(ngModel)]="user.addressDTO.street" placeholder="Enter your street">
                 </div>
                 <div class="form-group">
                   <label>Zip code</label>
-                  <input class="form-control form-control-md" type="text" name="zipcode"
+                  <input class="form-control form-control-md" type="text" name="zipcode" id="zipcode"
                          [(ngModel)]="user.addressDTO.zipCode" placeholder="Enter your zip code">
                 </div>
                 <div>

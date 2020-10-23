@@ -1,14 +1,18 @@
 package com.sda.onlinestore.persistence.dto;
 
+import java.util.List;
+
 public class UserDTO {
 
     private Long id;
 
     private String email;
 
-    private String image;
-
     private String password;
+
+    private String url;
+
+    private List<RoleDTO> roleDTOList;
 
     private String newPassword;
 
@@ -19,6 +23,22 @@ public class UserDTO {
     private String firstName;
 
     private String lastName;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public List<RoleDTO> getRoleDTOList() {
+        return roleDTOList;
+    }
+
+    public void setRoleDTOList(List<RoleDTO> roleDTOList) {
+        this.roleDTOList = roleDTOList;
+    }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -74,14 +94,6 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public AddressDTO getAddressDTO() {

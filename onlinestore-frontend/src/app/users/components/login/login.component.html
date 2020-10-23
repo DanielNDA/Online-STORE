@@ -1,0 +1,31 @@
+<div class="form-group">
+  <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+  <div class="alert alert-success" *ngIf='loginSuccess'>{{successMessage}}</div>
+  <div class="wrapper fadeInDown">
+    <br>
+    <div id="formContent">
+      <br>
+      <div class="fadeIn first">
+        <br>
+        <img src="assets/avatar.svg" width="40" height="40" class="d-inline-block align-top" alt="">
+      </div>
+      <br>
+      <div class="form-group">
+        <input type="text" class="form-control" id="username" [(ngModel)]="email" placeholder="Enter username"
+               name="username" required="true" class="fadeIn second">
+      </div>
+      <div class="form-group">
+        <input type="password" class="fadeIn third" [(ngModel)]="password" id="password" placeholder="Enter password"
+               name="password" required="true">
+        <br>
+        <br>
+        <input (click)=login() type="submit" class="fadeIn fourth" value="Log In">
+      </div>
+      <div id="formFooter">
+        Don't have an account? <a class="underlineHover" routerLink="/register"> Create
+        one</a>
+      </div>
+    </div>
+  </div>
+</div>
+

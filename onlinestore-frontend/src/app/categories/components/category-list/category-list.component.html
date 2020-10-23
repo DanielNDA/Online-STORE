@@ -1,30 +1,43 @@
-<div class="card my-5 col">
-  <div class="card-body col">
-    <div class="d-inline-block">
-      <button class="btn btn rounded-pill" routerLink="/category-add"><i class="fa fa-plus"></i></button>
-    </div>
-    <div ngbDropdown class="d-inline-block" *ngFor="let parent of parents">
-      <button class="btn btn-outline text-dark" id="dropdownBasic1" ngbDropdownToggle>{{parent.name}}</button>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button class="button" *ngFor="let subCategory of parent.subCategories"
-                ngbDropdownItem>{{subCategory.name}}</button>
+<!--<div class="card my-5 col">-->
+<!--  <div class="card-body col">-->
+<!--    <div class="d-inline-block">-->
+<!--      <button class="btn btn rounded-pill" routerLink="/category-add"><i class="fa fa-plus"></i></button>-->
+<!--    </div>-->
+<!--    <div ngbDropdown class="d-inline-block" *ngFor="let parent of parents">-->
+<!--      <button class="btn btn-outline text-dark" id="dropdownBasic1" ngbDropdownToggle>{{parent.name}}</button>-->
+<!--      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">-->
+<!--        <button class="button" *ngFor="let subCategory of parent.subCategories"-->
+<!--                ngbDropdownItem>{{subCategory.name}}</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+
+<div class="container pb-5 mb-sm-2" *ngFor="let parent of parents">
+  <div class="row no-gutters">
+    <div class="col-lg-3 col-sm-4 col-6 category-card border border-collapse">
+      <div class="card border-0">
+        <div class="card-body pb-2">
+          <h2 class="h6 mb-2">{{parent.name}}</h2>
+          <div *ngFor="let subCategory of parent.subCategories" class="list-group list-group-flush font-size-sm"><a class="list-group-item list-group-item-action"
+               href="#">{{subCategory.name}}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right ml-1" style="width: .875rem; height: .875rem;"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
       </div>
     </div>
   </div>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
