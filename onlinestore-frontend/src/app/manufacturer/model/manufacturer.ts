@@ -1,4 +1,4 @@
-import {Product} from '../../../products/components/model/product';
+import {Product} from '../../products/components/model/product';
 
 export class Manufacturer {
   id: number;

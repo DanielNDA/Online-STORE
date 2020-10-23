@@ -4,6 +4,9 @@ import {ProductService} from '../service/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OrderService} from '../../../orders/service/order.service';
 import {Observable} from 'rxjs';
+import {User} from '../../../users/model/user';
+import {UserService} from '../../../users/service/user.service';
+import {AuthService} from '../../../users/service/auth.service';
 
 @Component({
   selector: 'app-product-list',
@@ -15,16 +18,21 @@ export class ProductListComponent implements OnInit {
   products: Product[];
   image: Observable<any>;
   page = 1;
+  currentUser: User;
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
               private router: Router,
-              private orderService: OrderService) {
+              private orderService: OrderService,
+              private userService: UserService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.getProducts();
+    this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
   }
+
 
   getPhoto(id: number): Observable<any> {
     return this.productService.getProductImage(id);
@@ -59,7 +67,8 @@ export class ProductListComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   addToCart(productID: number) {
-    this.orderService.addToCart('alisa', productID).subscribe(data => {
+    const a = this.currentUser.email;
+    this.orderService.addToCart(a, productID).subscribe(data => {
       this.getProducts();
     });
   }
