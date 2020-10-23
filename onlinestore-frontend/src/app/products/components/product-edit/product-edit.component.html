@@ -1,30 +1,30 @@
 <div class="card my-5">
   <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #productEdit="ngForm">
+    <form (ngSubmit)="onSubmit()" #userTypeForm="ngForm">
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" [(ngModel)]="product.name"
                class="form-control"
                id="name"
                name="name"
-               placeholder="Enter product name"
+               placeholder="Enter user type name"
                required #name="ngModel">
       </div>
       <div class="form-group">
-        <label for="name">Description</label>
+        <label for="name">Name</label>
         <input type="text" [(ngModel)]="product.description"
                class="form-control"
                id="description"
-               name="description"
+               name="name"
                placeholder="Enter description"
                required #name="ngModel">
       </div>
       <div class="form-group">
-        <label for="name">Price</label>
+        <label for="name">Name</label>
         <input type="text" [(ngModel)]="product.price"
                class="form-control"
                id="price"
-               name="price"
+               name="name"
                placeholder="Enter price"
                required #name="ngModel">
       </div>
@@ -33,7 +33,7 @@
         <a (click)="goToProductList()"
            class="btn btn-secondary mx-1">Back
         </a>
-        <button type="submit" [disabled]="!productEdit.form.valid"
+        <button type="submit" [disabled]="!userTypeForm.form.valid"
                 class="btn btn-info">Submit
         </button>
       </div>

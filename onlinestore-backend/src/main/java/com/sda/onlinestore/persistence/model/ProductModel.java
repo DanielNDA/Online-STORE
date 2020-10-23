@@ -26,6 +26,9 @@ public class ProductModel {
     @OneToOne(mappedBy = "productModel")
     private OrderLineModel orderLine;
 
+    @OneToOne(mappedBy = "product")
+    private ImageProductModel image;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private CategoryModel categoryModel;
 
@@ -99,5 +102,13 @@ public class ProductModel {
 
     public void setCategoryModel(CategoryModel categoryModel) {
         this.categoryModel = categoryModel;
+    }
+
+    public ImageProductModel getImage() {
+        return image;
+    }
+
+    public void setImage(ImageProductModel image) {
+        this.image = image;
     }
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../model/user';
 
@@ -10,10 +10,14 @@ export class UserService {
 
   private readonly usersUrl: string;
   private readonly registerUrl: string;
+  private readonly imageUrl: string;
+  private readonly userUrl: string;
 
   constructor(private http: HttpClient) {
     this.usersUrl = 'http://localhost:8080/users';
+    this.userUrl = 'http://localhost:8080/user';
     this.registerUrl = 'http://localhost:8080/register';
+    this.imageUrl = 'http://localhost:8080/image';
   }
 
   public findAll(): Observable<User[]> {
@@ -23,6 +27,11 @@ export class UserService {
   // tslint:disable-next-line:typedef
   public save(user: User) {
     return this.http.post<User>(this.registerUrl, user);
+  }
+
+  // tslint:disable-next-line:typedef
+  public getByEmail(email: string): Observable<any> {
+    return this.http.get(`${this.userUrl}/${email}`);
   }
 
   // tslint:disable-next-line:typedef
@@ -38,5 +47,23 @@ export class UserService {
   // tslint:disable-next-line:typedef
   public getById(id: number): Observable<any> {
     return this.http.get(`${this.usersUrl}/${id}`);
+  }
+
+  public upload(url: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    formData.append('image', url);
+    const req = new HttpRequest('POST', this.imageUrl, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+    return this.http.request(req);
+  }
+
+  getImage(): Observable<any> {
+    return this.http.get(this.imageUrl);
+  }
+
+  getUserImage(id: number): Observable<any> {
+    return this.http.get(`http://localhost:8080/url/${id}`);
   }
 }

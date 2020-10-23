@@ -74,9 +74,10 @@
         <div [hidden]="!manufacturerField.pristine" class="alert alert-danger">Manufacturer is required</div>
       </div>
 
-      <label class="btn btn-default">
-        <input type="file" (change)="selectFile($event)" />
-      </label>
+      <div class="upload-button-wrapper">
+        <button class="button" >Upload a photo</button>
+        <input type="file" name="myfile" (change)="selectFile($event)"/>
+      </div>
       <div class="form-group">
 
         <a (click)="goToProductList()"

@@ -7,10 +7,10 @@ import com.sda.onlinestore.persistence.model.OrderLineModel;
 import com.sda.onlinestore.persistence.model.OrderModel;
 import com.sda.onlinestore.persistence.model.Status;
 import com.sda.onlinestore.persistence.model.UserModel;
-import com.sda.onlinestore.repository.OrderLineRepository;
-import com.sda.onlinestore.repository.OrderRepository;
-import com.sda.onlinestore.repository.ProductRepository;
-import com.sda.onlinestore.repository.UserRepository;
+import com.sda.onlinestore.persistence.repository.OrderLineRepository;
+import com.sda.onlinestore.persistence.repository.OrderRepository;
+import com.sda.onlinestore.persistence.repository.ProductRepository;
+import com.sda.onlinestore.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

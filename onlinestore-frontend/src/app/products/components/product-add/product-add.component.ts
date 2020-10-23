@@ -21,6 +21,7 @@ export class ProductAddComponent implements OnInit {
   currentFile: File;
   categories: Category[];
   manufacturers: Manufacturer[];
+  message = '';
 
 
   constructor(private route: ActivatedRoute,
@@ -38,9 +39,14 @@ export class ProductAddComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onSubmit() {
     this.productService.save(this.product).subscribe(data => {
-      this.upload();
-      this.goToProductList();
+      this.product = data;
     });
+    this.upload();
+    setTimeout(() =>
+      {
+        this.goToProductList();
+      },
+      3000);
   }
 
 
@@ -50,6 +56,7 @@ export class ProductAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.product = new Product();
     this.productTypes.push('PIECE');
     this.productTypes.push('KG');
     this.categoryService.findAll().subscribe(data => {
@@ -72,11 +79,15 @@ export class ProductAddComponent implements OnInit {
       event => {
         if (event.type === HttpEventType.UploadProgress) {
         } else if (event instanceof HttpResponse) {
-          const a = event.body.id;
+          this.message = event.body.message;
+          const  a = event.body.id;
         }
       },
       err => {
+        this.message = 'Could not upload the file!';
         this.currentFile = undefined;
       });
+
+    this.selectedFiles = undefined;
   }
 }

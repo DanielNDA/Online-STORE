@@ -42,4 +42,8 @@ export class CategoryService {
   public findAllParentNull(): Observable<Category[]> {
     return this.httpClient.get<Category[]>(`${this.categoriesUrl}-by-parent`);
   }
+
+  public findAllParentNotNull(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(`${this.categoriesUrl}-by-parent-not-null`);
+  }
 }

@@ -3,6 +3,7 @@ package com.sda.onlinestore.controller;
 import com.sda.onlinestore.persistence.dto.CategoryDTO;
 import com.sda.onlinestore.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +40,12 @@ public class CategoryController {
         return categoryService.findAllByParentNull();
     }
 
-    @PutMapping("/categories/{id}")
+    @GetMapping("/categories-by-parent-not-null")
+    public List<CategoryDTO> findAllByParentNotNull() {
+        return categoryService.findAllParentNotNull() ;
+    }
+
+    @PutMapping("/categories")
     public void update(@RequestBody CategoryDTO categoryDTO) {
         categoryService.update(categoryDTO);
     }

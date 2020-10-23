@@ -6,7 +6,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "prodImage")
 public class ImageProductModel {
 
     @Id
@@ -20,8 +19,8 @@ public class ImageProductModel {
     @Lob
     private byte[] data;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("prodImage")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("image")
     private ProductModel product;
 
     public ImageProductModel(String name, String type, byte[] data) {
@@ -73,4 +72,5 @@ public class ImageProductModel {
     public void setProduct(ProductModel product) {
         this.product = product;
     }
+
 }

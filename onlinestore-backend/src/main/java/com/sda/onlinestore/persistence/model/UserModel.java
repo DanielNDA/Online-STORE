@@ -26,17 +26,65 @@ public class UserModel {
 
     private String url;
 
+    private String firstName;
+
+    private String lastName;
+
     @OneToOne(cascade = CascadeType.ALL)
     private AddressModel addressModel;
 
     private String channel;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userList")
-    private List<RoleModel> roleList = new ArrayList<>();
+    private List<RoleModel> roleList;
 
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnoreProperties("customer")
     private List<OrderModel> orders;
+
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnoreProperties("user")
+    private ImageModelUser image;
+
+    public List<RoleModel> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<RoleModel> roleList) {
+        this.roleList = roleList;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public ImageModelUser getImage() {
+        return image;
+    }
+
+    public void setImage(ImageModelUser image) {
+        this.image = image;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 
     public String getChannel() {
         return channel;
@@ -78,28 +126,12 @@ public class UserModel {
         this.email = email;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public AddressModel getAddressModel() {
         return addressModel;
     }
 
     public void setAddressModel(AddressModel addressModel) {
         this.addressModel = addressModel;
-    }
-
-    public List<RoleModel> getRoleList() {
-        return roleList;
-    }
-
-    public void setRoleList(List<RoleModel> roleList) {
-        this.roleList = roleList;
     }
 
     public List<OrderModel> getOrders() {

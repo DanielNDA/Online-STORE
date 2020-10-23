@@ -13,23 +13,19 @@ public class RoleModel {
 
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "roles_privileges",
-            joinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "privilege_id", referencedColumnName = "id"))
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<PrivilegeModel> privilegeList = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "roles_users",
-            joinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"))
-    private List<UserModel> userList = new ArrayList<>();
+    private List<UserModel> userList;
+
+    public List<PrivilegeModel> getPrivilegeList() {
+        return privilegeList;
+    }
+
+    public void setPrivilegeList(List<PrivilegeModel> privilegeList) {
+        this.privilegeList = privilegeList;
+    }
 
     public List<UserModel> getUserList() {
         return userList;
@@ -55,12 +51,6 @@ public class RoleModel {
         this.name = name;
     }
 
-    public List<PrivilegeModel> getPrivilegeList() {
-        return privilegeList;
-    }
 
-    public void setPrivilegeList(List<PrivilegeModel> privilegeList) {
-        this.privilegeList = privilegeList;
-    }
 }
 

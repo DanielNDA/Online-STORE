@@ -2,7 +2,7 @@ package com.sda.onlinestore.service;
 
 import com.sda.onlinestore.persistence.dto.ManufacturerDTO;
 import com.sda.onlinestore.persistence.model.ManufacturerModel;
-import com.sda.onlinestore.repository.ManufacturerRepository;
+import com.sda.onlinestore.persistence.repository.ManufacturerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

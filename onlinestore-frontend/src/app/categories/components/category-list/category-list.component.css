@@ -1,4 +1,25 @@
-.button:hover:not(.active) {
-  background-color: #4CAF50;
-  color: black;
+/*.button:hover:not(.active) {*/
+/*  background-color: #B3C7D6FF;*/
+/*  color: black;*/
+/*}*/
+/*.btn {*/
+/*  background-color: #B3C7D6FF;*/
+/*}*/
+
+/*.d-inline-block {*/
+/*  padding-right: 15px;*/
+/*}*/
+
+body{
+  margin-top:20px;
+  padding: 15px;
+}
+img, figure {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.no-gutters {
+  padding: 20px;
 }
