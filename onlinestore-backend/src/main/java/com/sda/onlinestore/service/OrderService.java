@@ -1,6 +1,5 @@
 package com.sda.onlinestore.service;
 
-<<<<<<< Updated upstream
 import com.sda.onlinestore.persistence.dto.OrderDTO;
 import com.sda.onlinestore.persistence.dto.OrderLineDTO;
 import com.sda.onlinestore.persistence.dto.ProductDTO;
@@ -12,14 +11,8 @@ import com.sda.onlinestore.persistence.repository.OrderLineRepository;
 import com.sda.onlinestore.persistence.repository.OrderRepository;
 import com.sda.onlinestore.persistence.repository.ProductRepository;
 import com.sda.onlinestore.persistence.repository.UserRepository;
-=======
 import com.sda.onlinestore.persistence.dto.*;
 import com.sda.onlinestore.persistence.model.*;
-import com.sda.onlinestore.repository.OrderLineRepository;
-import com.sda.onlinestore.repository.OrderRepository;
-import com.sda.onlinestore.repository.ProductRepository;
-import com.sda.onlinestore.repository.UserRepository;
->>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

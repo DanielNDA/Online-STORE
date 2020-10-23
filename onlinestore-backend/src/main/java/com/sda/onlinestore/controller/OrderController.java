@@ -1,13 +1,7 @@
 package com.sda.onlinestore.controller;
 
 import com.sda.onlinestore.persistence.dto.OrderDTO;
-<<<<<<< Updated upstream
-import com.sda.onlinestore.persistence.repository.UserRepository;
 import com.sda.onlinestore.service.OrderService;
-=======
-import com.sda.onlinestore.service.OrderService;
-
->>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
