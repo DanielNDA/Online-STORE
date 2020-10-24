@@ -9,10 +9,12 @@ import {Observable} from 'rxjs';
 export class ProductService {
   private productUrl: string;
   private thumbnailUrl: string;
+  private deleteUrl: string;
 
   constructor(private http: HttpClient) {
     this.productUrl = 'http://localhost:8080/products';
     this.thumbnailUrl = 'http://localhost:8080/img';
+    this.deleteUrl = 'http://localhost:8080/deleteProducts';
   }
 
   public findAll(): Observable<Product[]> {
@@ -26,7 +28,7 @@ export class ProductService {
 
   // tslint:disable-next-line:typedef
   public delete(id: number) {
-    return this.http.delete(`${this.productUrl}/${id}`);
+    return this.http.delete(`${this.deleteUrl}/${id}`);
   }
 
   // tslint:disable-next-line:typedef

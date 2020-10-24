@@ -32,6 +32,7 @@ public class ProductModel {
     @ManyToOne(fetch = FetchType.LAZY)
     private CategoryModel categoryModel;
 
+
     public String getName() {
         return name;
     }

@@ -24,7 +24,7 @@ import {RoleFormComponent} from './security/roles/components/role-form/role-form
 import {RoleEditComponent} from './security/roles/components/role-edit/role-edit.component';
 import {RolePrivilegesComponent} from './security/roles/components/role-privileges/role-privileges.component';
 import {RoleUsersComponent} from './security/roles/components/role-users/role-users.component';
-import {ProductsCategoryComponent} from "./products/components/products-category/products-category.component";
+import {ProductsCategoryComponent} from './products/components/products-category/products-category.component';
 
 
 const routes: Routes = [

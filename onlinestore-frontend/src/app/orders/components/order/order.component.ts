@@ -6,6 +6,7 @@ import {Order} from '../../model/order';
 import {User} from '../../../users/model/user';
 import {AuthService} from '../../../users/service/auth.service';
 import {UserService} from '../../../users/service/user.service';
+import {ProductService} from '../../../products/components/service/product.service';
 
 @Component({
   selector: 'app-order-list',
@@ -21,26 +22,45 @@ export class OrderComponent implements OnInit {
   shippingCost: number;
   isLoggedIn = false;
   currentUser: User;
+  users: User[] = [];
 
   constructor(private orderService: OrderService,
               private route: ActivatedRoute,
               private router: Router,
               private authService: AuthService,
-              private userService: UserService) {
+              private userService: UserService,
+              private productService: ProductService) {
     this.currentUser = new User();
     this.currentUser.email = '';
+    this.order = new Order();
     this.shippingCost = 15;
   }
 
   ngOnInit(): void {
-    this.getOrderLines();
-    this.authService.isLoggedIn.subscribe(data => {
-      this.isLoggedIn = data;
-      this.currentUser = new User();
-      if (this.isLoggedIn) {
-        this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
+    // this.authService.isLoggedIn.subscribe(data => {
+    //   this.isLoggedIn = data;
+    //   this.currentUser = new User();
+    //   if (this.isLoggedIn) {
+    //     this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
+    //     for (const user of this.users) {
+    //       if (this.currentUser.id === user.id) {
+    //         this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
+    //       }
+    //     }
+    //   }
+    // });
+    this.userService.findAll().subscribe(data => {
+      this.users = data;
+      this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
+      this.getOrderLines();
+
+      for (const user of this.users) {
+        if (this.currentUser.id === user.id) {
+          this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
+        }
       }
     });
+
   }
 
   // tslint:disable-next-line:typedef
@@ -48,6 +68,10 @@ export class OrderComponent implements OnInit {
     console.log(this.currentUser.email);
     this.orderService.getByUsername(this.currentUser.email).subscribe(data => {
       this.order = data;
+      for (const o of this.order.orderLines) {
+        o.productDTO.thumbnail = this.productService.getProductImage(o.productDTO.id);
+      }
+      console.log(this.order);
       if (this.order.total < 80) {
         this.order.total = this.order.total + this.shippingCost;
       }
@@ -82,6 +106,6 @@ export class OrderComponent implements OnInit {
       this.order = data;
       this.getOrderLines();
     });
-  }
+  };
 
 }

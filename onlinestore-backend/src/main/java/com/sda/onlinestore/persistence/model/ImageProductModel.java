@@ -23,6 +23,7 @@ public class ImageProductModel {
     @JsonIgnoreProperties("image")
     private ProductModel product;
 
+
     public ImageProductModel(String name, String type, byte[] data) {
         this.name = name;
         this.type = type;
