@@ -1,5 +1,7 @@
 package com.sda.onlinestore.persistence.dto;
 
+import com.sda.onlinestore.persistence.model.AddressModel;
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class OrderDTO {
     private String status;
     private List<OrderLineDTO> orderLines;
     private AddressDTO deliveryAddress;
+    private AddressModel userAddress;
 
     public Long getId() {
         return id;
@@ -67,5 +70,13 @@ public class OrderDTO {
 
     public void setDeliveryAddress(AddressDTO deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
+    }
+
+    public AddressModel getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(AddressModel userAddress) {
+        this.userAddress = userAddress;
     }
 }

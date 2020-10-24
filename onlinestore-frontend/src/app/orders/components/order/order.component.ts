@@ -34,21 +34,21 @@ export class OrderComponent implements OnInit {
     this.currentUser.email = '';
     this.order = new Order();
     this.shippingCost = 15;
-    this.order.dateOfOrder = new Date();
   }
 
   ngOnInit(): void {
-      this.userService.findAll().subscribe(data => {
+    console.log(this.order.dateOfOrder);
+    this.userService.findAll().subscribe(data => {
       this.users = data;
       this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
       this.getOrderLines();
-
       for (const user of this.users) {
         if (this.currentUser.id === user.id) {
           this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
         }
       }
     });
+    console.log(this.order.dateOfOrder);
 
   }
 
@@ -74,7 +74,7 @@ export class OrderComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   checkout(id: number) {
-      this.router.navigate(['/order-details', id]);
+    this.router.navigate(['/order-details', id]);
   }
 
   // tslint:disable-next-line:typedef

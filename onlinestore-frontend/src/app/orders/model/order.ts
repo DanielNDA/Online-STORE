@@ -1,4 +1,5 @@
 import {OrderLine} from './order-line';
+import {Address} from '../../addresses/model/address';
 
 export class Order {
   id: number;
@@ -7,4 +8,5 @@ export class Order {
   dateOfOrder: Date;
   status: string;
   orderLines: OrderLine[] = [];
+  deliveryAddress: Address;
 }

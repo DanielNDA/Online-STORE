@@ -1,8 +1,10 @@
 package com.sda.onlinestore.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +16,7 @@ public class OrderModel {
     private Long id;
     private String userName;
     private Double total;
+    @JsonFormat(pattern = "M/d/yy, h:mm a")
     private Date dateOfOrder;
 
     @ManyToOne(fetch = FetchType.LAZY)
