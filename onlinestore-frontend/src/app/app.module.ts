@@ -44,6 +44,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {ManufacturerAddComponent} from './manufacturer/components/manufacturer-add/manufacturer-add.component';
 import {ManufacturerListComponent} from './manufacturer/components/manufacturer-list/manufacturer-list.component';
 import {Ng2SearchPipeModule} from "ng2-search-filter";
+import { ProductsCategoryComponent } from './products/components/products-category/products-category.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import {Ng2SearchPipeModule} from "ng2-search-filter";
     PrivilegeListComponent,
     AdminPanelComponent,
     ManufacturerAddComponent,
-    ManufacturerListComponent
+    ManufacturerListComponent,
+    ProductsCategoryComponent
   ],
   imports: [
     BrowserModule,
