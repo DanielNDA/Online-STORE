@@ -15,7 +15,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping("/add-to-cart/{username}/{productID}")
+    @GetMapping("/add-to-cart/{username}/{productID}")
     public void save(@PathVariable(name = "username") String username,@PathVariable(name = "productID") Long productID) {
         //User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         orderService.addToCart(username, productID);
