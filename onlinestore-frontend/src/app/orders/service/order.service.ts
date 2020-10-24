@@ -16,7 +16,7 @@ export class OrderService {
   private checkoutURL: string;
 
   constructor(private http: HttpClient) {
-    this.cartURL = 'http://localhost:8080/add-to-cart/{username}/{productID}';
+    this.cartURL = 'http://localhost:8080/add-to-cart';
     this.URL = 'http://localhost:8080/orders';
     this.deleteURL = 'http://localhost:8080/delete-order';
     this.updateURL = 'http://localhost:8080/update-order';
@@ -28,8 +28,8 @@ export class OrderService {
   }
 
   // tslint:disable-next-line:typedef
-  public addToCart(username: string, productID: number) {
-    return this.http.post<Order>(`${this.cartURL}/${productID}`, username);
+  public addToCart(email: string, productId: number){
+    return  this.http.get<Order>(this.cartURL + '/' + email + '/' + productId);
   }
 
   // tslint:disable-next-line:typedef
@@ -58,8 +58,8 @@ export class OrderService {
   }
 
   // tslint:disable-next-line:typedef
-  public getByUsername(username: string): Observable<any> {
-    return this.http.get(`${'http://localhost:8080/find-by-username'}/${username}`);
+  public getByUsername(email: string): Observable<any> {
+    return this.http.get<Order>('http://localhost:8080/find-by-username/' + email);
   }
 
   // tslint:disable-next-line:typedef

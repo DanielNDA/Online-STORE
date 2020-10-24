@@ -34,8 +34,8 @@ public class OrderService {
     @Autowired
     private OrderLineRepository orderLineRepository;
 
-    public void addToCart(String username, Long productID){
-        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserNameAndStatus(username,Status.HOLD);
+    public void addToCart(String email, Long productID){
+        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserName(email);
         OrderModel order;
 
         boolean isAlreadyInBasket = false;
@@ -64,7 +64,7 @@ public class OrderService {
         else{
             order = new OrderModel();
             order.setStatus(Status.HOLD);
-            order.setUserName(username);
+            order.setUserName(email);
             OrderLineModel orderLineModel = new OrderLineModel();
             orderLineModel.setQuantity(1);
             orderLineModel.setProductModel(productRepository.findById(productID).orElse(null));
