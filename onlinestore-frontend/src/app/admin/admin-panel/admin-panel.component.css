@@ -15,5 +15,6 @@
 
 .block:hover {
   background-color: #B3C7D6FF;
-  color: #4da59e;
+  text-decoration: underline;
+  color: #0d0d0d;
 }

@@ -51,7 +51,7 @@ export class UserService {
 
   public upload(image: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
-    formData.append('images', image);
+    formData.append('image', image);
     const req = new HttpRequest('POST', this.imageUrl, formData, {
       reportProgress: true,
       responseType: 'json'
