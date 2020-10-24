@@ -68,6 +68,7 @@ export class ProductListComponent implements OnInit {
   // tslint:disable-next-line:typedef
   addToCart(productID: number) {
     const a = this.currentUser.email;
+    console.log(this.currentUser.email);
     this.orderService.addToCart(a, productID).subscribe(data => {
       this.getProducts();
     });
