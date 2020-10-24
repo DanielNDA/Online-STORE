@@ -4,9 +4,9 @@ import {ProductService} from '../service/product.service';
 import {Product} from '../model/product';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
 import {Category} from '../../../categories/model/category';
-import {Manufacturer} from '../../../manufacturer/components/model/manufacturer';
+import {Manufacturer} from '../../../manufacturer/model/manufacturer';
 import {CategoryService} from '../../../categories/service/category.service';
-import {ManufacturerService} from '../../../manufacturer/components/service/manufacturer.service';
+import {ManufacturerService} from '../../../manufacturer/service/manufacturer.service';
 
 @Component({
   selector: 'app-product-add',

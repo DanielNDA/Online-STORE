@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Manufacturer} from '../model/manufacturer';
-import {ManufacturerService} from '../service/manufacturer.service';
+import {Manufacturer} from '../../model/manufacturer';
+import {ManufacturerService} from '../../service/manufacturer.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 

@@ -14,6 +14,8 @@ import {LoginComponent} from './users/components/login/login.component';
 import {AuthGuardService} from './users/service/auth-guard.service';
 import {AdminPanelComponent} from './admin/admin-panel/admin-panel.component';
 import {OrderComponent} from './orders/components/order/order.component';
+import {ManufacturerAddComponent} from './manufacturer/components/manufacturer-add/manufacturer-add.component';
+import {ManufacturerListComponent} from './manufacturer/components/manufacturer-list/manufacturer-list.component';
 
 
 const routes: Routes = [
@@ -31,14 +33,8 @@ const routes: Routes = [
   {path: 'product-view', component: ProductViewComponent, canActivate: [AuthGuardService]},
   {path: 'view-profile/:id', component: UserViewComponent, canActivate: [AuthGuardService]},
   {path: 'administrator-panel', component: AdminPanelComponent, canActivate: [AuthGuardService]},
-  {path: 'view-cart', component: OrderComponent},
-  {path: 'checkout', component: ProductListComponent},
-  {path: 'category-add', component: CategoryFormComponent},
-  {path: 'profile-edit/:id', component: UserEditComponent},
-  {path: 'products', component: ProductListComponent},
-  {path: 'product-add', component: ProductAddComponent},
-  {path: 'product-edit', component: ProductEditComponent},
-  {path: 'product-view', component: ProductViewComponent},
+  {path: 'manufacturer-add', component: ManufacturerAddComponent, canActivate: [AuthGuardService]},
+  {path: 'manufacturer-list', component: ManufacturerListComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({

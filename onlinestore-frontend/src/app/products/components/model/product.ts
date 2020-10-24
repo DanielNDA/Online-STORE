@@ -1,4 +1,4 @@
-import {Manufacturer} from '../../../manufacturer/components/model/manufacturer';
+import {Manufacturer} from '../../../manufacturer/model/manufacturer';
 import {Category} from '../../../categories/model/category';
 import {Observable} from 'rxjs';
 
