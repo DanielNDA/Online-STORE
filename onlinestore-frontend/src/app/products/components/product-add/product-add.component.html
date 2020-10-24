@@ -31,6 +31,53 @@
                required #price="ngModel">
       </div>
       <div [hidden]="!price.pristine" class="alert alert-danger">Price is required</div>
+
+      <div class="form-group">
+        <label for="price">Category</label>
+
+        <select type="text" [(ngModel)]="product.categoryDTO"
+                class="form-control"
+                id="category"
+                name="category"
+                placeholder="Select category"
+                required #categoryField="ngModel">
+          <option *ngFor="let c of categories" [ngValue]="c">{{c.name}}</option>
+        </select>
+        <div [hidden]="!categoryField.pristine" class="alert alert-danger">Category is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Type</label>
+
+        <select type="text" [(ngModel)]="product.productType"
+                class="form-control"
+                id="productType"
+                name="productType"
+                placeholder="Select product type"
+                required #productTypeField="ngModel">
+          <option *ngFor="let pt of productTypes" [ngValue]="pt">{{pt.valueOf()}}</option>
+        </select>
+        <div [hidden]="!productTypeField.pristine" class="alert alert-danger">Product Type is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Manufacturer</label>
+
+        <select type="text" [(ngModel)]="product.manufacturerDto"
+                class="form-control"
+                id="manufacturer"
+                name="manufacturer"
+                placeholder="Select manufacturer"
+                required #manufacturerField="ngModel">
+          <option *ngFor="let m of manufacturers" [ngValue]="m">{{m.name}}</option>
+        </select>
+        <div [hidden]="!manufacturerField.pristine" class="alert alert-danger">Manufacturer is required</div>
+      </div>
+
+      <div class="upload-button-wrapper">
+        <button class="button" >Upload a photo</button>
+        <input type="file" name="myfile" (change)="selectFile($event)"/>
+      </div>
       <div class="form-group">
 
         <a (click)="goToProductList()"

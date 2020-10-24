@@ -8,7 +8,8 @@ export class Product {
   description: string;
   thumbnail: Observable<any>;
   price: number;
-  category: Category;
-  manufacturer: Manufacturer;
+  categoryDTO: Category;
+  manufacturerDto: Manufacturer;
+  productType: string;
 
 }

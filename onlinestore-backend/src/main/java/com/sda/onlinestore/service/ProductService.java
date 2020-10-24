@@ -1,5 +1,6 @@
 package com.sda.onlinestore.service;
 
+
 import com.sda.onlinestore.persistence.dto.CategoryDTO;
 import com.sda.onlinestore.persistence.dto.ManufacturerDTO;
 import com.sda.onlinestore.persistence.dto.ProductDTO;
@@ -7,7 +8,6 @@ import com.sda.onlinestore.persistence.model.CategoryModel;
 import com.sda.onlinestore.persistence.model.ManufacturerModel;
 import com.sda.onlinestore.persistence.model.ProductModel;
 import com.sda.onlinestore.persistence.model.ProductType;
-
 import com.sda.onlinestore.persistence.repository.CategoryRepository;
 import com.sda.onlinestore.persistence.repository.ManufacturerRepository;
 import com.sda.onlinestore.persistence.repository.ProductRepository;
@@ -47,7 +47,6 @@ public class ProductService {
         ProductModel productModel = new ProductModel();
         productModel.setId(productDto.getId());
         productModel.setName(productDto.getName());
-        productModel.setThumbnail(productDto.getThumbnail());
         productModel.setDescription(productDto.getDescription());
         productModel.setProductType(ProductType.valueOf(productDto.getProductType()));
         productModel.setPrice(productDto.getPrice());
@@ -76,6 +75,20 @@ public class ProductService {
             productDto.setDescription(productModel.getDescription());
             productDto.setPrice(productModel.getPrice());
             productDTOList.add(productDto);
+
+            CategoryModel categoryModel = productModel.getCategoryModel();
+            CategoryDTO categoryDTO = new CategoryDTO();
+            categoryDTO.setName(categoryModel.getName());
+            categoryDTO.setId(categoryModel.getId());
+
+            ManufacturerModel manufacturerModel = productModel.getManufacturerModel();
+            ManufacturerDTO manufacturerDTO = new ManufacturerDTO();
+            manufacturerDTO.setName(manufacturerModel.getName());
+            manufacturerDTO.setId(manufacturerModel.getId());
+
+            productDto.setCategoryDTO(categoryDTO);
+            productDto.setManufacturerDto(manufacturerDTO);
+            productDto.setProductType(productModel.getProductType().name());
         }
         return productDTOList;
     }
