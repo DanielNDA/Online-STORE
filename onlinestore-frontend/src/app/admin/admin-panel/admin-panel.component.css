@@ -1,9 +1,19 @@
-body { padding-top:20px;
-  background:#eee;
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #4da59e;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
 }
-.panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px; }
 
-.row {
-  padding: 15px;
+.container {
+  padding-top: 48px;
 }
 
+.block:hover {
+  background-color: #B3C7D6FF;
+  color: #4da59e;
+}

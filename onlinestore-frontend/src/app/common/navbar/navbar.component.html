@@ -1,5 +1,5 @@
 <nav class="navbar sticky-top navbar-expand-sm navbar-light myNav" *ngIf="isLoggedIn">
-  <a routerLink="/products" class="navbar-brand text-dark title"><img src="/assets/ecommerce.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+  <a routerLink="/products" class="navbar-brand text-dark title"><img src="/assets/buy-button.svg" width="30" height="30" class="d-inline-block align-top" alt="">
     eStore!</a>
   <button (click)="isMenuCollapsed = !isMenuCollapsed" class="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -13,6 +13,9 @@
       </li>
       <li class="nav-item">
         <a routerLink="/category-list" class="nav-link text-dark"><img src="/assets/list.svg" width="20" height="25" class="d-inline-block align-content-center" alt=""> Categories</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/administrator-panel" class="nav-link text-dark"><img src="/assets/admin.svg" width="20" height="25" class="d-inline-block align-content-center" alt=""> Administrator</a>
       </li>
 
     </ul>
