@@ -51,6 +51,14 @@ export class NavbarComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
+  editProfile() {
+    this.userService.getByEmail(this.currentUser.email).subscribe(data => {
+      this.currentUser = data;
+      this.goToEditProfile(this.currentUser.id);
+    });
+  }
+
+  // tslint:disable-next-line:typedef
   goToProfilePage(id: number) {
     this.router.navigate(['view-profile', id]);
   }
@@ -58,5 +66,10 @@ export class NavbarComponent implements OnInit {
   // tslint:disable-next-line:typedef
   goToShoppingCart() {
     this.router.navigate(['view-cart']);
+  }
+
+  // tslint:disable-next-line:typedef
+  goToEditProfile(id: number) {
+    this.router.navigate(['profile-edit', id]);
   }
 }

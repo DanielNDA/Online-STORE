@@ -1,0 +1,53 @@
+.body{
+  margin-top:20px;
+  background-color: #f2f3f8;
+}
+.card {
+
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);
+}
+
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #e5e9f2;
+  border-radius: .2rem;
+}
+
+.upload-button-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.button {
+  border: 2px solid gray;
+  color: white;
+  background-color: gray;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.upload-button-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.form-control-md {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  border-radius: 8px;
+}

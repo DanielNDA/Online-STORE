@@ -1,109 +1,71 @@
-<div class="card my-5">
-  <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
-      <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" [(ngModel)]="user.firstName"
-               class="form-control"
-               id="firstName"
-               name="firstName"
-               placeholder="Enter your first name"
-               required #firstname="ngModel">
-        <div [hidden]="firstname.valid" class="alert alert-danger">First name is required</div>
-      </div>
-      <div class="form-group">
-        <label for="lastName">Last Name</label>
-        <input type="text" [(ngModel)]="user.lastName"
-               class="form-control"
-               id="lastName"
-               name="lastName"
-               placeholder="Enter your last name"
-               required #lastname="ngModel">
-        <div [hidden]="lastname.valid" class="alert alert-danger">Last name is required</div>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" [(ngModel)]="user.email"
-               class="form-control"
-               id="email"
-               name="email"
-               placeholder="Enter your email"
-               required #email="ngModel">
-        <div [hidden]="email.valid" class="alert alert-danger">Email is required</div>
-      </div>
-      <div class="form-group">
-        <label for="channel">Channel</label>
-        <input type="email" [(ngModel)]="user.channel"
-               class="form-control"
-               id="channel"
-               name="channel"
-               placeholder="Enter the channel you want to receive promotions"
-               required #channel="ngModel">
-        <div [hidden]="channel.valid" class="alert alert-danger">Channel is required</div>
-
-      </div>
-      <div class="form-group">
-        <label for="country">Country</label>
-        <input type="text" [(ngModel)]="user.addressDTO.country"
-               class="form-control"
-               id="country"
-               name="country"
-               placeholder="Enter country"
-               required #country="ngModel">
-        <div [hidden]="country.valid" class="alert alert-danger">Country is required</div>
-      </div>
-      <div class="form-group">
-        <label for="city">City</label>
-        <input type="text" [(ngModel)]="user.addressDTO.city"
-               class="form-control"
-               id="city"
-               name="city"
-               placeholder="Enter city"
-               required #city="ngModel">
-        <div [hidden]="city.valid" class="alert alert-danger">City is required</div>
-      </div>
-      <div class="form-group">
-        <label for="street">Street</label>
-        <input type="text" [(ngModel)]="user.addressDTO.street"
-               class="form-control"
-               id="street"
-               name="street"
-               placeholder="Enter street"
-               required #street="ngModel">
-        <div [hidden]="street.valid" class="alert alert-danger">Street is required</div>
-      </div>
-      <div class="form-group">
-        <label for="zipcode">Zip Code</label>
-        <input type="text" [(ngModel)]="user.addressDTO.zipCode"
-               class="form-control"
-               id="zipcode"
-               name="zipcode"
-               placeholder="Enter zip code"
-               required #zipcode="ngModel">
-        <div [hidden]="zipcode.valid" class="alert alert-danger">Zip code is required</div>
-      </div>
-      <label>Choose your profile photo</label>
-      <div *ngIf="currentFile" class="progress">
-        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-             attr.aria-valuenow="{{ progress }}"
-             aria-valuemin="0"
-             aria-valuemax="100"
-             [ngStyle]="{ width: progress + '%' }">{{ progress }}%
+<div class="container h-100" style="padding-top: 20px">
+  <div class="row h-100">
+    <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+      <div class="d-table-cell align-middle">
+        <div class="card">
+          <div class="card-body">
+            <div class="m-sm-4">
+              <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+                <div class="form-group d-inline-block" style="padding-right: 10px">
+                  <label>First name</label>
+                  <input class="form-control form-control-md" type="text" name="firstName" id="firstName" [(ngModel)]="user.firstName"
+                         placeholder="Enter your first name">
+                </div>
+                <div class="form-group d-xl-inline-block">
+                  <label>Last name</label>
+                  <input class="form-control form-control-md" type="text" name="lastName" id="lastName" [(ngModel)]="user.lastName"
+                         placeholder="Enter your last name">
+                </div>
+                <div class="form-group d-lg-inline-block" style="padding-right: 10px">
+                  <label>Email</label>
+                  <input class="form-control form-control-md" type="email" name="email" id="email" [(ngModel)]="user.email"
+                         placeholder="Enter your email">
+                </div>
+                <div class="form-group d-lg-inline-block">
+                  <label>Password</label>
+                  <input class="form-control form-control-md" type="password" name="password" id="password" [(ngModel)]="user.password"
+                         placeholder="Enter your password">
+                </div>
+                <div class="form-group d-lg-inline-block">
+                  <label>Channel</label>
+                  <input class="form-control form-control-md" type="email" name="channel" id="channel" [(ngModel)]="user.channel"
+                         placeholder="Enter your channel">
+                </div>
+                <hr>
+                <div class="form-group d-lg-inline-block" style="padding-right: 10px">
+                  <label>Country</label>
+                  <input class="form-control form-control-md" type="text" name="country" id="country"
+                         [(ngModel)]="user.addressDTO.country" placeholder="Enter your country">
+                </div>
+                <div class="form-group d-lg-inline-block">
+                  <label>City</label>
+                  <input class="form-control form-control-md" type="text" name="city" id="city" [(ngModel)]="user.addressDTO.city"
+                         placeholder="Enter your city">
+                </div>
+                <div class="form-group d-lg-inline-block" style="padding-right: 10px">
+                  <label>Street</label>
+                  <input class="form-control form-control-md" type="text" name="street" id="street"
+                         [(ngModel)]="user.addressDTO.street" placeholder="Enter your street">
+                </div>
+                <div class="form-group d-lg-inline-block">
+                  <label>Zip code</label>
+                  <input class="form-control form-control-md" type="text" name="zipcode" id="zipcode"
+                         [(ngModel)]="user.addressDTO.zipCode" placeholder="Enter your zip code">
+                </div>
+                <hr>
+                <div class="btn-group text-center mt-3">
+                  <a (click)="goToHomePage()"
+                     class="btn btn-secondary mx-1">Back
+                  </a>
+                  <button type="submit" [disabled]="!userForm.form.valid"
+                          class="btn btn-info">Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-
-      <label class="btn btn-default">
-        <input type="file" (change)="selectFile($event)"/>
-      </label>
-      <div class="alert alert-light" role="alert">{{ message }}</div>
-      <div class="btn-group">
-        <a (click)="goToHomePage()"
-           class="btn btn-secondary mx-1">Back
-        </a>
-        <button type="submit" [disabled]="!userForm.form.valid"
-                class="btn btn-info">Submit
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>
