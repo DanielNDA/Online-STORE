@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {Product} from '../model/product';
 import {Observable} from 'rxjs';
@@ -57,6 +57,7 @@ export class ProductService {
     return this.http.get(`http://localhost:8080/thumbnail/${id}`);
   }
 
-
-
+  public findByCategory(id: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`http://localhost:8080/products-by-category/${id}`);
+  }
 }

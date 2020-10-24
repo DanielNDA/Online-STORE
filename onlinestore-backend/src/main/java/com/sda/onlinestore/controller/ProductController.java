@@ -95,4 +95,10 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
         }
     }
+    @GetMapping("/products-by-category/{id}")
+    public List<ProductDTO> findByCategory(@PathVariable(name = "id") Long id) {
+        return productService.getProductsByCategory(id);
+    }
+
+
 }
