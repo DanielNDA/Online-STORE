@@ -3,6 +3,9 @@ import {OrderLine} from '../../model/order-line';
 import {OrderService} from '../../service/order.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Order} from '../../model/order';
+import {User} from '../../../users/model/user';
+import {AuthService} from '../../../users/service/auth.service';
+import {UserService} from '../../../users/service/user.service';
 
 @Component({
   selector: 'app-order-list',
@@ -14,24 +17,35 @@ export class OrderComponent implements OnInit {
   cartList: OrderLine[];
   order: Order;
   id: number;
-  values: number[];
   selectedValue: number;
   shippingCost: number;
+  isLoggedIn = false;
+  currentUser: User;
 
   constructor(private orderService: OrderService,
               private route: ActivatedRoute,
-              private router: Router) {
-    this.values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+              private router: Router,
+              private authService: AuthService,
+              private userService: UserService) {
+    this.currentUser = new User();
+    this.currentUser.email = '';
     this.shippingCost = 15;
   }
 
   ngOnInit(): void {
     this.getOrderLines();
+    this.authService.isLoggedIn.subscribe(data => {
+      this.isLoggedIn = data;
+      this.currentUser = new User();
+      if (this.isLoggedIn) {
+        this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
+      }
+    });
   }
 
   // tslint:disable-next-line:typedef
   getOrderLines() {
-    this.orderService.getByUsername('alisa').subscribe(data => {
+    this.orderService.getByUsername(this.currentUser.email).subscribe(data => {
       this.order = data;
       if (this.order.total < 80) {
         this.order.total = this.order.total + this.shippingCost;
@@ -56,14 +70,14 @@ export class OrderComponent implements OnInit {
   // tslint:disable-next-line:typedef
   updateQuantity(olID: number) {
     console.log(this.selectedValue);
-    this.orderService.update('alisa', olID, this.selectedValue).subscribe(data => {
+    this.orderService.update(this.currentUser.email, olID, this.selectedValue).subscribe(data => {
       this.router.navigate(['/view-cart']);
     });
   }
 
   changeQuantity = (olID, quantity) => {
     console.log(quantity);
-    this.orderService.update('alisa', olID, quantity).subscribe(data => {
+    this.orderService.update(this.currentUser.email, olID, quantity).subscribe(data => {
       this.order = data;
       this.getOrderLines();
     });
