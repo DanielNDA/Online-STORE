@@ -14,17 +14,19 @@ export class RegisterComponent implements OnInit {
 
   user: User = new User();
   id: number;
-  matched = true;
+  isUpperCase = true;
   address: Address;
   selectedFiles: FileList;
   currentFile: File;
   progress = 0;
   message = '';
+  password = '';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private userService: UserService) {
     this.user = new User();
+    this.user.password = '';
     this.address = new Address();
     this.user.addressDTO = this.address;
   }
@@ -34,12 +36,11 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): any {
     this.userService.save(this.user).subscribe(data => {
-    this.upload();
-    setTimeout(() =>
-      {
-        this.goToLogin();
-      },
-      3000);
+      this.upload();
+      setTimeout(() => {
+          this.goToLogin();
+        },
+        3000);
     });
   }
 
@@ -62,7 +63,7 @@ export class RegisterComponent implements OnInit {
           this.progress = Math.round(100 * event.loaded / event.total);
         } else if (event instanceof HttpResponse) {
           this.message = event.body.message;
-          const  a = event.body.id;
+          const a = event.body.id;
         }
       },
       err => {
@@ -72,5 +73,14 @@ export class RegisterComponent implements OnInit {
       });
 
     this.selectedFiles = undefined;
+  }
+
+  // tslint:disable-next-line:typedef
+  isPasswordsFirstLetterUpperCase() {
+    if (this.user.password.charAt(0) === this.user.password.charAt(0).toUpperCase()) {
+      this.isUpperCase = true;
+    } else {
+      this.isUpperCase = false;
+    }
   }
 }
