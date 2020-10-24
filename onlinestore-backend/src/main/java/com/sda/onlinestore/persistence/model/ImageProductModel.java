@@ -19,8 +19,7 @@ public class ImageProductModel {
     @Lob
     private byte[] data;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("image")
+    @OneToOne(mappedBy = "image" )
     private ProductModel product;
 
     public ImageProductModel(String name, String type, byte[] data) {
