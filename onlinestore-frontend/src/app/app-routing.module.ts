@@ -37,7 +37,7 @@ const routes: Routes = [
   {path: 'profile-edit/:id', component: UserEditComponent, canActivate: [AuthGuardService]},
   {path: 'products', component: ProductListComponent, canActivate: [AuthGuardService]},
   {path: 'product-add', component: ProductAddComponent, canActivate: [AuthGuardService]},
-  {path: 'product-edit', component: ProductEditComponent, canActivate: [AuthGuardService]},
+  {path: 'product-edit/:id', component: ProductEditComponent, canActivate: [AuthGuardService]},
   {path: 'product-view', component: ProductViewComponent, canActivate: [AuthGuardService]},
   {path: 'view-profile/:id', component: UserViewComponent, canActivate: [AuthGuardService]},
   {path: 'administrator-panel', component: AdminPanelComponent, canActivate: [AuthGuardService]},

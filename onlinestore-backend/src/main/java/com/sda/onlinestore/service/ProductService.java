@@ -110,4 +110,34 @@ public class ProductService {
         }
     }
 
+    public List<ProductDTO> getProductsByCategory(Long id){
+        List<ProductModel> productModelList = productRepository.findAllByCategoryModelId(id);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+
+        for (ProductModel productModel : productModelList) {
+            ProductDTO productDto = new ProductDTO();
+            productDto.setId(productModel.getId());
+            productDto.setName(productModel.getName());
+            productDto.setThumbnail(productModel.getThumbnail());
+            productDto.setDescription(productModel.getDescription());
+            productDto.setPrice(productModel.getPrice());
+            productDTOList.add(productDto);
+
+            CategoryModel categoryModel = productModel.getCategoryModel();
+            CategoryDTO categoryDTO = new CategoryDTO();
+            categoryDTO.setName(categoryModel.getName());
+            categoryDTO.setId(categoryModel.getId());
+
+            ManufacturerModel manufacturerModel = productModel.getManufacturerModel();
+            ManufacturerDTO manufacturerDTO = new ManufacturerDTO();
+            manufacturerDTO.setName(manufacturerModel.getName());
+            manufacturerDTO.setId(manufacturerModel.getId());
+
+            productDto.setCategoryDTO(categoryDTO);
+            productDto.setManufacturerDto(manufacturerDTO);
+            productDto.setProductType(productModel.getProductType().name());
+        }
+        return productDTOList;
+    }
+
 }
