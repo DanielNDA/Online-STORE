@@ -13,13 +13,10 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class UserEditComponent implements OnInit {
 
-  user: User;
   id: number;
   address: Address;
-  selectedFiles: FileList;
-  currentFile: File;
-  progress = 0;
-  message = '';
+  confirmPassword: '';
+  matched = true;
   users: User[] = [];
   currentUser: User;
 
@@ -33,24 +30,33 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.findAll().subscribe(data => {
-      this.users = data;
-      this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
-      for (const user of this.users) {
-        if (this.currentUser.id === user.id) {
-          this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
-        }
-      }
+    this.currentUser = new User();
+    this.id = this.route.snapshot.params.id;
+    this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
+    this.userService.getByEmail(this.currentUser.email).subscribe(data => {
+      this.currentUser = data;
+      this.userService.findAll().subscribe(data1 => {
+        this.users = data;
+      });
     });
   }
 
   // tslint:disable-next-line:typedef
   onSubmit() {
-    this.userService.update(this.user).subscribe(result => this.goToHomePage());
+    this.userService.update(this.currentUser).subscribe(result => this.goToHomePage());
   }
 
   // tslint:disable-next-line:typedef
   goToHomePage() {
     this.router.navigate(['products']);
+  }
+
+  // tslint:disable-next-line:typedef
+  matchPasswords() {
+    if (this.currentUser.newPassword === '' || this.currentUser.newPassword === this.confirmPassword) {
+      this.matched = true;
+    } else {
+      this.matched = false;
+    }
   }
 }

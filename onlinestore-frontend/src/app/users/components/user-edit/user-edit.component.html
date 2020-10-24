@@ -8,49 +8,55 @@
               <form (ngSubmit)="onSubmit()" #userForm="ngForm">
                 <div class="form-group d-inline-block" style="padding-right: 10px">
                   <label>First name</label>
-                  <input class="form-control form-control-md" type="text" name="firstName" id="firstName" [(ngModel)]="user.firstName"
+                  <input class="form-control form-control-md" type="text" name="firstName" id="firstName" [(ngModel)]="currentUser.firstName"
                          placeholder="Enter your first name">
                 </div>
                 <div class="form-group d-xl-inline-block">
                   <label>Last name</label>
-                  <input class="form-control form-control-md" type="text" name="lastName" id="lastName" [(ngModel)]="user.lastName"
+                  <input class="form-control form-control-md" type="text" name="lastName" id="lastName" [(ngModel)]="currentUser.lastName"
                          placeholder="Enter your last name">
                 </div>
-                <div class="form-group d-lg-inline-block" style="padding-right: 10px">
+                <div class="form-group " style="padding-right: 10px">
                   <label>Email</label>
-                  <input class="form-control form-control-md" type="email" name="email" id="email" [(ngModel)]="user.email"
+                  <input class="form-control form-control-md" type="email" name="email" id="email" [(ngModel)]="currentUser.email"
                          placeholder="Enter your email">
                 </div>
-                <div class="form-group d-lg-inline-block">
-                  <label>Password</label>
-                  <input class="form-control form-control-md" type="password" name="password" id="password" [(ngModel)]="user.password"
-                         placeholder="Enter your password">
+                <div class="form-group">
+                  <label>New Password</label>
+                  <input class="form-control form-control-md" type="password" name="password" id="password" [(ngModel)]="currentUser.newPassword"
+                         placeholder="Enter your new password" (keyup)="matchPasswords()">
                 </div>
-                <div class="form-group d-lg-inline-block">
+                <div class="form-group ">
+                  <label>Confirm Password</label>
+                  <input class="form-control form-control-md" type="password" name="newPassword" id="newPassword" [(ngModel)]="confirmPassword"
+                         placeholder="Enter your new password" (keyup)="matchPasswords()">
+                </div>
+                <div [hidden]="matched"  class="alert alert-danger">Passwords don't match</div>
+                <div class="form-group ">
                   <label>Channel</label>
-                  <input class="form-control form-control-md" type="email" name="channel" id="channel" [(ngModel)]="user.channel"
-                         placeholder="Enter your channel">
+                  <input class="form-control form-control-md" type="email" name="channel" id="channel" [(ngModel)]="currentUser.channel"
+                         placeholder="Enter your preferred channel">
                 </div>
                 <hr>
                 <div class="form-group d-lg-inline-block" style="padding-right: 10px">
                   <label>Country</label>
                   <input class="form-control form-control-md" type="text" name="country" id="country"
-                         [(ngModel)]="user.addressDTO.country" placeholder="Enter your country">
+                         [(ngModel)]="currentUser.addressDTO.country" placeholder="Enter your country">
                 </div>
                 <div class="form-group d-lg-inline-block">
                   <label>City</label>
-                  <input class="form-control form-control-md" type="text" name="city" id="city" [(ngModel)]="user.addressDTO.city"
+                  <input class="form-control form-control-md" type="text" name="city" id="city" [(ngModel)]="currentUser.addressDTO.city"
                          placeholder="Enter your city">
                 </div>
                 <div class="form-group d-lg-inline-block" style="padding-right: 10px">
                   <label>Street</label>
                   <input class="form-control form-control-md" type="text" name="street" id="street"
-                         [(ngModel)]="user.addressDTO.street" placeholder="Enter your street">
+                         [(ngModel)]="currentUser.addressDTO.street" placeholder="Enter your street">
                 </div>
                 <div class="form-group d-lg-inline-block">
                   <label>Zip code</label>
                   <input class="form-control form-control-md" type="text" name="zipcode" id="zipcode"
-                         [(ngModel)]="user.addressDTO.zipCode" placeholder="Enter your zip code">
+                         [(ngModel)]="currentUser.addressDTO.zipCode" placeholder="Enter your zip code">
                 </div>
                 <hr>
                 <div class="btn-group text-center mt-3">
