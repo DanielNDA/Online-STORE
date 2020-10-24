@@ -38,7 +38,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/thumbnail/*").permitAll()
                 .antMatchers("/img/*").permitAll()
                 .antMatchers("/img").permitAll()
-                .antMatchers("/add-to-cart/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/add-to-cart/**").permitAll()
                 .antMatchers("/update-order/***").permitAll()
                 .antMatchers("/update-order/**").permitAll()
                 .antMatchers("/checkout/*").permitAll()
