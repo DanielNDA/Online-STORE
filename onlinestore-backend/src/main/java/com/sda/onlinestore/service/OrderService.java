@@ -11,6 +11,8 @@ import com.sda.onlinestore.persistence.repository.OrderLineRepository;
 import com.sda.onlinestore.persistence.repository.OrderRepository;
 import com.sda.onlinestore.persistence.repository.ProductRepository;
 import com.sda.onlinestore.persistence.repository.UserRepository;
+import com.sda.onlinestore.persistence.dto.*;
+import com.sda.onlinestore.persistence.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,7 @@ public class OrderService {
             for (OrderLineModel olm: orderLineModels) {
                 if(olm.getProductModel().getId() == productID){
                    olm.setQuantity(olm.getQuantity() + 1);
+                   olm.setPrice(olm.getQuantity() * olm.getProductModel().getPrice());
                    isAlreadyInBasket = true;
                 }
             }
@@ -98,6 +101,7 @@ public class OrderService {
                 ProductDTO productDto = new ProductDTO();
                 productDto.setId(ol.getProductModel().getId());
                 productDto.setName(ol.getProductModel().getName());
+                productDto.setDescription(ol.getProductModel().getDescription());
                 productDto.setPrice(ol.getProductModel().getPrice());
                 old.setProductDTO(productDto);
                 orderLinesDTO.add(old);
@@ -125,9 +129,29 @@ public class OrderService {
                 old.setQuantity(ol.getQuantity());
 
                 ProductDTO productDto = new ProductDTO();
-                productDto.setId(ol.getProductModel().getId());
-                productDto.setName(ol.getProductModel().getName());
-                productDto.setPrice(ol.getProductModel().getPrice());
+                ProductModel productModel = ol.getProductModel();
+
+                productDto.setId(productModel.getId());
+                productDto.setName(productModel.getName());
+                productDto.setDescription(productModel.getDescription());
+                productDto.setPrice(productModel.getPrice());
+                productDto.setProductType(productModel.getProductType().name());
+
+                CategoryDTO categoryDTO = new CategoryDTO();
+                CategoryModel categoryModel = productModel.getCategoryModel();
+
+                categoryDTO.setId(categoryModel.getId());
+                categoryDTO.setName(categoryModel.getName());
+                productDto.setCategoryDTO(categoryDTO);
+
+                ManufacturerDTO manufacturerDTO = new ManufacturerDTO();
+                ManufacturerModel manufacturerModel = productModel.getManufacturerModel();
+
+                manufacturerDTO.setId(manufacturerModel.getId());
+                manufacturerDTO.setName(manufacturerModel.getName());
+
+                productDto.setManufacturerDto(manufacturerDTO);
+                productDto.setCategoryDTO(categoryDTO);
                 old.setProductDTO(productDto);
                 orderLinesDTO.add(old);
             }
@@ -137,8 +161,8 @@ public class OrderService {
         return orderDTOS;
     }
 
-    public void update(String username, Long orderLineID, int quantity){
-        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserNameAndStatus(username, Status.HOLD);
+    public OrderDTO update(String username, Long orderLineID, int quantity){
+        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserName(username);
         if(orderModelOptional.isPresent()) {
             OrderModel order = orderModelOptional.get();
 
@@ -153,12 +177,13 @@ public class OrderService {
                         olm.setPrice(olm.getQuantity() * olm.getProductModel().getPrice());
                         orderLineRepository.save(olm);
                     }
-
                 }
             }
             order.setTotal(totalPrice(order.getOrderLines()));
             orderRepository.save(order);
+
         }
+        return findByUsername(username);
     }
 
     public Double totalPrice(List<OrderLineModel> orderLineModels){
@@ -199,6 +224,33 @@ public class OrderService {
             }
             orderDTO.setOrderLines(orderLinesDTO);
             orderDTO.setStatus(order.get().getStatus().name());
+        }
+        return orderDTO;
+    }
+
+    public OrderDTO findByUsername(String username) {
+        Optional<OrderModel> order = orderRepository.findOrderModelByUserName(username);
+        OrderDTO orderDTO = new OrderDTO();
+        if (order.isPresent()) {
+            orderDTO.setId(order.get().getId());
+            orderDTO.setTotal(order.get().getTotal());
+
+            List<OrderLineDTO> orderLinesDTO = new ArrayList<>();
+            for (OrderLineModel ol : order.get().getOrderLines()) {
+                OrderLineDTO old = new OrderLineDTO();
+                old.setId(ol.getId());
+                old.setPrice(ol.getPrice());
+                old.setQuantity(ol.getQuantity());
+
+                ProductDTO productDto = new ProductDTO();
+                productDto.setId(ol.getProductModel().getId());
+                productDto.setName(ol.getProductModel().getName());
+                productDto.setDescription(ol.getProductModel().getDescription());
+                productDto.setPrice(ol.getProductModel().getPrice());
+                old.setProductDTO(productDto);
+                orderLinesDTO.add(old);
+            }
+            orderDTO.setOrderLines(orderLinesDTO);
         }
         return orderDTO;
     }
