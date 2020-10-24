@@ -11,6 +11,7 @@ public class OrderDTO {
     private Date dateOfOrder;
     private String status;
     private List<OrderLineDTO> orderLines;
+    private AddressDTO deliveryAddress;
 
     public Long getId() {
         return id;
@@ -58,5 +59,13 @@ public class OrderDTO {
 
     public void setOrderLines(List<OrderLineDTO> orderLines) {
         this.orderLines = orderLines;
+    }
+
+    public AddressDTO getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(AddressDTO deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
     }
 }

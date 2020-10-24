@@ -34,22 +34,23 @@ public class OrderService {
     @Autowired
     private OrderLineRepository orderLineRepository;
 
-    public void addToCart(String email, Long productID){
+    public void addToCart(String email, Long productID) {
         Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserName(email);
+        UserModel userModel = userRepository.findUserModelByEmail(email).orElse(null);
         OrderModel order;
 
         boolean isAlreadyInBasket = false;
-        if(orderModelOptional.isPresent()) {
-            order  = orderModelOptional.get();
+        if (orderModelOptional.isPresent()) {
+            order = orderModelOptional.get();
             List<OrderLineModel> orderLineModels = order.getOrderLines();
-            for (OrderLineModel olm: orderLineModels) {
-                if(olm.getProductModel().getId() == productID){
-                   olm.setQuantity(olm.getQuantity() + 1);
-                   olm.setPrice(olm.getQuantity() * olm.getProductModel().getPrice());
-                   isAlreadyInBasket = true;
+            for (OrderLineModel olm : orderLineModels) {
+                if (olm.getProductModel().getId() == productID) {
+                    olm.setQuantity(olm.getQuantity() + 1);
+                    olm.setPrice(olm.getQuantity() * olm.getProductModel().getPrice());
+                    isAlreadyInBasket = true;
                 }
             }
-            if(!isAlreadyInBasket){
+            if (!isAlreadyInBasket) {
                 OrderLineModel orderLineModel = new OrderLineModel();
                 orderLineModel.setQuantity(1);
                 orderLineModel.setProductModel(productRepository.findById(productID).orElse(null));
@@ -58,10 +59,10 @@ public class OrderService {
                 order.setTotal(totalPrice(order.getOrderLines()));
                 orderRepository.save(order);
             }
+            order.setDeliveryAddress(userModel.getAddressModel());
             order.setTotal(totalPrice(order.getOrderLines()));
             orderRepository.save(order);
-        }
-        else{
+        } else {
             order = new OrderModel();
             order.setStatus(Status.HOLD);
             order.setUserName(email);
@@ -70,17 +71,18 @@ public class OrderService {
             orderLineModel.setProductModel(productRepository.findById(productID).orElse(null));
             orderLineModel.setPrice(orderLineModel.getQuantity() * orderLineModel.getProductModel().getPrice());
             order.getOrderLines().add(orderLineModel);
+            order.setDeliveryAddress(userModel.getAddressModel());
             order.setTotal(totalPrice(order.getOrderLines()));
             orderRepository.save(order);
 
         }
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         OrderModel order = orderRepository.findById(id).orElse(null);
         UserModel user = order.getCustomer();
-               user.getOrders().removeIf(a->a.getId().equals(id));
-               userRepository.save(user);
+        user.getOrders().removeIf(a -> a.getId().equals(id));
+        userRepository.save(user);
         orderRepository.deleteById(id);
     }
 
@@ -109,7 +111,31 @@ public class OrderService {
             orderDTO.setOrderLines(orderLinesDTO);
         }
         return orderDTO;
-    }
+
+//        OrderDTO orderDTO = new OrderDTO();
+//        if (order.isPresent()) {
+//            orderDTO.setId(order.get().getId());
+//            orderDTO.setTotal(order.get().getTotal());
+//
+//            List<OrderLineDTO> orderLinesDTO = new ArrayList<>();
+//            for (OrderLineModel ol : order.get().getOrderLines()) {
+//                OrderLineDTO old = new OrderLineDTO();
+//                old.setId(ol.getId());
+//                old.setPrice(ol.getPrice());
+//                old.setQuantity(ol.getQuantity());
+//
+//                ProductDTO productDto = new ProductDTO();
+//                productDto.setId(ol.getProductModel().getId());
+//                productDto.setName(ol.getProductModel().getName());
+//                productDto.setDescription(ol.getProductModel().getDescription());
+//                productDto.setPrice(ol.getProductModel().getPrice());
+//                old.setProductDTO(productDto);
+//                orderLinesDTO.add(old);
+//            }
+//            orderDTO.setOrderLines(orderLinesDTO);
+//        }
+//        return orderDTO;
+}
 
 
     public List<OrderDTO> findAll(){
