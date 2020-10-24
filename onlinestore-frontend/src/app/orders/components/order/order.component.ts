@@ -81,6 +81,7 @@ export class OrderComponent implements OnInit {
   updateQuantity(olID: number) {
     console.log(this.selectedValue);
     this.orderService.update(this.currentUser.email, olID, this.selectedValue).subscribe(data => {
+      this.order = data;
       this.router.navigate(['/view-cart']);
     });
   }

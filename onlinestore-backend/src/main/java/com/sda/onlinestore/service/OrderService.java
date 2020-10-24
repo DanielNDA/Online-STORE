@@ -143,7 +143,7 @@ public class OrderService {
     }
 
     public OrderDTO update(String username, Long orderLineID, int quantity){
-        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserName(username);
+        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserNameAndStatus(username,Status.HOLD);
         if(orderModelOptional.isPresent()) {
             OrderModel order = orderModelOptional.get();
 

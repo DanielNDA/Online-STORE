@@ -36,7 +36,7 @@ public class OrderController {
         orderService.deleteById(id);
     }
 
-    @PutMapping("/update-order/{username}/{orderLineID}/{quantity}")
+    @GetMapping("/update-order/{username}/{orderLineID}/{quantity}")
     public void update(@PathVariable(name = "username") String username, @PathVariable(name = "orderLineID") Long orderLineID, @PathVariable(name = "quantity") int quantity) {
         orderService.update(username, orderLineID, quantity);
     }
