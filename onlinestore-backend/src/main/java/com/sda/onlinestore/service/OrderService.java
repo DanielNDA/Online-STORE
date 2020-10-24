@@ -35,7 +35,7 @@ public class OrderService {
     private OrderLineRepository orderLineRepository;
 
     public void addToCart(String email, Long productID) {
-        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserName(email);
+        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserNameAndStatus(email,Status.HOLD);
         UserModel userModel = userRepository.findUserModelByEmail(email).orElse(null);
         OrderModel order;
 
@@ -76,6 +76,7 @@ public class OrderService {
             orderRepository.save(order);
 
         }
+
     }
 
     public void deleteById(Long id) {
@@ -209,9 +210,10 @@ public class OrderService {
     }
 
     public OrderDTO findByUsername(String username) {
-        Optional<OrderModel> order = orderRepository.findOrderModelByUserName(username);
-           return convert(order.get());
-    }
+        Optional<OrderModel> order = orderRepository.findOrderModelByUserNameAndStatus(username,Status.HOLD);
+
+            return convert(order.get());
+           }
 
     public OrderDTO convert(OrderModel order){
         OrderDTO orderDTO = new OrderDTO();

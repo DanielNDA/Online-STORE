@@ -91,6 +91,6 @@ export class OrderComponent implements OnInit {
       this.order = data;
       this.getOrderLines();
     });
-  };
+  }
 
 }
