@@ -117,7 +117,7 @@
           <div class="card-body">
             <div class="m-sm-4">
               <form (ngSubmit)="onSubmit()" #userForm="ngForm">
-                <div class="form-group d-inline-block" style="padding-right: 10px">
+                <div class="form-group d-inline-block" style="padding-right: 15px">
                   <label>First name</label>
                   <input class="form-control form-control-md" type="text" name="firstName" id="firstName" [(ngModel)]="user.firstName"
                          placeholder="Enter your first name">
@@ -127,23 +127,24 @@
                   <input class="form-control form-control-md" type="text" name="lastName" id="lastName" [(ngModel)]="user.lastName"
                          placeholder="Enter your last name">
                 </div>
-                <div class="form-group d-lg-inline-block" style="padding-right: 10px">
+                <div class="form-group " style="padding-right: 10px">
                   <label>Email</label>
                   <input class="form-control form-control-md" type="email" name="email" id="email" [(ngModel)]="user.email"
                          placeholder="Enter your email">
                 </div>
-                <div class="form-group d-lg-inline-block">
+                <div class="form-group" style="padding-right: 10px">
                   <label>Password</label>
                   <input class="form-control form-control-md" type="password" name="password" id="password" [(ngModel)]="user.password"
-                         placeholder="Enter your password">
+                         placeholder="Enter your password"  (keypress)="isPasswordsFirstLetterUpperCase()">
                 </div>
-                <div class="form-group d-lg-inline-block">
+                <div [hidden]="isUpperCase"  class="alert alert-danger">Password must start with capital letter</div>
+                <div class="form-group " style="padding-right: 10px">
                   <label>Channel</label>
                   <input class="form-control form-control-md" type="email" name="channel" id="channel" [(ngModel)]="user.channel"
                          placeholder="Enter your channel">
                 </div>
                 <hr>
-                <div class="form-group d-lg-inline-block" style="padding-right: 10px">
+                <div class="form-group d-lg-inline-block" style="padding-right: 15px">
                   <label>Country</label>
                   <input class="form-control form-control-md" type="text" name="country" id="country"
                          [(ngModel)]="user.addressDTO.country" placeholder="Enter your country">
@@ -153,7 +154,7 @@
                   <input class="form-control form-control-md" type="text" name="city" id="city" [(ngModel)]="user.addressDTO.city"
                          placeholder="Enter your city">
                 </div>
-                <div class="form-group d-lg-inline-block" style="padding-right: 10px">
+                <div class="form-group d-lg-inline-block" style="padding-right: 15px">
                   <label>Street</label>
                   <input class="form-control form-control-md" type="text" name="street" id="street"
                          [(ngModel)]="user.addressDTO.street" placeholder="Enter your street">
