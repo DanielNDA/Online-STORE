@@ -1,7 +1,5 @@
 package com.sda.onlinestore.persistence.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 
 @Entity
@@ -28,12 +26,12 @@ public class ProductModel {
     @OneToOne(mappedBy = "productModel")
     private OrderLineModel orderLine;
 
+    @OneToOne(mappedBy = "product")
+    private ImageProductModel image;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private CategoryModel categoryModel;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JsonIgnoreProperties("product")
-    private ImageProductModel image;
 
     public String getName() {
         return name;
