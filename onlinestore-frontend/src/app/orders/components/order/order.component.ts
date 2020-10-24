@@ -45,6 +45,7 @@ export class OrderComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   getOrderLines() {
+    console.log(this.currentUser.email);
     this.orderService.getByUsername(this.currentUser.email).subscribe(data => {
       this.order = data;
       if (this.order.total < 80) {

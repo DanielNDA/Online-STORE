@@ -58,8 +58,8 @@ export class OrderService {
   }
 
   // tslint:disable-next-line:typedef
-  public getByUsername(username: string): Observable<any> {
-    return this.http.get(`${'http://localhost:8080/find-by-username'}/${username}`);
+  public getByUsername(email: string): Observable<any> {
+    return this.http.get<Order>('http://localhost:8080/find-by-username/' + email);
   }
 
   // tslint:disable-next-line:typedef
