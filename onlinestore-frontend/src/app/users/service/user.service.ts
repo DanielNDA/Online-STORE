@@ -51,7 +51,7 @@ export class UserService {
 
   public upload(image: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
-    formData.append('image', image);
+    formData.append('images', image);
     const req = new HttpRequest('POST', this.imageUrl, formData, {
       reportProgress: true,
       responseType: 'json'
@@ -64,6 +64,6 @@ export class UserService {
   }
 
   getUserImage(id: number): Observable<any> {
-    return this.http.get(`http://localhost:8080/images/${id}`);
+    return this.http.get(`http://localhost:8080/image/${id}`);
   }
 }

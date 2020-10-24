@@ -78,12 +78,12 @@ public class UserController {
         return userService.findByEmail(email);
     }
 
-    @RequestMapping(value = "/images", method = RequestMethod.GET)
-    public ResponseEntity<List<ResponseFile>> getListFiles() {
-        List<ResponseFile> files = imageServiceUser.getImages().map(dbFile -> {
+    @GetMapping("/image/{id}")
+    public ResponseEntity<List<ResponseFile>> getImage(@PathVariable(name = "id") Long id) {
+        List<ResponseFile> files = imageServiceUser.getUserImage(id).map(dbFile -> {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
-                    .path("/image/")
+                    .path("/images/")
                     .path(dbFile.getId())
                     .toUriString();
             return new ResponseFile(
@@ -96,23 +96,6 @@ public class UserController {
     }
 
     @GetMapping("/images/{id}")
-    public ResponseEntity<List<ResponseFile>> getImage(@PathVariable(name = "id") Long id) {
-        List<ResponseFile> files = imageServiceUser.getUserImage(id).map(dbFile -> {
-            String fileDownloadUri = ServletUriComponentsBuilder
-                    .fromCurrentContextPath()
-                    .path("/image/")
-                    .path(dbFile.getId())
-                    .toUriString();
-            return new ResponseFile(
-                    dbFile.getName(),
-                    fileDownloadUri,
-                    dbFile.getType(),
-                    dbFile.getData().length);
-        }).collect(Collectors.toList());
-        return ResponseEntity.status(HttpStatus.OK).body(files);
-    }
-
-    @GetMapping("/image/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
         ImageModelUser image = imageServiceUser.getPhoto(id);
         return ResponseEntity.ok()
@@ -121,7 +104,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/image")
+    @PostMapping("/images")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("image") MultipartFile image) {
         String message;
         try {
