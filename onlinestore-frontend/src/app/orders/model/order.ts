@@ -6,5 +6,5 @@ export class Order {
   total: number;
   dateOfOrder: Date;
   status: string;
-  orderLines: OrderLine[];
+  orderLines: OrderLine[] = [];
 }

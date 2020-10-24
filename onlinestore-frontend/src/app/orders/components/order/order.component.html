@@ -1,23 +1,24 @@
-<div class="container bootstrap snippets bootdey">
+<div class="container bootstrap snippets bootdey" >
   <div class="col-md-10 col-sm-9 content">
     <div class="row">
       <div class="col-md-13">
-        <ol class="breadcrumb">
-          <li><a href="#">Home </a></li>
+        <ol class="breadcrumb" >
+          <li><a >Home </a></li>
           <li class="active"> /Cart</li>
         </ol>
       </div>
     </div>
-    <div class="row">
+    <div class="row"  style="background: whitesmoke" >
       <div class="col-md-12">
         <div class="panel panel-info panel-shadow">
-          <div class="panel-heading">
+          <div class="panel-heading ">
             <h3>
-              <img class="img-circle img-thumbnail" src="https://bootdey.com/img/Content/user_3.jpg">
+              <img *ngIf="currentUser.image | async as image" [src]="image[0].url" height="150px" alt="Admin" class="rounded-circle" width="150px">
+
               {{currentUser.lastName}} {{currentUser.firstName}}
             </h3>
           </div>
-          <div class="panel-body" *ngIf="order.orderLines.length >0">
+          <div class="panel-body" style="background: whitesmoke" *ngIf="order.orderLines.length >0">
             <div class="table-responsive">
               <table class="table">
                 <thead>
@@ -31,7 +32,8 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let orderline of order.orderLines">
-                  <td><img src="https://via.placeholder.com/400x200/FFB6C1/000000" class="img-cart"></td>
+                  <td><img *ngIf="orderline.productDTO.thumbnail | async as thumbnail"
+                           [src]="thumbnail[0].url"  class="img-cart"></td>
                   <td><strong>{{orderline.productDTO.name}}</strong><p>{{orderline.productDTO.productType}}</p></td>
                   <td>
                     <input type="number" value="1" min="1"  id="inputlg" [(ngModel)]="orderline.quantity"
@@ -60,12 +62,12 @@
           </div>
 
         </div>
-        <a routerLink="/products" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>
-        <a routerLink="/view-order" class="btn btn-primary pull-right">Next<span class="glyphicon glyphicon-chevron-right"></span></a>
+        <a routerLink="/products" class="btn btn-outline-dark"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>
+        <a class="btn btn-outline-dark pull-right" (click)="checkout()">Checkout<span class="glyphicon glyphicon-chevron-right"></span></a>
       </div>
       <div class="cart-page-content" *ngIf="order.orderLines.length == 0">
         <h4>Your cart is empty.</h4>
-        <a routerLink="/">Go shopping</a>
+        <a routerLink="/products">Go shopping</a>
       </div>
     </div>
   </div>

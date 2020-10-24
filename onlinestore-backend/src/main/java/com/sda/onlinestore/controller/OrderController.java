@@ -51,9 +51,9 @@ public class OrderController {
         return orderService.checkout(id);
     }
 
-    @GetMapping("/orders/shopping-cart/{id}")
-    public OrderDTO getOrderLines(@PathVariable(name = "id") Long id) {
-        OrderDTO orderDTO = orderService.findById(id);
+    @GetMapping("/orders/shopping-cart/{email}")
+    public OrderDTO getOrderLines(@PathVariable(name = "email") String email) {
+        OrderDTO orderDTO = orderService.findByUsername(email);
         return orderDTO;
     }
 }
