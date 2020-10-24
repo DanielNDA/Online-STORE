@@ -54,4 +54,9 @@ export class NavbarComponent implements OnInit {
   goToProfilePage(id: number) {
     this.router.navigate(['view-profile', id]);
   }
+
+  // tslint:disable-next-line:typedef
+  goToShoppingCart() {
+    this.router.navigate(['view-cart']);
+  }
 }
