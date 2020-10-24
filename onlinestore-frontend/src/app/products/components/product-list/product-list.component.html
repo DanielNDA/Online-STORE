@@ -24,7 +24,7 @@
        <b> {{product.price}}</b> RON</div>
       <hr>
       <p>
-        <button class="btn btn-outline-dark rounded-circle"><i class="fa fa-heart-o"></i></button>
+        <button (click)="addToCart(product.id)" class="btn btn-outline-dark rounded-circle"><i class="fa fa-heart-o"></i></button>
       </p>
     </div>
   </div>
