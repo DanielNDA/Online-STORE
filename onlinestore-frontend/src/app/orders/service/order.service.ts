@@ -49,12 +49,12 @@ export class OrderService {
   }
 
   public checkout(id: number): Observable<any>{
-    return this.http.get(`${this.updateURL}/${id}`);
+    return this.http.get(`${this.checkoutURL}/${id}`);
   }
 
   // tslint:disable-next-line:typedef
-  public getById(id: number): Observable<any> {
-    return this.http.get(`${this.URL}/${id}`);
+  public getById(id: number): Observable<Order> {
+    return this.http.get<Order>(`${this.URL}/${id}`);
   }
 
   // tslint:disable-next-line:typedef

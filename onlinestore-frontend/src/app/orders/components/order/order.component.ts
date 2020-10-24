@@ -34,22 +34,11 @@ export class OrderComponent implements OnInit {
     this.currentUser.email = '';
     this.order = new Order();
     this.shippingCost = 15;
+    this.order.dateOfOrder = new Date();
   }
 
   ngOnInit(): void {
-    // this.authService.isLoggedIn.subscribe(data => {
-    //   this.isLoggedIn = data;
-    //   this.currentUser = new User();
-    //   if (this.isLoggedIn) {
-    //     this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
-    //     for (const user of this.users) {
-    //       if (this.currentUser.id === user.id) {
-    //         this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
-    //       }
-    //     }
-    //   }
-    // });
-    this.userService.findAll().subscribe(data => {
+      this.userService.findAll().subscribe(data => {
       this.users = data;
       this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
       this.getOrderLines();
@@ -84,12 +73,8 @@ export class OrderComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  checkout() {
-    this.id = this.route.snapshot.params.id;
-    this.orderService.checkout(this.id).subscribe(data => {
-
-      this.router.navigate(['/products']);
-    });
+  checkout(id: number) {
+      this.router.navigate(['/order-details', id]);
   }
 
   // tslint:disable-next-line:typedef
