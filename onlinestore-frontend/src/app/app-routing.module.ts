@@ -26,6 +26,7 @@ import {RolePrivilegesComponent} from './security/roles/components/role-privileg
 import {RoleUsersComponent} from './security/roles/components/role-users/role-users.component';
 import {ProductsCategoryComponent} from './products/components/products-category/products-category.component';
 import {OrderAddComponent} from './orders/components/order-add/order-add.component';
+import {OrderUsersComponent} from './orders/components/order-users/order-users.component';
 
 
 const routes: Routes = [
@@ -54,7 +55,8 @@ const routes: Routes = [
   {path: 'role-privileges/:id', component: RolePrivilegesComponent, canActivate: [AuthGuardService]},
   {path: 'role-users/:id', component: RoleUsersComponent, canActivate: [AuthGuardService]},
   {path: 'products-category/:id', component: ProductsCategoryComponent, canActivate: [AuthGuardService]},
-  {path: 'order-details/:id', component: OrderAddComponent, canActivate: [AuthGuardService]}
+  {path: 'order-details/:id', component: OrderAddComponent, canActivate: [AuthGuardService]},
+  {path: 'order-history', component: OrderUsersComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

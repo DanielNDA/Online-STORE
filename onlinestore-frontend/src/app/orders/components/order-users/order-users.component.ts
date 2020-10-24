@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Order} from '../../model/order';
+import {OrderService} from '../../service/order.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../../../users/service/auth.service';
+import {UserService} from '../../../users/service/user.service';
+import {ProductService} from '../../../products/components/service/product.service';
 
 @Component({
   selector: 'app-order-users',
@@ -6,10 +12,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-users.component.css']
 })
 export class OrderUsersComponent implements OnInit {
+  orders: Order[];
 
-  constructor() { }
+  constructor(private orderService: OrderService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private authService: AuthService,
+              private userService: UserService,
+              private productService: ProductService) {
+  }
 
   ngOnInit(): void {
+    this.orderService.findAll().subscribe(data => {
+      this.orders = data;
+    });
   }
 
 }

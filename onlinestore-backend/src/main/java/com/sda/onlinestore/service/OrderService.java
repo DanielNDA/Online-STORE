@@ -88,53 +88,7 @@ public class OrderService {
 
     public OrderDTO findById(Long id) {
         Optional<OrderModel> order = orderRepository.findById(id);
-        OrderDTO orderDTO = new OrderDTO();
-        if (order.isPresent()) {
-            orderDTO.setId(order.get().getId());
-            orderDTO.setTotal(order.get().getTotal());
-
-            List<OrderLineDTO> orderLinesDTO = new ArrayList<>();
-            for (OrderLineModel ol : order.get().getOrderLines()) {
-                OrderLineDTO old = new OrderLineDTO();
-                old.setId(ol.getId());
-                old.setPrice(ol.getPrice());
-                old.setQuantity(ol.getQuantity());
-
-                ProductDTO productDto = new ProductDTO();
-                productDto.setId(ol.getProductModel().getId());
-                productDto.setName(ol.getProductModel().getName());
-                productDto.setDescription(ol.getProductModel().getDescription());
-                productDto.setPrice(ol.getProductModel().getPrice());
-                old.setProductDTO(productDto);
-                orderLinesDTO.add(old);
-            }
-            orderDTO.setOrderLines(orderLinesDTO);
-        }
-        return orderDTO;
-
-//        OrderDTO orderDTO = new OrderDTO();
-//        if (order.isPresent()) {
-//            orderDTO.setId(order.get().getId());
-//            orderDTO.setTotal(order.get().getTotal());
-//
-//            List<OrderLineDTO> orderLinesDTO = new ArrayList<>();
-//            for (OrderLineModel ol : order.get().getOrderLines()) {
-//                OrderLineDTO old = new OrderLineDTO();
-//                old.setId(ol.getId());
-//                old.setPrice(ol.getPrice());
-//                old.setQuantity(ol.getQuantity());
-//
-//                ProductDTO productDto = new ProductDTO();
-//                productDto.setId(ol.getProductModel().getId());
-//                productDto.setName(ol.getProductModel().getName());
-//                productDto.setDescription(ol.getProductModel().getDescription());
-//                productDto.setPrice(ol.getProductModel().getPrice());
-//                old.setProductDTO(productDto);
-//                orderLinesDTO.add(old);
-//            }
-//            orderDTO.setOrderLines(orderLinesDTO);
-//        }
-//        return orderDTO;
+        return convert(order.get());
 }
 
 
@@ -256,28 +210,30 @@ public class OrderService {
 
     public OrderDTO findByUsername(String username) {
         Optional<OrderModel> order = orderRepository.findOrderModelByUserName(username);
+           return convert(order.get());
+    }
+
+    public OrderDTO convert(OrderModel order){
         OrderDTO orderDTO = new OrderDTO();
-        if (order.isPresent()) {
-            orderDTO.setId(order.get().getId());
-            orderDTO.setTotal(order.get().getTotal());
+        orderDTO.setId(order.getId());
+        orderDTO.setTotal(order.getTotal());
+        List<OrderLineDTO> orderLinesDTO = new ArrayList<>();
+        for (OrderLineModel ol : order.getOrderLines()) {
+            OrderLineDTO old = new OrderLineDTO();
+            old.setId(ol.getId());
+            old.setPrice(ol.getPrice());
+            old.setQuantity(ol.getQuantity());
 
-            List<OrderLineDTO> orderLinesDTO = new ArrayList<>();
-            for (OrderLineModel ol : order.get().getOrderLines()) {
-                OrderLineDTO old = new OrderLineDTO();
-                old.setId(ol.getId());
-                old.setPrice(ol.getPrice());
-                old.setQuantity(ol.getQuantity());
-
-                ProductDTO productDto = new ProductDTO();
-                productDto.setId(ol.getProductModel().getId());
-                productDto.setName(ol.getProductModel().getName());
-                productDto.setDescription(ol.getProductModel().getDescription());
-                productDto.setPrice(ol.getProductModel().getPrice());
-                old.setProductDTO(productDto);
-                orderLinesDTO.add(old);
-            }
-            orderDTO.setOrderLines(orderLinesDTO);
+            ProductDTO productDto = new ProductDTO();
+            productDto.setId(ol.getProductModel().getId());
+            productDto.setName(ol.getProductModel().getName());
+            productDto.setPrice(ol.getProductModel().getPrice());
+            old.setProductDTO(productDto);
+            orderLinesDTO.add(old);
         }
-        return orderDTO;
+        orderDTO.setOrderLines(orderLinesDTO);
+        orderDTO.setStatus(order.getStatus().name());
+
+        return  orderDTO;
     }
 }
