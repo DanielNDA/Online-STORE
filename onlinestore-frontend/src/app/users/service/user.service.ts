@@ -17,7 +17,7 @@ export class UserService {
     this.usersUrl = 'http://localhost:8080/users';
     this.userUrl = 'http://localhost:8080/user';
     this.registerUrl = 'http://localhost:8080/register';
-    this.imageUrl = 'http://localhost:8080/image';
+    this.imageUrl = 'http://localhost:8080/images';
   }
 
   public findAll(): Observable<User[]> {
@@ -49,9 +49,9 @@ export class UserService {
     return this.http.get(`${this.usersUrl}/${id}`);
   }
 
-  public upload(url: File): Observable<HttpEvent<any>> {
+  public upload(image: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
-    formData.append('image', url);
+    formData.append('image', image);
     const req = new HttpRequest('POST', this.imageUrl, formData, {
       reportProgress: true,
       responseType: 'json'
@@ -64,6 +64,6 @@ export class UserService {
   }
 
   getUserImage(id: number): Observable<any> {
-    return this.http.get(`http://localhost:8080/url/${id}`);
+    return this.http.get(`http://localhost:8080/images/${id}`);
   }
 }

@@ -18,6 +18,7 @@ export class UserViewComponent implements OnInit {
   closeResult = '';
   isLoggedIn = false;
   image: Observable<any>;
+  users: User[] = [];
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -29,23 +30,32 @@ export class UserViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCurrentUser();
-  }
-
-  // tslint:disable-next-line:typedef
-  getCurrentUser() {
-    this.authService.isLoggedIn.subscribe(data => {
-      this.isLoggedIn = data;
-      this.currentUser = new User();
-      if (this.isLoggedIn) {
-        this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
-        this.currentUser.url = this.userService.getUserImage(this.currentUser.id);
-        if (this.currentUser === null) {
-          this.currentUser = new User();
+    this.userService.findAll().subscribe(data => {
+      this.users = data;
+      this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
+      for (const user of this.users) {
+        if (this.currentUser.id === user.id) {
+          this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
         }
       }
     });
   }
+
+  // tslint:disable-next-line:typedef
+  // getCurrentUser() {
+  // this.authService.isLoggedIn.subscribe(data => {
+  //   this.isLoggedIn = data;
+  //   this.currentUser = new User();
+  //   if (this.isLoggedIn) {
+  //     this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
+  //     this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
+  //     console.log(this.currentUser.image);
+  //     if (this.currentUser === null) {
+  //       this.currentUser = new User();
+  //     }
+  //   }
+  // });
+  // }
 
   // tslint:disable-next-line:typedef
   deleteProfile(id: number) {

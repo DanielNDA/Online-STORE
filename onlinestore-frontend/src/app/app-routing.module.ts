@@ -13,6 +13,7 @@ import {CategoryEditComponent} from './categories/components/category-edit/categ
 import {CategoryListComponent} from './categories/components/category-list/category-list.component';
 import {LoginComponent} from './users/components/login/login.component';
 import {AuthGuardService} from './users/service/auth-guard.service';
+import {AdminPanelComponent} from './admin/admin-panel/admin-panel.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'product-edit', component: ProductEditComponent, canActivate: [AuthGuardService]},
   {path: 'product-view', component: ProductViewComponent, canActivate: [AuthGuardService]},
   {path: 'view-profile/:id', component: UserViewComponent, canActivate: [AuthGuardService]},
+  {path: 'administrator-panel', component: AdminPanelComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

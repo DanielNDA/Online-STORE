@@ -35,6 +35,7 @@ import {PrivilegeListComponent} from './security/privileges/components/privilege
 import {HttpInterceptorService} from './users/service/http-interceptor.service';
 import {PrivilegeEditComponent} from './security/privileges/components/privilege-edit/privilege-edit.component';
 import {PrivilegeFormComponent} from './security/privileges/components/privilege-form/privilege-form.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {PrivilegeFormComponent} from './security/privileges/components/privilege
     RoleUsersComponent,
     PrivilegeEditComponent,
     PrivilegeFormComponent,
-    PrivilegeListComponent
+    PrivilegeListComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,

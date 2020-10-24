@@ -78,7 +78,24 @@ public class UserController {
         return userService.findByEmail(email);
     }
 
-    @GetMapping("/url/{id}")
+    @RequestMapping(value = "/images", method = RequestMethod.GET)
+    public ResponseEntity<List<ResponseFile>> getListFiles() {
+        List<ResponseFile> files = imageServiceUser.getImages().map(dbFile -> {
+            String fileDownloadUri = ServletUriComponentsBuilder
+                    .fromCurrentContextPath()
+                    .path("/image/")
+                    .path(dbFile.getId())
+                    .toUriString();
+            return new ResponseFile(
+                    dbFile.getName(),
+                    fileDownloadUri,
+                    dbFile.getType(),
+                    dbFile.getData().length);
+        }).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(files);
+    }
+
+    @GetMapping("/images/{id}")
     public ResponseEntity<List<ResponseFile>> getImage(@PathVariable(name = "id") Long id) {
         List<ResponseFile> files = imageServiceUser.getUserImage(id).map(dbFile -> {
             String fileDownloadUri = ServletUriComponentsBuilder
