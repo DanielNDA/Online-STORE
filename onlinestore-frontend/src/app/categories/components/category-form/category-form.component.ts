@@ -35,6 +35,6 @@ export class CategoryFormComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   goToCategoryList() {
-    this.router.navigate(['']);
+    this.router.navigate(['category-list']);
   }
 }
