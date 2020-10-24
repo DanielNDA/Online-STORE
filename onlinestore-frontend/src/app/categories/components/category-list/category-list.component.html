@@ -27,26 +27,42 @@
 <!--<br>-->
 <!--<br>-->
 <!--<br>-->
-
-<div class="container pb-5 mb-sm-2" *ngFor="let parent of parents">
-  <div class="row no-gutters">
-    <div class="col-lg-3 col-sm-4 col-6 category-card border border-collapse">
-      <div class="card border-0">
-        <div class="card-body pb-2">
-          <a routerLink="">{{parent.name}}</a>
-          <div *ngFor="let subCategory of parent.subCategories" class="list-group list-group-flush font-size-sm"><a
-            class="list-group-item list-group-item-action"
-            href="#">{{subCategory.name}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                 class="feather feather-chevron-right ml-1" style="width: .875rem; height: .875rem;">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </a>
+<div class="container" style="padding: 20px">
+  <div class="input-group col-3">
+    <input type="text" [(ngModel)]="searchValue" class="form-control">
+    <div class="input-group-append">
+      <button type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+    </div>
+  </div>
+  <div class="container pb-5 mb-sm-2" *ngFor="let parent of parents | filter: searchValue">
+    <div class="row no-gutters">
+      <div class="col-lg-3 col-sm-4 col-6 category-card">
+        <div class="card border-0">
+          <div class="card-body pb-2">
+            <a (click)="goToProductByCategory(parent.id)">{{parent.name}}</a>
+            <div *ngFor="let subCategory of parent.subCategories" class="list-group list-group-flush font-size-sm">
+              <a class="list-group-item list-group-item-action" (click)="goToProductByCategory(subCategory.id)">{{subCategory.name}}
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="feather feather-chevron-right ml-1" style="width: .875rem; height: .875rem;">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

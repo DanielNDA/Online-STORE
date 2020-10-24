@@ -117,47 +117,48 @@
           <div class="card-body">
             <div class="m-sm-4">
               <form (ngSubmit)="onSubmit()" #userForm="ngForm">
-                <div class="form-group">
+                <div class="form-group d-inline-block" style="padding-right: 10px">
                   <label>First name</label>
                   <input class="form-control form-control-md" type="text" name="firstName" id="firstName" [(ngModel)]="user.firstName"
                          placeholder="Enter your first name">
                 </div>
-                <div class="form-group">
+                <div class="form-group d-xl-inline-block">
                   <label>Last name</label>
                   <input class="form-control form-control-md" type="text" name="lastName" id="lastName" [(ngModel)]="user.lastName"
                          placeholder="Enter your last name">
                 </div>
-                <div class="form-group">
+                <div class="form-group d-lg-inline-block" style="padding-right: 10px">
                   <label>Email</label>
                   <input class="form-control form-control-md" type="email" name="email" id="email" [(ngModel)]="user.email"
                          placeholder="Enter your email">
                 </div>
-                <div class="form-group">
+                <div class="form-group d-lg-inline-block">
                   <label>Password</label>
                   <input class="form-control form-control-md" type="password" name="password" id="password" [(ngModel)]="user.password"
                          placeholder="Enter your password">
                 </div>
-                <div class="form-group">
+                <div class="form-group d-lg-inline-block">
                   <label>Channel</label>
                   <input class="form-control form-control-md" type="email" name="channel" id="channel" [(ngModel)]="user.channel"
-                         placeholder="Enter your preferred channel">
+                         placeholder="Enter your channel">
                 </div>
-                <div class="form-group">
+                <hr>
+                <div class="form-group d-lg-inline-block" style="padding-right: 10px">
                   <label>Country</label>
                   <input class="form-control form-control-md" type="text" name="country" id="country"
                          [(ngModel)]="user.addressDTO.country" placeholder="Enter your country">
                 </div>
-                <div class="form-group">
+                <div class="form-group d-lg-inline-block">
                   <label>City</label>
                   <input class="form-control form-control-md" type="text" name="city" id="city" [(ngModel)]="user.addressDTO.city"
                          placeholder="Enter your city">
                 </div>
-                <div class="form-group">
+                <div class="form-group d-lg-inline-block" style="padding-right: 10px">
                   <label>Street</label>
                   <input class="form-control form-control-md" type="text" name="street" id="street"
                          [(ngModel)]="user.addressDTO.street" placeholder="Enter your street">
                 </div>
-                <div class="form-group">
+                <div class="form-group d-lg-inline-block">
                   <label>Zip code</label>
                   <input class="form-control form-control-md" type="text" name="zipcode" id="zipcode"
                          [(ngModel)]="user.addressDTO.zipCode" placeholder="Enter your zip code">
@@ -179,6 +180,7 @@
                   <input type="file" name="myfile" (change)="selectFile($event)"/>
                 </div>
                 <div class="alert alert-light" role="alert">{{ message }}</div>
+                <hr>
                 <div class="btn-group text-center mt-3">
                   <a (click)="goToLogin()"
                      class="btn btn-secondary mx-1">Back
