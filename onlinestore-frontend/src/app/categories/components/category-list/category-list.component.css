@@ -12,14 +12,9 @@
 
 body{
   margin-top:20px;
-  padding: 15px;
-}
-img, figure {
-  max-width: 100%;
-  height: auto;
-  vertical-align: middle;
 }
 
 .no-gutters {
-  padding: 20px;
+  padding-top: 20px;
 }
+
