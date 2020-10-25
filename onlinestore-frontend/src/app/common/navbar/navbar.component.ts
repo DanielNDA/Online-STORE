@@ -72,4 +72,9 @@ export class NavbarComponent implements OnInit {
   goToEditProfile(id: number) {
     this.router.navigate(['profile-edit', id]);
   }
+
+  // tslint:disable-next-line:typedef
+  hasPrivilege(privilege: string) {
+    return this.authService.hasPrivilege(privilege);
+  }
 }

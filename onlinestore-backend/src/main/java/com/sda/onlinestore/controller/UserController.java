@@ -35,10 +35,11 @@ public class UserController {
     private ImageServiceUser imageServiceUser;
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody UserDTO user){
+    public ResponseEntity register(@RequestBody UserDTO user) {
         userService.save(user);
         return new ResponseEntity(HttpStatus.OK);
     }
+
     @GetMapping(path = "/basicauth")
     public AuthenticationBean basicauth() {
         return new AuthenticationBean("You are authenticated");
@@ -47,8 +48,8 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     public void deleteById(@PathVariable(name = "id") Long id) {
         List<RoleModel> roleList = roleRepository.findAll();
-        for(RoleModel role : roleList){
-            role.getUserList().removeIf(a->a.getId() == id);
+        for (RoleModel role : roleList) {
+            role.getUserList().removeIf(a -> a.getId() == id);
         }
         roleRepository.saveAll(roleList);
 
@@ -72,10 +73,11 @@ public class UserController {
 
     @GetMapping("/user/{email}")
     public UserDTO findByEmail(@PathVariable(name = "email") String email) {
-        //        for (RoleDTO role : user.getRoleDTOList()) {
-//            role.getPrivilegeDTOList().size();
-//        }
-        return userService.findByEmail(email);
+        UserDTO user = userService.findByEmail(email);
+        for (RoleDTO role : user.getRoleDTOList()) {
+            role.getPrivilegeDTOList().size();
+        }
+        return user;
     }
 
     @GetMapping("/image/{id}")

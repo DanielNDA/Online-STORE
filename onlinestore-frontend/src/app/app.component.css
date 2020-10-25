@@ -14,3 +14,13 @@ div#transbox {
   border-radius: 25px;
   opacity: 1.0;
 }
+
+#footer {
+  position: static;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #92badd;
+  color: black;
+  text-align: center;
+}

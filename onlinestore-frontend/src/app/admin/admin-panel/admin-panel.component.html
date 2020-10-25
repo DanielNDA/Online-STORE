@@ -1,23 +1,26 @@
-<div class="container">
-  <button routerLink="/category-add" type="button" class="block rounded-pill">Add Category</button>
-</div>
-<div class="container">
-  <button routerLink="/product-add" type="button" class="block rounded-pill">Add Product</button>
-</div>
-<div class="container">
-  <button routerLink="/manufacturer-add" type="button" class="block rounded-pill">Add Manufacturer</button>
-</div>
-<div class="container">
-  <button routerLink="/add-role" type="button" class="block  rounded-pill">Add Role</button>
-</div>
-<div class="container">
-  <button routerLink="/add-privilege" type="button" class="block rounded-pill">Add Privilege</button>
-</div>
-<div class="container">
-  <button routerLink="/role" type="button" class="block rounded-pill">Role List</button>
-</div>
-<div class="container">
-  <button routerLink="/privilege" type="button" class="block rounded-pill">Privilege List</button>
+<div *ngIf="hasPrivilege('/administrator-panel')">
+  <div class="container">
+    <button routerLink="/category-add" type="button" class="block rounded-pill">Add Category</button>
+  </div>
+  <div class="container">
+    <button routerLink="/product-add" type="button" class="block rounded-pill">Add Product</button>
+  </div>
+  <div class="container">
+    <button routerLink="/manufacturer-add" type="button" class="block rounded-pill">Add Manufacturer</button>
+  </div>
+  <div class="container">
+    <button routerLink="/add-role" type="button" class="block  rounded-pill">Add Role</button>
+  </div>
+  <div class="container">
+    <button routerLink="/add-privilege" type="button" class="block rounded-pill">Add Privilege</button>
+  </div>
+  <div class="container">
+    <button routerLink="/role" type="button" class="block rounded-pill">Role List</button>
+  </div>
+  <div class="container">
+    <button routerLink="/privilege" type="button" class="block rounded-pill">Privilege List</button>
+  </div>
 </div>
 
+<div></div>
 
