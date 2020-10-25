@@ -29,10 +29,14 @@ export class OrderService {
     return this.http.get<Order[]>(this.URL);
   }
 
-  public findOrders(username: string): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.URL}/${username}`);
+  public findOrders(email: string): Observable<Order[]> {
+    return this.http.get<Order[]>('http://localhost:8080/order-history/' + email);
   }
 
+  // tslint:disable-next-line:typedef
+  public getByUsername(email: string): Observable<Order> {
+    return this.http.get<Order>('http://localhost:8080/orders/shopping-cart/' + email);
+  }
   // tslint:disable-next-line:typedef
   public addToCart(email: string, productId: number){
     return  this.http.get<Order>(this.cartURL + '/' + email + '/' + productId);
@@ -61,11 +65,6 @@ export class OrderService {
   // tslint:disable-next-line:typedef
   public getById(id: number): Observable<Order> {
     return this.http.get<Order>(`${this.URL}/${id}`);
-  }
-
-  // tslint:disable-next-line:typedef
-  public getByUsername(email: string): Observable<Order> {
-    return this.http.get<Order>('http://localhost:8080/orders/shopping-cart/' + email);
   }
 
   // tslint:disable-next-line:typedef
