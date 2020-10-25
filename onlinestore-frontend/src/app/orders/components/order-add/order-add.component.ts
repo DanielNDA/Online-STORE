@@ -33,13 +33,10 @@ export class OrderAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.order = new Order();
     this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
-    this.order = new Order();
     this.id = this.route.snapshot.params.id;
     this.orderService.getById(this.id).subscribe(data => {
       this.order = data;
-
       this.dateTime.setDate(this.time);
     });
   }
