@@ -47,12 +47,6 @@ public class UserController {
 
     @DeleteMapping("/users/{id}")
     public void deleteById(@PathVariable(name = "id") Long id) {
-//        List<RoleModel> roleList = roleRepository.findAll();
-//        for (RoleModel role : roleList) {
-//            role.getUserList().removeIf(a -> a.getId() == id);
-//        }
-//        roleRepository.saveAll(roleList);
-
         userService.deleteById(id);
     }
 

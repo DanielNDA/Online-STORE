@@ -1,8 +1,6 @@
 package com.sda.onlinestore.persistence.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class RoleModel {
@@ -12,18 +10,6 @@ public class RoleModel {
     private long id;
 
     private String name;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<PrivilegeModel> privilegeList = new ArrayList<>();
-
-    public List<PrivilegeModel> getPrivilegeList() {
-        return privilegeList;
-    }
-
-    public void setPrivilegeList(List<PrivilegeModel> privilegeList) {
-        this.privilegeList = privilegeList;
-    }
-
 
     public long getId() {
         return id;

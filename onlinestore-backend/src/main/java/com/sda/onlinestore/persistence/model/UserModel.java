@@ -34,7 +34,7 @@ public class UserModel {
 
     private String channel;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private RoleModel role;
 
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
