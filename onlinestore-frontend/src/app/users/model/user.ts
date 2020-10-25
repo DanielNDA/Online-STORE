@@ -1,5 +1,6 @@
 import {Address} from '../../addresses/model/address';
 import {Observable} from 'rxjs';
+import {Role} from './role';
 
 export class User {
   id: number;
@@ -11,4 +12,5 @@ export class User {
   newPassword: string;
   addressDTO: Address;
   image: Observable<any>;
+  roleDTO: Role;
 }

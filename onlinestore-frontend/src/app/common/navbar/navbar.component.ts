@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   isMenuCollapsed = true;
   isLoggedIn = false;
   currentUser: User;
+  boolean: boolean;
 
 
   constructor(private authService: AuthService,
@@ -71,5 +72,11 @@ export class NavbarComponent implements OnInit {
   // tslint:disable-next-line:typedef
   goToEditProfile(id: number) {
     this.router.navigate(['profile-edit', id]);
+  }
+
+  // tslint:disable-next-line:typedef
+  hasRole(role: string) {
+    this.boolean = this.authService.hasRole(role);
+    return this.boolean;
   }
 }

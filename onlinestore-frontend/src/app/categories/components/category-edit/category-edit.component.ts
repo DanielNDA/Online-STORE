@@ -39,11 +39,20 @@ export class CategoryEditComponent implements OnInit {
   onSubmit() {
     this.categoryService.update(this.category).subscribe(data => {
       this.goToCategoryList();
+    }, error => {
+      console.clear();
+      if (error.error.error === 'Forbidden') {
+        this.router.navigate(['products']);
+      }
     });
   }
 
   // tslint:disable-next-line:typedef
   goToCategoryList() {
     this.router.navigate(['category-list']);
+  }
+
+  hasRole(role: string) {
+
   }
 }

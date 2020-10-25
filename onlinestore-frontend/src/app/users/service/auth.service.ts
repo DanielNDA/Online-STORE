@@ -80,4 +80,14 @@ export class AuthService {
     }
     return user;
   }
+
+  hasRole(role: string): boolean {
+    const user = JSON.parse(sessionStorage.getItem(this.USER_DATA_SESSION_ATTRIBUTE_NAME));
+    if (user && user.roleDTO) {
+      if (user.roleDTO.name === role) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

@@ -14,7 +14,7 @@
       <li class="nav-item">
         <a routerLink="/category-list" class="nav-link text-dark"><img src="/assets/list.svg" width="20" height="25" class="d-inline-block align-content-center" alt=""> Categories</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="hasRole('ADMIN')">
         <a routerLink="/administrator-panel" class="nav-link text-dark"><img src="/assets/admin.svg" width="20" height="25" class="d-inline-block align-content-center" alt=""> Administrator</a>
       </li>
 

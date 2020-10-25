@@ -37,10 +37,6 @@ export class RegisterComponent implements OnInit {
   onSubmit(): any {
     this.userService.save(this.user).subscribe(data => {
       this.upload();
-      setTimeout(() => {
-          this.goToLogin();
-        },
-        3000);
     });
   }
 
@@ -65,11 +61,13 @@ export class RegisterComponent implements OnInit {
           this.message = event.body.message;
           const a = event.body.id;
         }
+        this.goToLogin();
       },
       err => {
         this.progress = 0;
         this.message = 'Could not upload the file!';
         this.currentFile = undefined;
+        this.goToLogin();
       });
 
     this.selectedFiles = undefined;

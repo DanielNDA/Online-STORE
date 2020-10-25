@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../users/service/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin-panel',
@@ -8,9 +9,22 @@ import {AuthService} from '../../users/service/auth.service';
 })
 export class AdminPanelComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  boolean: boolean;
+
+  constructor(private authService: AuthService,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
+  }
+
+  // tslint:disable-next-line:typedef
+  hasRole(role: string) {
+    this.boolean = this.authService.hasRole(role);
+    if (!this.boolean) {
+      this.router.navigate(['products']);
+    }
+    return this.boolean;
   }
 
 }
