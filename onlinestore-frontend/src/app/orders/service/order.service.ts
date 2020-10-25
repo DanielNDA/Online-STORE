@@ -27,6 +27,10 @@ export class OrderService {
     return this.http.get<Order[]>(this.URL);
   }
 
+  public findOrders(username: string): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.URL}/${username}`);
+  }
+
   // tslint:disable-next-line:typedef
   public addToCart(email: string, productId: number){
     return  this.http.get<Order>(this.cartURL + '/' + email + '/' + productId);

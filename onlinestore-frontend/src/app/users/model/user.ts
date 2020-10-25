@@ -10,7 +10,7 @@ export class User {
   lastName: string;
   password: string;
   newPassword: string;
-  addressDTO: Address;
+  addressDTO: Address = new Address();
   image: Observable<any>;
   roleDTO: Role;
 }

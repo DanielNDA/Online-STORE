@@ -46,6 +46,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         if(user != null && user.getEmail().equals("a@a.ro") && user.getPassword().equals("admin")){
             return true;
         }
+
         if(user != null && user.getPassword().equals(Hasher.encode(password))){
             return true;
         } else {
