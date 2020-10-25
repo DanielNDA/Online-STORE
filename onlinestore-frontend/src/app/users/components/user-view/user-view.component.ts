@@ -42,11 +42,11 @@ export class UserViewComponent implements OnInit {
       for (const user of this.users) {
         if (this.currentUser.id === user.id) {
           this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
+          this.orderService.findOrders().subscribe(data1 => {
+            this.orders = data1;
+          });
         }
       }
-    });
-    this.orderService.findOrders(this.currentUser.email).subscribe(data => {
-      this.orders = data;
     });
   }
 

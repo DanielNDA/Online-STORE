@@ -76,23 +76,20 @@
             </div>
           </div>
         </div>
-        <div class="bg-white card mb-4 order-list shadow-sm">
+        <div class="bg-white card mb-4 order-list shadow-sm" *ngFor="let order of orders">
           <div class="gold-members p-4">
             <a href="#">
             </a>
-            <div class="media" *ngFor="let order of orders">
+            <div class="media">
               <div class="media-body">
-                <a href="#">
-                  <span class="float-right text-info">Delivered on {{order.dateOfOrder}} <i class="icofont-check-circled text-success"></i></span>
-                </a>
                 <h6 class="mb-2">
                   <a href="#"></a>
-                  <a href="#" class="text-black">Jimmy's Famous American Tavern</a>
+                  <a href="#" class="text-black">{{order.status}}</a>
                 </h6>
-                <p class="text-gray mb-1"><i class="icofont-location-arrow"></i> 1733 Ocean Ave, Santa Monica, CA 90401, USA
+                <p class="text-gray mb-1"><i class="icofont-location-arrow"></i>{{order.deliveryAddress.country}}
                 </p>
-                <p class="text-gray mb-3"><i class="icofont-list"></i> ORDER #25102589748 <i class="icofont-clock-time ml-2"></i> Mon, Nov 12, 6:26 PM</p>
-                <p class="text-dark">Veg Masala Roll x 5, Veg Burger x 1, Veg Penne Pasta in Red Sauce x 1
+                <p class="text-gray mb-3"><i class="icofont-list"></i>#{{order.id}} <i class="icofont-clock-time ml-2"></i></p>
+                <p class="text-dark" *ngFor="let orderline of order.orderLines"> {{orderline.productDTO.name}}- {{orderline.price}}
                 </p>
                 <hr>
                 <div class="float-right">
