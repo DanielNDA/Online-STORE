@@ -47,9 +47,6 @@ export class ProductViewComponent implements OnInit {
   getProducts() {
     this.productService.findAll().subscribe(data => {
       this.products = data;
-      for (const p of this.products) {
-        p.thumbnail = this.productService.getProductImage(p.id);
-      }
     });
   }
 
