@@ -32,11 +32,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         UserModel userModel = userRepository.findUserModelByEmail(email).orElse(null);
 
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_" + Objects.requireNonNull(userModel).getRole().getName());
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_" + (userModel != null ? userModel.getRole().getName() : null));
+        authorities.add(simpleGrantedAuthority);
 
         if (shouldAuthenticateAgainstThirdPartySystem(email, password)) {
             return new UsernamePasswordAuthenticationToken(
-                    email, password, new ArrayList<>());
+                    email, password, authorities);
         } else {
             return null;
         }
