@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Manufacturer} from '../../model/manufacturer';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ManufacturerService} from '../../service/manufacturer.service';
+import {AuthService} from "../../../users/service/auth.service";
 
 @Component({
   selector: 'app-manufacturer-add',
@@ -12,10 +13,12 @@ export class ManufacturerAddComponent implements OnInit {
 
 
   manufacturer: Manufacturer = new Manufacturer();
+  boolean: boolean;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private manufacturerService: ManufacturerService) {
+              private manufacturerService: ManufacturerService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -32,5 +35,14 @@ export class ManufacturerAddComponent implements OnInit {
   // tslint:disable-next-line:typedef
   goToManufacturerList() {
     this.router.navigate(['/manufacturer-list']);
+  }
+
+  // tslint:disable-next-line:typedef
+  hasRole(role: string) {
+    this.boolean = this.authService.hasRole(role);
+    if (!this.boolean) {
+      this.router.navigate(['products']);
+    }
+    return this.boolean;
   }
 }

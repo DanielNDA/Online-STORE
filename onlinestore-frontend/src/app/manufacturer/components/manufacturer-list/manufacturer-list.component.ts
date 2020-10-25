@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Manufacturer} from '../../model/manufacturer';
 import {ManufacturerService} from '../../service/manufacturer.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AuthService} from '../../../users/service/auth.service';
 
 @Component({
   selector: 'app-manufacturer-list',
@@ -12,17 +12,19 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class ManufacturerListComponent implements OnInit {
 
   manufacturers: Manufacturer[];
-  closeResult = '';
-  searchValue = '';
+  boolean: boolean;
+
   constructor(private manufacturerService: ManufacturerService,
               private route: ActivatedRoute,
               private router: Router,
-              private modalService: NgbModal) { }
+              private authService: AuthService) {
+  }
 
   ngOnInit(): void {
     this.manufacturers = [];
     this.getAll();
   }
+
 // tslint:disable-next-line:typedef
   getAll() {
     this.manufacturerService.findAll().subscribe(data => {
@@ -30,33 +32,25 @@ export class ManufacturerListComponent implements OnInit {
       this.manufacturers = data;
     });
   }
+
   // tslint:disable-next-line:typedef
-  add(){
+  add() {
     this.router.navigate(['addManufacturer']);
   }
+
   // tslint:disable-next-line:typedef
   delete(id: number) {
     this.manufacturerService.delete(id).subscribe(data => {
       this.getAll();
     });
   }
-  // tslint:disable-next-line:typedef
-  open(content, id) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-      this.delete(id);
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
+  // tslint:disable-next-line:typedef
+  hasRole(role: string) {
+    this.boolean = this.authService.hasRole(role);
+    if (!this.boolean) {
+      this.router.navigate(['products']);
     }
+    return this.boolean;
   }
 }
