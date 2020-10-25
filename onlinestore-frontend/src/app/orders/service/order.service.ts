@@ -29,17 +29,18 @@ export class OrderService {
     return this.http.get<Order[]>(this.URL);
   }
 
-  public findOrders(email: string): Observable<Order[]> {
-    return this.http.get<Order[]>('http://localhost:8080/order-history/' + email);
+  public findOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(this.ul);
   }
 
   // tslint:disable-next-line:typedef
-  public getByUsername(email: string): Observable<Order> {
-    return this.http.get<Order>('http://localhost:8080/orders/shopping-cart/' + email);
+  public getByUsername(): Observable<Order> {
+    return this.http.get<Order>('http://localhost:8080/orders/shopping-cart');
   }
+
   // tslint:disable-next-line:typedef
-  public addToCart(email: string, productId: number){
-    return  this.http.get<Order>(this.cartURL + '/' + email + '/' + productId);
+  public addToCart(productId: number) {
+    return this.http.get<Order>(this.cartURL + '/' + productId);
   }
 
   // tslint:disable-next-line:typedef
@@ -48,17 +49,12 @@ export class OrderService {
   }
 
   // tslint:disable-next-line:typedef
-  public update(username: string, orderLineID: number, quantity: number): Observable<Order> {
-    return this.http.get<Order>(this.updateURL + '/' + username + '/' + orderLineID + '/' + quantity);
+  public update(orderLineID: number, quantity: number): Observable<Order> {
+    return this.http.get<Order>(this.updateURL + '/' + orderLineID + '/' + quantity);
 
   }
 
-  // tslint:disable-next-line:typedef
-  public removeFromCart(username: string, orderLineID: number) {
-    return this.http.put<Order>(`${this.updateURL}/${orderLineID}`, username);
-  }
-
-  public checkout(id: number): Observable<any>{
+  public checkout(id: number): Observable<any> {
     return this.http.get(`${this.checkoutURL}/${id}`);
   }
 
