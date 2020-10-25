@@ -1,95 +1,109 @@
-<div class="container h-100">
+<div class="container h-100" style="padding-top: 20px">
   <div class="row h-100">
     <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
       <div class="d-table-cell align-middle">
         <div class="card">
           <div class="card-body">
             <div class="m-sm-4">
-    <form (ngSubmit)="onSubmit()" #productAdd="ngForm">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" [(ngModel)]="product.name"
-               class="form-control"
-               id="name"
-               name="name"
-               placeholder="Enter product name"
-               required #name="ngModel">
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" [(ngModel)]="product.description"
-               class="form-control"
-               id="description"
-               name="description"
-               placeholder="Enter product description"
-               required #description="ngModel">
-      </div>
-      <div class="form-group">
-        <label for="price">Price</label>
-        <input type="text" [(ngModel)]="product.price"
-               class="form-control"
-               id="price"
-               name="price"
-               placeholder="Enter product price"
-               required #price="ngModel">
-      </div>
-      <div class="form-group">
-        <label for="price">Category</label>
+              <form (ngSubmit)="onSubmit()" #productAdd="ngForm">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" [(ngModel)]="product.name"
+                         class="form-control form-control-md"
+                         id="name"
+                         name="name"
+                         placeholder="Enter product name"
+                         required #name="ngModel">
+                </div>
+                <div class="form-group ">
+                  <label for="description">Description</label>
+                  <input type="text" [(ngModel)]="product.description"
+                         class="form-control form-control-md"
+                         id="description"
+                         name="description"
+                         placeholder="Enter product description"
+                         required #description="ngModel">
+                </div>
+                <div class="form-group d-lg-inline-block" style="padding-right: 15px">
+                  <label for="price">Price</label>
+                  <input type="text" [(ngModel)]="product.price"
+                         class="form-control form-control-md"
+                         id="price"
+                         name="price"
+                         placeholder="Enter product price"
+                         required #price="ngModel">
+                </div>
+                <div class="form-group d-lg-inline-block">
+                  <label for="productType">Type</label>
 
-        <select type="text" [(ngModel)]="product.categoryDTO"
-                class="form-control"
-                id="category"
-                name="category"
-                placeholder="Select category"
-                required #categoryField="ngModel">
-          <option *ngFor="let c of categories" [ngValue]="c">{{c.name}}</option>
-        </select>
+                  <select type="text" [(ngModel)]="product.productType"
+                          class="form-control form-control-md"
+                          id="productType"
+                          name="productType"
+                          placeholder="Select product type"
+                          required #productTypeField="ngModel">
+                    <option [ngValue]="undefined" disabled hidden selected> Select the product type</option>
+                    <option *ngFor="let pt of productTypes" [ngValue]="pt">{{pt.valueOf()}}</option>
+                  </select>
+                </div>
+                <div class="form-group d-lg-inline-block" style="padding-right: 15px">
+                  <label for="category">Category</label>
+
+                  <select type="text" [(ngModel)]="product.categoryDTO"
+                          class="form-control form-control-md"
+                          id="category"
+                          name="category"
+                          placeholder="Select category"
+                          required #categoryField="ngModel">
+                    <option [ngValue]="undefined" disabled hidden selected> Select a category</option>
+                    <option *ngFor="let c of categories" [ngValue]="c">{{c.name}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group d-lg-inline-block">
+                  <label for="manufacturer">Manufacturer</label>
+
+                  <select type="text" [(ngModel)]="product.manufacturerDto"
+                          class="form-control form-control-md"
+                          id="manufacturer"
+                          name="manufacturer"
+                          placeholder="Select manufacturer"
+                          required #manufacturerField="ngModel">
+                    <option [ngValue]="undefined" disabled hidden selected> Select a manufacturer</option>
+                    <option *ngFor="let m of manufacturers" [ngValue]="m">{{m.name}}</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Choose your profile picture</label>
+                </div>
+                <div *ngIf="currentFile" class="progress">
+                  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                       attr.aria-valuenow="{{ progress }}"
+                       aria-valuemin="0"
+                       aria-valuemax="100"
+                       [ngStyle]="{ width: progress + '%' }">{{ progress }}%
+                  </div>
+                </div>
+
+                <div class="upload-button-wrapper">
+                  <button class="button" >Upload a photo</button>
+                  <input type="file" name="myfile" (change)="selectFile($event)"/>
+                </div>
+                <div class="alert alert-light" role="alert">{{ message }}</div>
+                <hr>
+                <div class="btn-group text-center mt-3">
+                  <a (click)="goToProductList()"
+                     class="btn btn-secondary mx-1">Back
+                  </a>
+                  <button type="submit" [disabled]="!productAdd.form.valid"
+                          class="btn btn-info">Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="form-group">
-        <label for="price">Type</label>
-
-        <select type="text" [(ngModel)]="product.productType"
-                class="form-control"
-                id="productType"
-                name="productType"
-                placeholder="Select product type"
-                required #productTypeField="ngModel">
-          <option *ngFor="let pt of productTypes" [ngValue]="pt">{{pt.valueOf()}}</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="price">Manufacturer</label>
-
-        <select type="text" [(ngModel)]="product.manufacturerDto"
-                class="form-control"
-                id="manufacturer"
-                name="manufacturer"
-                placeholder="Select manufacturer"
-                required #manufacturerField="ngModel">
-          <option *ngFor="let m of manufacturers" [ngValue]="m">{{m.name}}</option>
-        </select>
-      </div>
-
-      <div class="upload-button-wrapper">
-        <button class="button" >Upload a photo</button>
-        <input type="file" name="myfile" (change)="selectFile($event)"/>
-      </div>
-      <div class="form-group">
-
-        <a (click)="goToProductList()"
-           class="btn btn-secondary mx-1">Back
-        </a>
-        <button type="submit" [disabled]="!productAdd.form.valid"
-                class="btn btn-info">Submit
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>

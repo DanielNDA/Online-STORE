@@ -22,6 +22,7 @@ export class ProductAddComponent implements OnInit {
   categories: Category[];
   manufacturers: Manufacturer[];
   message = '';
+  progress = 0;
 
 
   constructor(private route: ActivatedRoute,
@@ -74,16 +75,19 @@ export class ProductAddComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   upload() {
+    this.progress = 0;
     this.currentFile = this.selectedFiles.item(0);
     this.productService.upload(this.currentFile).subscribe(
       event => {
         if (event.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * event.loaded / event.total);
         } else if (event instanceof HttpResponse) {
           this.message = event.body.message;
-          const  a = event.body.id;
+          const a = event.body.id;
         }
       },
       err => {
+        this.progress = 0;
         this.message = 'Could not upload the file!';
         this.currentFile = undefined;
       });

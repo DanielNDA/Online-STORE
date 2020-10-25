@@ -32,6 +32,9 @@ export class ProductsCategoryComponent implements OnInit {
   getProductByCategory(id: number) {
     this.productService.findByCategory(id).subscribe(data => {
       this.products = data;
+      for (const p of this.products) {
+        p.thumbnail = this.productService.getProductImage(p.id);
+      }
     });
   }
 

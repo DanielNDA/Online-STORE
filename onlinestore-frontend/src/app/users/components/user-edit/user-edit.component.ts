@@ -30,8 +30,6 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentUser = new User();
-    this.id = this.route.snapshot.params.id;
     this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
     this.userService.getByEmail(this.currentUser.email).subscribe(data => {
       this.currentUser = data;

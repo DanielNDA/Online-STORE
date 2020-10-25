@@ -1,68 +1,13 @@
-<!--<div class="card my-5 col">-->
-<!--  <div class="card-body col">-->
-<!--    <div class="d-inline-block">-->
-<!--      <button class="btn btn rounded-pill" routerLink="/category-add"><i class="fa fa-plus"></i></button>-->
-<!--    </div>-->
-<!--    <div ngbDropdown class="d-inline-block" *ngFor="let parent of parents">-->
-<!--      <button class="btn btn-outline text-dark" id="dropdownBasic1" ngbDropdownToggle>{{parent.name}}</button>-->
-<!--      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">-->
-<!--        <button class="button" *ngFor="let subCategory of parent.subCategories"-->
-<!--                ngbDropdownItem>{{subCategory.name}}</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<div class="container" style="padding: 20px">
-  <div class="input-group col-3">
-    <input type="text" [(ngModel)]="searchValue" class="form-control">
-    <div class="input-group-append">
-      <button type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
-    </div>
+<div class="container">
+  <div class="col-3">
+    <input type="text" [(ngModel)]="searchValue" class="input-group-text text-left" placeholder="Search for category">
   </div>
-  <div class="container pb-5 mb-sm-2" *ngFor="let parent of parents | filter: searchValue">
-    <div class="row no-gutters">
-      <div class="col-lg-3 col-sm-4 col-6 category-card">
-        <div class="card border-0">
-          <div class="card-body pb-2">
-            <a (click)="goToProductByCategory(parent.id)">{{parent.name}}</a>
-            <div *ngFor="let subCategory of parent.subCategories" class="list-group list-group-flush font-size-sm">
-              <a class="list-group-item list-group-item-action" (click)="goToProductByCategory(subCategory.id)">{{subCategory.name}}
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                   class="feather feather-chevron-right ml-1" style="width: .875rem; height: .875rem;">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </a>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="container d-lg-inline-block">
+    <div class="shape shape2" *ngFor="let parent of parents | filter: searchValue" (click)="goToProductByCategory(parent.id)" style="cursor: pointer">
+      <div class="card-header text-center id1 rounded parent">{{parent.name}}</div>
+      <div class="card-header text-center id2 rounded" *ngFor="let subCategory of parent.subCategories"
+           (click)="goToProductByCategory(subCategory.id)">{{subCategory.name}}</div>
     </div>
   </div>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+

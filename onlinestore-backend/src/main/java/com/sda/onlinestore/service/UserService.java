@@ -87,14 +87,15 @@ public class UserService {
 
             AddressModel addressModel = new AddressModel();
             AddressDTO addressDto = userDTO.getAddressDTO();
+
             addressModel.setCountry(addressDto.getCountry());
             addressModel.setCity(addressDto.getCity());
             addressModel.setStreet(addressDto.getStreet());
             addressModel.setZipCode(addressDto.getZipCode());
 
-//            if (userDTO.getNewPassword() != null && !userDTO.getNewPassword().equals("")) {
-//                userModel.setNewPassword(userDTO.getNewPassword());
-//            }
+            if (userDTO.getNewPassword() != null) {
+                userModel.setPassword(Hasher.encode(userDTO.getNewPassword()));
+            }
             userModel.setAddressModel(addressModel);
             userRepository.save(userModel);
         }
