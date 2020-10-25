@@ -14,6 +14,7 @@ export class OrderService {
   private deleteURL: string;
   private updateURL: string;
   private checkoutURL: string;
+  private ul: string;
 
   constructor(private http: HttpClient) {
     this.cartURL = 'http://localhost:8080/add-to-cart';
@@ -21,6 +22,7 @@ export class OrderService {
     this.deleteURL = 'http://localhost:8080/delete-order';
     this.updateURL = 'http://localhost:8080/update-order';
     this.checkoutURL = 'http://localhost:8080/checkout';
+    this.ul = 'http://localhost:8080/order-history';
   }
 
   public findAll(): Observable<Order[]> {
@@ -28,7 +30,7 @@ export class OrderService {
   }
 
   public findOrders(username: string): Observable<Order[]> {
-    return this.http.get<Order[]>('http://localhost:8080/order-history' + username);
+    return this.http.get<Order[]>(`${this.URL}/${username}`);
   }
 
   // tslint:disable-next-line:typedef
