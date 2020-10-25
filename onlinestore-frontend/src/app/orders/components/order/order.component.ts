@@ -23,6 +23,7 @@ export class OrderComponent implements OnInit {
   isLoggedIn = false;
   currentUser: User;
   users: User[] = [];
+  items: number;
 
   constructor(private orderService: OrderService,
               private route: ActivatedRoute,
