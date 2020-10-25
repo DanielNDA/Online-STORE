@@ -39,12 +39,13 @@ import {PrivilegeListComponent} from './security/privileges/components/privilege
 import {HttpInterceptorService} from './users/service/http-interceptor.service';
 import {PrivilegeEditComponent} from './security/privileges/components/privilege-edit/privilege-edit.component';
 import {PrivilegeFormComponent} from './security/privileges/components/privilege-form/privilege-form.component';
-import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import {AdminPanelComponent} from './admin/admin-panel/admin-panel.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ManufacturerAddComponent} from './manufacturer/components/manufacturer-add/manufacturer-add.component';
 import {ManufacturerListComponent} from './manufacturer/components/manufacturer-list/manufacturer-list.component';
-import { ProductsCategoryComponent } from './products/components/products-category/products-category.component';
+import {ProductsCategoryComponent} from './products/components/products-category/products-category.component';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     NgxPaginationModule,
     Ng2SearchPipeModule
   ],
-  providers: [OrderService, ProductService, UserService,
+  providers: [OrderService, ProductService, UserService, DatePipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,

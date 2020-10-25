@@ -34,33 +34,30 @@ export class OrderComponent implements OnInit {
     this.currentUser.email = '';
     this.order = new Order();
     this.shippingCost = 15;
-    this.order.dateOfOrder = new Date();
   }
 
   ngOnInit(): void {
-      this.userService.findAll().subscribe(data => {
+    this.order = new Order();
+    this.order.orderLines = [];
+    this.userService.findAll().subscribe(data => {
       this.users = data;
       this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
       this.getOrderLines();
-
       for (const user of this.users) {
         if (this.currentUser.id === user.id) {
           this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
         }
       }
     });
-
   }
 
   // tslint:disable-next-line:typedef
   getOrderLines() {
-    console.log(this.currentUser.email);
     this.orderService.getByUsername(this.currentUser.email).subscribe(data => {
       this.order = data;
       for (const o of this.order.orderLines) {
         o.productDTO.thumbnail = this.productService.getProductImage(o.productDTO.id);
       }
-      console.log(this.order);
       if (this.order.total < 80) {
         this.order.total = this.order.total + this.shippingCost;
       }
@@ -74,12 +71,12 @@ export class OrderComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   checkout(id: number) {
-      this.router.navigate(['/order-details', id]);
+    this.router.navigate(['/order-details', id]);
   }
 
   // tslint:disable-next-line:typedef
   updateQuantity(olID: number) {
-    console.log(this.selectedValue);
+    this.order = new Order();
     this.orderService.update(this.currentUser.email, olID, this.selectedValue).subscribe(data => {
       this.order = data;
       this.router.navigate(['/view-cart']);
@@ -87,11 +84,11 @@ export class OrderComponent implements OnInit {
   }
 
   changeQuantity = (olID, quantity) => {
-    console.log(quantity);
+    this.order = new Order();
     this.orderService.update(this.currentUser.email, olID, quantity).subscribe(data => {
       this.order = data;
       this.getOrderLines();
     });
-  }
+  };
 
 }

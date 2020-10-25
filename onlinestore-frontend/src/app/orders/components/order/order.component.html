@@ -1,24 +1,16 @@
+<br>
 <div class="container bootstrap snippets bootdey" >
   <div class="col-md-10 col-sm-9 content">
     <div class="row">
-      <div class="col-md-13">
-        <ol class="breadcrumb" >
-          <li><a >Home </a></li>
-          <li class="active"> /Cart</li>
-        </ol>
-      </div>
-    </div>
-    <div class="row"  style="background: whitesmoke" >
       <div class="col-md-12">
         <div class="panel panel-info panel-shadow">
           <div class="panel-heading ">
             <h3>
               <img *ngIf="currentUser.image | async as image" [src]="image[0].url" height="150px" alt="Admin" class="rounded-circle" width="150px">
-
               {{currentUser.lastName}} {{currentUser.firstName}}
             </h3>
           </div>
-          <div class="panel-body" style="background: whitesmoke" *ngIf="order.orderLines.length >0">
+          <div class="panel-body" *ngIf="order.orderLines.length >0">
             <div class="table-responsive">
               <table class="table">
                 <thead>
@@ -44,7 +36,9 @@
                 </tr>
 
                 <tr>
-                  <td colspan="6">&nbsp;</td>
+                  <td colspan="4">&nbsp;
+                  <hr>
+                  </td>
                 </tr>
 
                 <tr>
@@ -60,89 +54,26 @@
               </table>
             </div>
           </div>
-
         </div>
-        <a routerLink="/products" class="btn btn-outline-dark"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>
-        <a class="btn btn-outline-dark pull-right" (click)="checkout(order.id)">Checkout<span class="glyphicon glyphicon-chevron-right"></span></a>
+        <br>
+        <a *ngIf="order.orderLines.length >0" routerLink="/products" class="btn btn-outline-dark"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>
+        <a *ngIf="order.orderLines.length >0" class="btn btn-outline-dark pull-right" (click)="checkout(order.id)">Checkout<span class="glyphicon glyphicon-chevron-right"></span></a>
+
       </div>
-      <div class="cart-page-content" *ngIf="order.orderLines.length == 0">
-        <h4>Your cart is empty.</h4>
-        <a routerLink="/products">Go shopping</a>
+
+      <div class="footer" *ngIf="order.orderLines.length == 0">
+        <table width="100%">
+          <tbody><tr>
+            <td class="aligncenter content-block">Your cart is empty.</td>
+          </tr>
+          <tr>
+            <td class="aligncenter content-block" >
+              <button class="btn btn-outline-dark" routerLink="/products">Go shopping</button>
+            </td>
+          </tr>
+          </tbody></table>
       </div>
     </div>
   </div>
-
-
+  <br>
 </div>
-
-
-<!--  <div class="cart-page-header">-->
-<!--    <h1>Shopping Cart</h1>-->
-<!--  </div>-->
-<!--  <div class="cart-page-content" *ngIf="order.orderLines.length > 0">-->
-<!--  <div class="cart-page-content" >-->
-<!--    <div class="cart-item-header cart-item-row">-->
-<!--      <div class="cart-item-cell cart-item-product"><span>Product</span></div>-->
-<!--      <div class="cart-item-cell cart-item-quantity"><span>Quantity</span></div>-->
-<!--      <div class="cart-item-cell cart-item-total"><span>Total</span></div>-->
-<!--      <div class="cart-item-cell cart-item-action"><span>Action</span></div>-->
-<!--    </div>-->
-<!--    <div class="cart-item-row" *ngFor="let orderline of order.orderLines">-->
-<!--      <div class="cart-item-cell cart-item-product">-->
-<!--&lt;!&ndash;        <div class="cart-item-thumbnail" [ngStyle]="{'background-image': 'url(./assets/imgs/' + cart.productModel.thumbnail + ')'}">&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        <div class="cart-item-info">-->
-<!--          <div class="cart-item-title">{{orderline.productDTO.name}}</div>-->
-<!--          <div class="cart-item-brand">{{orderline.productDTO.description}}</div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="cart-item-cell cart-item-quantity">-->
-<!--        <quantity-control [quantity]="orderline.quantity" (onChange)="changeQuantity(orderline.id,$event)"></quantity-control>-->
-<!--      </div>-->
-
-<!--      <span class="caret"></span>-->
-<!--      <div class="cart-item-cell cart-item-total">-->
-<!--        <div class="item-price">-->
-<!--          {{orderline.price | currency :'RON ':true }}-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="cart-item-cell cart-item-action">-->
-<!--        <div class="item-remove"><i class="fa fa-times-circle-o" aria-hidden="true"></i>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="row cart-total">-->
-<!--      <div class="col-lg-offset-6">-->
-<!--        <div class="cart-total-row row">-->
-<!--          <div class="col-md-6 cart-total-label"> <small>Cart overview</small>-->
-<!--          </div>-->
-<!--          <div class="col-md-6 cart-total-value"></div>-->
-<!--        </div>-->
-<!--        <div class="cart-total-row row">-->
-<!--          <div class="col-md-6 cart-total-label">-->
-<!--            subtotal-->
-<!--          </div>-->
-<!--          <div class="col-md-6 cart-total-value">-->
-<!--            {{order.total | currency :'RON':true}}-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="cart-total-row row">-->
-<!--          <div class="col-md-6 cart-total-label">-->
-<!--            total-->
-<!--          </div>-->
-<!--          <div class="col-md-6 cart-total-value cart-total-price">-->
-<!--            {{order.total | currency :'RON':true}}-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="cart-buttons">-->
-<!--      <div class="continue-shopping"><a routerLink="/products">continue shopping</a></div>-->
-<!--      <div class="checkout"><a routerLink="/checkout" >Checkout <small>({{order.total | currency :'RON ':true}})</small></a></div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="cart-page-content" *ngIf="order.orderLines.length == 0">-->
-<!--    <h4>Your cart is empty.</h4>-->
-<!--    <a routerLink="/products">Go shopping</a>-->
-<!--  </div>-->
-<!--  </div>-->

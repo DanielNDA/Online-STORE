@@ -66,12 +66,14 @@ public class OrderService {
             order = new OrderModel();
             order.setStatus(Status.HOLD);
             order.setUserName(email);
+            order.setCustomer(userModel);
+            order.setDeliveryAddress(userModel.getAddressModel());
+            order.setUserAddress(userModel.getAddressModel());
             OrderLineModel orderLineModel = new OrderLineModel();
             orderLineModel.setQuantity(1);
             orderLineModel.setProductModel(productRepository.findById(productID).orElse(null));
             orderLineModel.setPrice(orderLineModel.getQuantity() * orderLineModel.getProductModel().getPrice());
             order.getOrderLines().add(orderLineModel);
-            order.setDeliveryAddress(userModel.getAddressModel());
             order.setTotal(totalPrice(order.getOrderLines()));
             orderRepository.save(order);
 
@@ -136,7 +138,15 @@ public class OrderService {
                 old.setProductDTO(productDto);
                 orderLinesDTO.add(old);
             }
+            AddressModel addressModel = om.getCustomer().getAddressModel();
+            AddressDTO addressDTO = new AddressDTO();
+            addressDTO.setId(addressModel.getId());
+            addressDTO.setCity(addressModel.getCity());
+            addressDTO.setStreet(addressModel.getStreet());
+            addressDTO.setZipCode(addressModel.getZipCode());
+            orderDTO.setDeliveryAddress(addressDTO);
             orderDTO.setOrderLines(orderLinesDTO);
+            orderDTO.setStatus(om.getStatus().name());
             orderDTOS.add(orderDTO);
         }
         return orderDTOS;
@@ -184,6 +194,7 @@ public class OrderService {
         OrderDTO orderDTO = new OrderDTO();
         if (order.isPresent()) {
             order.get().setStatus(Status.DELIVERED);
+            //order.get().setDateOfOrder(date.);
             orderRepository.save(order.get());
 
             orderDTO.setId(order.get().getId());
@@ -203,6 +214,13 @@ public class OrderService {
                 old.setProductDTO(productDto);
                 orderLinesDTO.add(old);
             }
+            AddressModel addressModel = order.get().getCustomer().getAddressModel();
+            AddressDTO addressDTO = new AddressDTO();
+            addressDTO.setId(addressModel.getId());
+            addressDTO.setCity(addressModel.getCity());
+            addressDTO.setStreet(addressModel.getStreet());
+            addressDTO.setZipCode(addressModel.getZipCode());
+            orderDTO.setDeliveryAddress(addressDTO);
             orderDTO.setOrderLines(orderLinesDTO);
             orderDTO.setStatus(order.get().getStatus().name());
         }
@@ -230,9 +248,17 @@ public class OrderService {
             productDto.setId(ol.getProductModel().getId());
             productDto.setName(ol.getProductModel().getName());
             productDto.setPrice(ol.getProductModel().getPrice());
+
             old.setProductDTO(productDto);
             orderLinesDTO.add(old);
         }
+        AddressModel addressModel = order.getCustomer().getAddressModel();
+        AddressDTO addressDTO = new AddressDTO();
+        addressDTO.setId(addressModel.getId());
+        addressDTO.setCity(addressModel.getCity());
+        addressDTO.setStreet(addressModel.getStreet());
+        addressDTO.setZipCode(addressModel.getZipCode());
+        orderDTO.setDeliveryAddress(addressDTO);
         orderDTO.setOrderLines(orderLinesDTO);
         orderDTO.setStatus(order.getStatus().name());
 

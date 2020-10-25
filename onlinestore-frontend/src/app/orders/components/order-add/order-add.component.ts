@@ -6,6 +6,7 @@ import {AuthService} from '../../../users/service/auth.service';
 import {UserService} from '../../../users/service/user.service';
 import {ProductService} from '../../../products/components/service/product.service';
 import {User} from '../../../users/model/user';
+import {DatePipe, formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-order-add',
@@ -16,15 +17,19 @@ export class OrderAddComponent implements OnInit {
   order: Order;
   id: number;
   currentUser: User;
+  time: number = Date.now();
+  dateTime: Date;
 
   constructor(private orderService: OrderService,
               private route: ActivatedRoute,
               private router: Router,
               private authService: AuthService,
               private userService: UserService,
-              private productService: ProductService) {
+              private productService: ProductService,
+              private datePipe: DatePipe) {
     this.order = new Order();
     this.currentUser = new User();
+    this.dateTime = new Date();
   }
 
   ngOnInit(): void {
@@ -34,6 +39,8 @@ export class OrderAddComponent implements OnInit {
     this.id = this.route.snapshot.params.id;
     this.orderService.getById(this.id).subscribe(data => {
       this.order = data;
+
+      this.dateTime.setDate(this.time);
     });
   }
 
