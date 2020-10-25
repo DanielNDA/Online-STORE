@@ -52,7 +52,7 @@ public class ProductController {
         return productService.getProducts();
     }
 
-    @PutMapping("/products/{id}")
+    @PutMapping("/products")
     public void update(@RequestBody ProductDTO productDto) {
         productService.update(productDto);
     }
