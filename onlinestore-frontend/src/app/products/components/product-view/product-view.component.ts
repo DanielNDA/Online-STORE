@@ -24,6 +24,7 @@ export class ProductViewComponent implements OnInit {
   searchValue = '';
   p = 1;
   numberOfItemsPerP = 5;
+  boolean: boolean;
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
@@ -60,5 +61,14 @@ export class ProductViewComponent implements OnInit {
   // tslint:disable-next-line:typedef
   editProduct(id: number) {
     this.router.navigate(['product-edit', id]);
+  }
+
+  // tslint:disable-next-line:typedef
+  hasRole(role: string) {
+    this.boolean = this.authService.hasRole(role);
+    if (!this.boolean) {
+      this.router.navigate(['products']);
+    }
+    return this.boolean;
   }
 }

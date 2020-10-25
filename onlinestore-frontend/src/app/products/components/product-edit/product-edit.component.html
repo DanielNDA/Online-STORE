@@ -1,4 +1,4 @@
-<div class="card my-5">
+<div  class="card my-5" *ngIf="hasRole('ADMIN')">
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #userTypeForm="ngForm">
       <div class="form-group">

@@ -4,6 +4,7 @@ import com.sda.onlinestore.persistence.dto.ManufacturerDTO;
 import com.sda.onlinestore.persistence.repository.ManufacturerRepository;
 import com.sda.onlinestore.service.ManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ManufacturerController {
     private ManufacturerRepository manufacturerRepository;
 
     @PostMapping("/manufacturer")
+    @PreAuthorize("hasRole('ADMIN')")
     public void add(@RequestBody ManufacturerDTO manufacturerDto) {
         manufacturerService.addManufacturer(manufacturerDto);
     }
@@ -35,6 +37,7 @@ public class ManufacturerController {
     }
 
     @PutMapping("/manufacturer")
+    @PreAuthorize("hasRole('ADMIN')")
     public void update(@RequestBody ManufacturerDTO manufacturerDto) {
         manufacturerService.update(manufacturerDto);
 

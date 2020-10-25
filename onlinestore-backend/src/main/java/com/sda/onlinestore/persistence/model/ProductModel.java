@@ -23,7 +23,7 @@ public class ProductModel {
     @ManyToOne(fetch = FetchType.LAZY)
     private ManufacturerModel manufacturerModel;
 
-    @OneToOne(mappedBy = "product")
+    @OneToOne(mappedBy = "product" , orphanRemoval = true)
     private ImageProductModel image;
 
     @ManyToOne(fetch = FetchType.LAZY)
