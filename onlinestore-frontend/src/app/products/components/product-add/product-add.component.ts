@@ -44,13 +44,8 @@ export class ProductAddComponent implements OnInit {
   onSubmit() {
     this.productService.save(this.product).subscribe(data => {
       this.product = data;
+      this.upload();
     });
-    this.upload();
-    setTimeout(() =>
-      {
-        this.goToProductList();
-      },
-      3000);
   }
 
 
@@ -88,11 +83,13 @@ export class ProductAddComponent implements OnInit {
           this.message = event.body.message;
           const a = event.body.id;
         }
+        this.goToProductList();
       },
       err => {
         this.progress = 0;
         this.message = 'Could not upload the file!';
         this.currentFile = undefined;
+        this.goToProductList();
       });
 
     this.selectedFiles = undefined;
