@@ -14,16 +14,11 @@ import {ProductService} from '../../../products/components/service/product.servi
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  totalPrice: number;
-  cartList: OrderLine[];
   order: Order;
   id: number;
-  selectedValue: number;
   shippingCost: number;
-  isLoggedIn = false;
   currentUser: User;
   users: User[] = [];
-  items: number;
 
   constructor(private orderService: OrderService,
               private route: ActivatedRoute,
@@ -54,7 +49,7 @@ export class OrderComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   getOrderLines() {
-    this.orderService.getByUsername(this.currentUser.email).subscribe(data => {
+    this.orderService.getByUsername().subscribe(data => {
       this.order = data;
       for (const o of this.order.orderLines) {
         o.productDTO.thumbnail = this.productService.getProductImage(o.productDTO.id);
@@ -77,11 +72,10 @@ export class OrderComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   changeQuantity(olID, quantity) {
-    this.orderService.update(this.currentUser.email, olID, quantity).subscribe(data => {
+    this.orderService.update(olID, quantity).subscribe(data => {
       this.order = data;
       this.getOrderLines();
     });
-
   }
 
 }

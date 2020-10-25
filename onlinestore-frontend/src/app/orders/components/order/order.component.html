@@ -8,17 +8,18 @@
 </nav>
 <div class="panel-heading ">
   <h3>
-    <img *ngIf="currentUser.image | async as image" [src]="image[0].url" height="150px" alt="Admin" class="rounded-circle" width="150px">
+    <img *ngIf="currentUser.image | async as image" [src]="image[0].url" height="150px" alt="Admin"
+         class="rounded-circle" width="150px">
     {{currentUser.lastName}} {{currentUser.firstName}}
   </h3>
 </div>
-<div class="container" >
+<div class="container">
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
       <div class="col-md-9">
         <div class="ibox" *ngIf="order.orderLines.length > 0">
           <div class="ibox-title">
-<!--            <span class="pull-right">(<strong></strong>) items</span>-->
+            <!--            <span class="pull-right">(<strong></strong>) items</span>-->
             <h5>Items in your cart</h5>
           </div>
           <div class="ibox-content">
@@ -33,10 +34,10 @@
                            [src]="thumbnail[0].url" height="50px" width="50px" class="text-center">
                     </div>
                   </td>
-                  <td class="desc" >
+                  <td class="desc">
 
                     <h3>
-                      <a  class="text-navy">
+                      <a class="text-navy">
                         {{ol.productDTO.name}}
                       </a>
                     </h3>
@@ -45,7 +46,8 @@
                     </dl>
                     <div class="m-t-sm">
 
-                      <a  class="text-muted" (click)="changeQuantity(ol.id,0)"><i class="fa fa-trash"></i> Remove item</a>
+                      <a class="text-muted" (click)="changeQuantity(ol.id,0)"><i class="fa fa-trash"></i> Remove
+                        item</a>
                     </div>
                   </td>
 
@@ -54,7 +56,8 @@
                     <s class="small text-muted">{{ol.productDTO.price + 4.50}} RON</s>
                   </td>
                   <td width="65">
-                    <input type="number" class="form-control" placeholder="1" id="quantity"  name="quantity" [(ngModel)]="ol.quantity"
+                    <input type="number" class="form-control" placeholder="1" id="quantity" name="quantity"
+                           [(ngModel)]="ol.quantity"
                            (change)="changeQuantity(ol.id, ol.quantity)">
                   </td>
                   <td>
@@ -67,142 +70,67 @@
               </table>
             </div>
             <div class="ibox-content">
-              <button class="btn btn-primary pull-right" (click)="checkout(order.id)"><i class="fa fa fa-shopping-cart" ></i> Checkout</button>
-              <button class="btn btn-white" routerLink="/products"><i class="fa fa-arrow-left"></i> Continue shopping</button>
+              <button class="btn btn-primary pull-right" (click)="checkout(order.id)"><i
+                class="fa fa fa-shopping-cart"></i> Checkout
+              </button>
+              <button class="btn btn-white" routerLink="/products"><i class="fa fa-arrow-left"></i> Continue shopping
+              </button>
 
             </div>
           </div>
         </div>
-        </div>
-        <div class="col-md-3" *ngIf="order.orderLines.length > 0">
-          <div class="ibox">
-            <div class="ibox-title">
-              <h5>Cart Summary</h5>
-            </div>
-            <div class="ibox-content">
+      </div>
+      <div class="col-md-3" *ngIf="order.orderLines.length > 0">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Cart Summary</h5>
+          </div>
+          <div class="ibox-content">
                     <span>
                         Taxes
                     </span>
-              <h6 class="font-bold">
-                {{shippingCost}} RON
-              </h6>
-              <span>
+            <h6 class="font-bold">
+              {{shippingCost}} RON
+            </h6>
+            <span>
                         Total
                     </span>
-              <h5 class="font-bold">
-                {{order.total}} RON
-              </h5>
+            <h5 class="font-bold">
+              {{order.total}} RON
+            </h5>
 
-              <hr>
-              <span class="text-muted small">
+            <hr>
+            <span class="text-muted small">
                         *For United States, France and Germany applicable sales tax will be applied
                     </span>
-              <div class="m-t-sm">
-                <div class="btn-group">
-                  <a (click)="checkout(order.id)" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i> Checkout</a>
-                  <a routerLink="/products" class="btn btn-white btn-sm"> Cancel</a>
-                </div>
+            <div class="m-t-sm">
+              <div class="btn-group">
+                <a (click)="checkout(order.id)" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i>
+                  Checkout</a>
+                <a routerLink="/products" class="btn btn-white btn-sm"> Cancel</a>
               </div>
             </div>
           </div>
-
-
         </div>
+
+
+      </div>
       <div class="container" *ngIf="order.orderLines.length == 0">
         <h5>Your cart is empty!</h5>
         <a routerLink="/products" class="btn btn-white btn-sm"> Go back</a>
       </div>
     </div>
     <br>
-          <div class="ibox">
-            <div class="ibox-title">
-              <h5>Support</h5>
-            </div>
-            <div class="ibox-content text-center">
-              <h3><i class="fa fa-phone"></i> +43 100 783 001</h3>
-              <span class="small">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>Support</h5>
+      </div>
+      <div class="ibox-content text-center">
+        <h3><i class="fa fa-phone"></i> +43 100 783 001</h3>
+        <span class="small">
                         Please contact with us if you have any questions. We are avalible 24h.
                     </span>
-            </div>
-          </div>
-        </div>
-
-
-<!--<div class="container bootstrap snippets bootdey" >-->
-<!--  <div class="col-md-10 col-sm-9 content">-->
-<!--    <div class="row">-->
-<!--      <div class="col-md-12">-->
-<!--        <div class="panel panel-info panel-shadow">-->
-<!--          <div class="panel-heading ">-->
-<!--            <h3>-->
-<!--              <img *ngIf="currentUser.image | async as image" [src]="image[0].url" height="150px" alt="Admin" class="rounded-circle" width="150px">-->
-<!--              {{currentUser.lastName}} {{currentUser.firstName}}-->
-<!--            </h3>-->
-<!--          </div>-->
-<!--          <div class="panel-body" *ngIf="order.orderLines.length >0">-->
-<!--            <div class="table-responsive">-->
-<!--              <table class="table">-->
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                  <th>Product</th>-->
-<!--                  <th>Description</th>-->
-<!--                  <th>Quantity</th>-->
-<!--                  <th>Price</th>-->
-<!--                  <th>Total</th>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <tbody>-->
-<!--                <tr *ngFor="let orderline of order.orderLines">-->
-<!--                  <td><img *ngIf="orderline.productDTO.thumbnail | async as thumbnail"-->
-<!--                           [src]="thumbnail[0].url"  class="img-cart"></td>-->
-<!--                  <td><strong>{{orderline.productDTO.name}}</strong><p>{{orderline.productDTO.productType}}</p></td>-->
-<!--                  <td>-->
-<!--                    <input type="number" value="1" min="1"  id="inputlg" [(ngModel)]="orderline.quantity"-->
-<!--                    (change)="changeQuantity(orderline.id, orderline.quantity)">-->
-<!--                  </td>-->
-<!--                  <td>{{orderline.productDTO.price}} RON</td>-->
-<!--                  <td>{{orderline.price}} RON</td>-->
-<!--                </tr>-->
-
-<!--                <tr>-->
-<!--                  <td colspan="4">&nbsp;-->
-<!--                  <hr>-->
-<!--                  </td>-->
-<!--                </tr>-->
-
-<!--                <tr>-->
-<!--                  <td colspan="4" class="text-right">Shipping cost</td>-->
-<!--                  <td *ngIf="order.total < 80">{{shippingCost}} RON</td>-->
-<!--                  <td *ngIf="order.total >= 80">0 RON</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td colspan="4" class="text-right"><strong>Total</strong></td>-->
-<!--                  <td >{{order.total}} RON</td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--              </table>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <br>-->
-<!--        <a *ngIf="order.orderLines.length >0" routerLink="/products" class="btn btn-outline-dark"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>-->
-<!--        <a *ngIf="order.orderLines.length >0" class="btn btn-outline-dark pull-right" (click)="checkout(order.id)">Checkout<span class="glyphicon glyphicon-chevron-right"></span></a>-->
-
-<!--      </div>-->
-
-<!--      <div class="footer" *ngIf="order.orderLines.length == 0">-->
-<!--        <table width="100%">-->
-<!--          <tbody><tr>-->
-<!--            <td class="aligncenter content-block">Your cart is empty.</td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <td class="aligncenter content-block" >-->
-<!--              <button class="btn btn-outline-dark" routerLink="/products">Go shopping</button>-->
-<!--            </td>-->
-<!--          </tr>-->
-<!--          </tbody></table>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <br>-->
-<!--</div>-->
+      </div>
+    </div>
+  </div>
+</div>
