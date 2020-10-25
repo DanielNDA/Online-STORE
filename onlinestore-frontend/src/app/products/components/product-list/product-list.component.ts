@@ -19,6 +19,7 @@ export class ProductListComponent implements OnInit {
   image: Observable<any>;
   page = 1;
   currentUser: User;
+  boolean: boolean;
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
@@ -72,5 +73,13 @@ export class ProductListComponent implements OnInit {
     this.orderService.addToCart(a, productID).subscribe(data => {
       this.getProducts();
     });
+  }
+  // tslint:disable-next-line:typedef
+  hasRole(role: string) {
+    this.boolean = this.authService.hasRole(role);
+    if (!this.boolean) {
+      this.router.navigate(['products']);
+    }
+    return this.boolean;
   }
 }
