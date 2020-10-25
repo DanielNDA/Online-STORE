@@ -16,7 +16,7 @@ public class OrderModel {
     private Long id;
     private String userName;
     private Double total;
-    @JsonFormat(pattern = "M/d/yy, h:mm a")
+//    @JsonFormat(pattern = "M/d/yy, h:mm a")
     private Date dateOfOrder;
 
     @ManyToOne(fetch = FetchType.LAZY)

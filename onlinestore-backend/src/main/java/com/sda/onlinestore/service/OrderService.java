@@ -16,7 +16,10 @@ import com.sda.onlinestore.persistence.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -170,11 +173,13 @@ public class OrderService {
                     }
                 }
             }
+            order.setUserName(username);
             order.setTotal(totalPrice(order.getOrderLines()));
             orderRepository.save(order);
 
         }
-        return findByUsername(username);
+        OrderDTO orderDTO = findByUsername(username);
+        return orderDTO;
     }
 
     public Double totalPrice(List<OrderLineModel> orderLineModels){
@@ -189,12 +194,15 @@ public class OrderService {
         update(username, orderLineID, 0);
     }
 
-    public OrderDTO checkout(Long id){
+    public OrderDTO checkout(Long id) throws ParseException {
         Optional<OrderModel> order = orderRepository.findById(id);
         OrderDTO orderDTO = new OrderDTO();
         if (order.isPresent()) {
             order.get().setStatus(Status.DELIVERED);
-            //order.get().setDateOfOrder(date.);
+            SimpleDateFormat formatter= new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            Date date = new Date(System.currentTimeMillis());
+            String s = formatter.format(date);
+            order.get().setDateOfOrder(new SimpleDateFormat("dd-MM-yyyy HH:mm").parse(s));
             orderRepository.save(order.get());
 
             orderDTO.setId(order.get().getId());
@@ -229,8 +237,9 @@ public class OrderService {
 
     public OrderDTO findByUsername(String username) {
         Optional<OrderModel> order = orderRepository.findOrderModelByUserNameAndStatus(username,Status.HOLD);
-
-            return convert(order.get());
+        OrderDTO orderDTO = convert(order.get());
+        orderDTO.setUserName(username);
+            return orderDTO;
            }
 
     public OrderDTO convert(OrderModel order){
