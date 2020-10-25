@@ -75,12 +75,12 @@ export class OrderComponent implements OnInit {
     this.router.navigate(['/order-details', id]);
   }
 
-  changeQuantity = (olID, quantity) => {
-    this.order = new Order();
+  // tslint:disable-next-line:typedef
+  changeQuantity(olID, quantity) {
     this.orderService.update(this.currentUser.email, olID, quantity).subscribe(data => {
       this.order = data;
-      this.getOrderLines();
     });
+
   }
 
 }

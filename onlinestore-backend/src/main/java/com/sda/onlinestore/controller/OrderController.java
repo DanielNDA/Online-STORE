@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -37,8 +38,8 @@ public class OrderController {
     }
 
     @GetMapping("/update-order/{username}/{orderLineID}/{quantity}")
-    public void update(@PathVariable(name = "username") String username, @PathVariable(name = "orderLineID") Long orderLineID, @PathVariable(name = "quantity") int quantity) {
-        orderService.update(username, orderLineID, quantity);
+    public OrderDTO update(@PathVariable(name = "username") String username, @PathVariable(name = "orderLineID") Long orderLineID, @PathVariable(name = "quantity") int quantity) {
+       return orderService.update(username, orderLineID, quantity);
     }
 
     @PutMapping("/update-order/{username}/{orderLineID}")
@@ -47,7 +48,7 @@ public class OrderController {
     }
 
     @GetMapping("/checkout/{id}")
-    public OrderDTO checkout(@PathVariable(name = "id") Long id) {
+    public OrderDTO checkout(@PathVariable(name = "id") Long id) throws ParseException {
         return orderService.checkout(id);
     }
 
