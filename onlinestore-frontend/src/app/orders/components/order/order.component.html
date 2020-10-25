@@ -12,11 +12,11 @@
     {{currentUser.lastName}} {{currentUser.firstName}}
   </h3>
 </div>
-<div class="container">
+<div class="container" >
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
       <div class="col-md-9">
-        <div class="ibox">
+        <div class="ibox" *ngIf="order.orderLines.length > 0">
           <div class="ibox-title">
 <!--            <span class="pull-right">(<strong></strong>) items</span>-->
             <h5>Items in your cart</h5>
@@ -74,7 +74,7 @@
           </div>
         </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3" *ngIf="order.orderLines.length > 0">
           <div class="ibox">
             <div class="ibox-title">
               <h5>Cart Summary</h5>
@@ -106,6 +106,14 @@
             </div>
           </div>
 
+
+        </div>
+      <div class="container" *ngIf="order.orderLines.length == 0">
+        <h5>Your cart is empty!</h5>
+        <a routerLink="/products" class="btn btn-white btn-sm"> Go back</a>
+      </div>
+    </div>
+    <br>
           <div class="ibox">
             <div class="ibox-title">
               <h5>Support</h5>
