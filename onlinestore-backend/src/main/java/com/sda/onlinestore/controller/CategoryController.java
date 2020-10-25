@@ -22,6 +22,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/categories/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteById(@PathVariable(name = "id") Long id) {
         categoryService.deleteById(id);
     }
@@ -47,6 +48,7 @@ public class CategoryController {
     }
 
     @PutMapping("/categories")
+    @PreAuthorize("hasRole('ADMIN')")
     public void update(@RequestBody CategoryDTO categoryDTO) {
         categoryService.update(categoryDTO);
     }

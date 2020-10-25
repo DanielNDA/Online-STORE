@@ -5,6 +5,8 @@ import {UserService} from '../../service/user.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Observable} from 'rxjs';
 import {AuthService} from '../../service/auth.service';
+import {OrderService} from '../../../orders/service/order.service';
+import {Order} from '../../../orders/model/order';
 
 @Component({
   selector: 'app-user-view',
@@ -19,17 +21,21 @@ export class UserViewComponent implements OnInit {
   isLoggedIn = false;
   image: Observable<any>;
   users: User[] = [];
+  orders: Order[];
+
 
   constructor(private authService: AuthService,
               private router: Router,
               private userService: UserService,
               private modalService: NgbModal,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private orderService: OrderService) {
     this.currentUser = new User();
     this.currentUser.email = '';
   }
 
   ngOnInit(): void {
+    this.currentUser = new User();
     this.userService.findAll().subscribe(data => {
       this.users = data;
       this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
@@ -40,22 +46,6 @@ export class UserViewComponent implements OnInit {
       }
     });
   }
-
-  // tslint:disable-next-line:typedef
-  // getCurrentUser() {
-  // this.authService.isLoggedIn.subscribe(data => {
-  //   this.isLoggedIn = data;
-  //   this.currentUser = new User();
-  //   if (this.isLoggedIn) {
-  //     this.currentUser = JSON.parse(sessionStorage.getItem(this.authService.USER_DATA_SESSION_ATTRIBUTE_NAME));
-  //     this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
-  //     console.log(this.currentUser.image);
-  //     if (this.currentUser === null) {
-  //       this.currentUser = new User();
-  //     }
-  //   }
-  // });
-  // }
 
   // tslint:disable-next-line:typedef
   deleteProfile(id: number) {

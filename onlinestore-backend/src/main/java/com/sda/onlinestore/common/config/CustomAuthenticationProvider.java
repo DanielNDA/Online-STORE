@@ -43,6 +43,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     private boolean shouldAuthenticateAgainstThirdPartySystem(String email, String password){
         UserModel user = userRepository.findUserModelByEmail(email).orElse(null);
 
+        if(user != null && user.getEmail().equals("m_glisca99@yahoo.com") && user.getPassword().equals("admin")){
+            //dupa ce ne logam ne editam profilul si schimbam parola pt a o encoda
+            return true;
+        }
+
         if(user != null && user.getPassword().equals(Hasher.encode(password))){
             return true;
         } else {
