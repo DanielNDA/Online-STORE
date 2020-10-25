@@ -1,12 +1,10 @@
 package com.sda.onlinestore.controller;
 
 import com.sda.onlinestore.common.utils.AuthenticationBean;
-import com.sda.onlinestore.persistence.dto.RoleDTO;
 import com.sda.onlinestore.persistence.dto.UserDTO;
 import com.sda.onlinestore.persistence.dto.file.ResponseFile;
 import com.sda.onlinestore.persistence.dto.file.ResponseMessage;
 import com.sda.onlinestore.persistence.model.ImageModelUser;
-import com.sda.onlinestore.persistence.model.RoleModel;
 import com.sda.onlinestore.persistence.repository.RoleRepository;
 import com.sda.onlinestore.service.ImageServiceUser;
 import com.sda.onlinestore.service.UserService;

@@ -11,9 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Component
@@ -44,6 +42,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     }
     private boolean shouldAuthenticateAgainstThirdPartySystem(String email, String password){
         UserModel user = userRepository.findUserModelByEmail(email).orElse(null);
+
         if(user != null && user.getPassword().equals(Hasher.encode(password))){
             return true;
         } else {

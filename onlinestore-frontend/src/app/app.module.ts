@@ -30,15 +30,7 @@ import {LoginComponent} from './users/components/login/login.component';
 import {UserService} from './users/service/user.service';
 import {OrderService} from './orders/service/order.service';
 import {ProductService} from './products/components/service/product.service';
-import {RoleFormComponent} from './security/roles/components/role-form/role-form.component';
-import {RoleEditComponent} from './security/roles/components/role-edit/role-edit.component';
-import {RoleListComponent} from './security/roles/components/role-list/role-list.component';
-import {RolePrivilegesComponent} from './security/roles/components/role-privileges/role-privileges.component';
-import {RoleUsersComponent} from './security/roles/components/role-users/role-users.component';
-import {PrivilegeListComponent} from './security/privileges/components/privilege-list/privilege-list.component';
 import {HttpInterceptorService} from './users/service/http-interceptor.service';
-import {PrivilegeEditComponent} from './security/privileges/components/privilege-edit/privilege-edit.component';
-import {PrivilegeFormComponent} from './security/privileges/components/privilege-form/privilege-form.component';
 import {AdminPanelComponent} from './admin/admin-panel/admin-panel.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ManufacturerAddComponent} from './manufacturer/components/manufacturer-add/manufacturer-add.component';
@@ -67,14 +59,6 @@ import {DatePipe} from '@angular/common';
     UserViewComponent,
     CategoryEditComponent,
     LoginComponent,
-    RoleFormComponent,
-    RoleEditComponent,
-    RoleListComponent,
-    RolePrivilegesComponent,
-    RoleUsersComponent,
-    PrivilegeEditComponent,
-    PrivilegeFormComponent,
-    PrivilegeListComponent,
     AdminPanelComponent,
     ManufacturerAddComponent,
     ManufacturerListComponent,

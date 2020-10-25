@@ -16,14 +16,6 @@ import {AdminPanelComponent} from './admin/admin-panel/admin-panel.component';
 import {OrderComponent} from './orders/components/order/order.component';
 import {ManufacturerAddComponent} from './manufacturer/components/manufacturer-add/manufacturer-add.component';
 import {ManufacturerListComponent} from './manufacturer/components/manufacturer-list/manufacturer-list.component';
-import {PrivilegeListComponent} from './security/privileges/components/privilege-list/privilege-list.component';
-import {PrivilegeFormComponent} from './security/privileges/components/privilege-form/privilege-form.component';
-import {PrivilegeEditComponent} from './security/privileges/components/privilege-edit/privilege-edit.component';
-import {RoleListComponent} from './security/roles/components/role-list/role-list.component';
-import {RoleFormComponent} from './security/roles/components/role-form/role-form.component';
-import {RoleEditComponent} from './security/roles/components/role-edit/role-edit.component';
-import {RolePrivilegesComponent} from './security/roles/components/role-privileges/role-privileges.component';
-import {RoleUsersComponent} from './security/roles/components/role-users/role-users.component';
 import {ProductsCategoryComponent} from './products/components/products-category/products-category.component';
 import {OrderAddComponent} from './orders/components/order-add/order-add.component';
 import {OrderUsersComponent} from './orders/components/order-users/order-users.component';
@@ -46,14 +38,6 @@ const routes: Routes = [
   {path: 'administrator-panel', component: AdminPanelComponent, canActivate: [AuthGuardService]},
   {path: 'manufacturer-add', component: ManufacturerAddComponent, canActivate: [AuthGuardService]},
   {path: 'manufacturer-list', component: ManufacturerListComponent, canActivate: [AuthGuardService]},
-  {path: 'privilege', component: PrivilegeListComponent, canActivate: [AuthGuardService]},
-  {path: 'add-privilege', component: PrivilegeFormComponent, canActivate: [AuthGuardService]},
-  {path: 'edit-privilege/:id', component: PrivilegeEditComponent, canActivate: [AuthGuardService]},
-  {path: 'role', component: RoleListComponent, canActivate: [AuthGuardService]},
-  {path: 'add-role', component: RoleFormComponent, canActivate: [AuthGuardService]},
-  {path: 'edit-role/:id', component: RoleEditComponent, canActivate: [AuthGuardService]},
-  {path: 'role-privileges/:id', component: RolePrivilegesComponent, canActivate: [AuthGuardService]},
-  {path: 'role-users/:id', component: RoleUsersComponent, canActivate: [AuthGuardService]},
   {path: 'products-category/:id', component: ProductsCategoryComponent, canActivate: [AuthGuardService]},
   {path: 'order-details/:id', component: OrderAddComponent, canActivate: [AuthGuardService]},
   {path: 'order-history', component: OrderUsersComponent, canActivate: [AuthGuardService]}

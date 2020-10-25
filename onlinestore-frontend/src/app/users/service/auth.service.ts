@@ -80,18 +80,4 @@ export class AuthService {
     }
     return user;
   }
-
-  hasPrivilege(privilege: string): boolean {
-    const user = JSON.parse(sessionStorage.getItem(this.USER_DATA_SESSION_ATTRIBUTE_NAME));
-    if (user && user.roleList) {
-      for (const role of user.roleList) {
-        for (const priv of role.privilegeList) {
-          if (priv.name === privilege) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  }
 }

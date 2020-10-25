@@ -13,9 +13,4 @@ export class AdminPanelComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // tslint:disable-next-line:typedef
-  hasPrivilege(privilege: string) {
-    return this.authService.hasPrivilege(privilege);
-  }
-
 }
