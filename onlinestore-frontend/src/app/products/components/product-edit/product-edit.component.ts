@@ -33,6 +33,6 @@ export class ProductEditComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   goToProductList() {
-    this.router.navigate(['/getProducts']);
+    this.router.navigate(['product-view']);
   }
 }
