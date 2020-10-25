@@ -79,6 +79,7 @@ export class OrderComponent implements OnInit {
   changeQuantity(olID, quantity) {
     this.orderService.update(this.currentUser.email, olID, quantity).subscribe(data => {
       this.order = data;
+      this.getOrderLines();
     });
 
   }

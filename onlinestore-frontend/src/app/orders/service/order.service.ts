@@ -28,7 +28,7 @@ export class OrderService {
   }
 
   public findOrders(username: string): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.URL}/${username}`);
+    return this.http.get<Order[]>('http://localhost:8080/order-history' + username);
   }
 
   // tslint:disable-next-line:typedef

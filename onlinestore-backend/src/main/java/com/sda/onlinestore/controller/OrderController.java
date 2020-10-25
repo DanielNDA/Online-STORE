@@ -31,8 +31,8 @@ public class OrderController {
     public List<OrderDTO> findAll() {
         return orderService.findAll();
     }
-    @GetMapping("/orders/{username}")
-    public List<OrderDTO> findAllByUsername(@PathVariable(name = "id") String username) {
+    @GetMapping("/order-history/{username}")
+    public List<OrderDTO> findAllByUsername(@PathVariable(name = "username") String username) {
         return orderService.findAllByUsername(username);
     }
 
