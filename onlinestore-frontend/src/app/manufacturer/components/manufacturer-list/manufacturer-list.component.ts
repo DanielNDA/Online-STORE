@@ -35,10 +35,6 @@ export class ManufacturerListComponent implements OnInit {
     this.router.navigate(['addManufacturer']);
   }
   // tslint:disable-next-line:typedef
-  editContinent(id: number) {
-    this.router.navigate(['editManufacturer/' + id]);
-  }
-  // tslint:disable-next-line:typedef
   delete(id: number) {
     this.manufacturerService.delete(id).subscribe(data => {
       this.getAll();
