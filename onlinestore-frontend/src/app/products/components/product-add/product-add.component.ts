@@ -7,6 +7,7 @@ import {Category} from '../../../categories/model/category';
 import {Manufacturer} from '../../../manufacturer/model/manufacturer';
 import {CategoryService} from '../../../categories/service/category.service';
 import {ManufacturerService} from '../../../manufacturer/service/manufacturer.service';
+import {AuthService} from '../../../users/service/auth.service';
 
 @Component({
   selector: 'app-product-add',
@@ -23,13 +24,15 @@ export class ProductAddComponent implements OnInit {
   manufacturers: Manufacturer[];
   message = '';
   progress = 0;
+  boolean: boolean;
 
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productService: ProductService,
               private categoryService: CategoryService,
-              private manufacturerService: ManufacturerService) {
+              private manufacturerService: ManufacturerService,
+              private authService: AuthService) {
     this.product = new Product();
     this.categories = [];
     this.manufacturers = [];
@@ -41,13 +44,8 @@ export class ProductAddComponent implements OnInit {
   onSubmit() {
     this.productService.save(this.product).subscribe(data => {
       this.product = data;
+      this.upload();
     });
-    this.upload();
-    setTimeout(() =>
-      {
-        this.goToProductList();
-      },
-      3000);
   }
 
 
@@ -85,13 +83,24 @@ export class ProductAddComponent implements OnInit {
           this.message = event.body.message;
           const a = event.body.id;
         }
+        this.goToProductList();
       },
       err => {
         this.progress = 0;
         this.message = 'Could not upload the file!';
         this.currentFile = undefined;
+        this.goToProductList();
       });
 
     this.selectedFiles = undefined;
+  }
+
+  // tslint:disable-next-line:typedef
+  hasRole(role: string) {
+    this.boolean = this.authService.hasRole(role);
+    if (!this.boolean) {
+      this.router.navigate(['products']);
+    }
+    return this.boolean;
   }
 }

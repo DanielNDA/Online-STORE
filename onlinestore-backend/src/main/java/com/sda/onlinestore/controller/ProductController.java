@@ -1,5 +1,4 @@
 package com.sda.onlinestore.controller;
-
 import com.sda.onlinestore.persistence.dto.ProductDTO;
 import com.sda.onlinestore.persistence.dto.file.ResponseFile;
 import com.sda.onlinestore.persistence.dto.file.ResponseMessage;
@@ -11,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,11 +32,13 @@ public class ProductController {
 
 
     @PostMapping("/products")
+    @PreAuthorize("hasRole('ADMIN')")
     public void save(@RequestBody ProductDTO productDto) {
         productService.addProduct(productDto);
     }
 
     @DeleteMapping("/deleteProducts/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteById(@PathVariable(name = "id") Long id) {
         productService.deleteById(id);
     }
@@ -53,6 +54,7 @@ public class ProductController {
     }
 
     @PutMapping("/products")
+    @PreAuthorize("hasRole('ADMIN')")
     public void update(@RequestBody ProductDTO productDto) {
         productService.update(productDto);
     }

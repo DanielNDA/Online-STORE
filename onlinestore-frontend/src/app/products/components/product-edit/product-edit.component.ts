@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Product} from '../model/product';
 import {ProductService} from '../service/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../../../users/service/auth.service';
 
 
 @Component({
@@ -12,10 +13,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ProductEditComponent implements OnInit {
   product: Product;
   id: number;
+  boolean: boolean;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private productService: ProductService) {
+              private productService: ProductService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -34,5 +37,14 @@ export class ProductEditComponent implements OnInit {
   // tslint:disable-next-line:typedef
   goToProductList() {
     this.router.navigate(['product-view']);
+  }
+
+  // tslint:disable-next-line:typedef
+  hasRole(role: string) {
+    this.boolean = this.authService.hasRole(role);
+    if (!this.boolean) {
+      this.router.navigate(['products']);
+    }
+    return this.boolean;
   }
 }
