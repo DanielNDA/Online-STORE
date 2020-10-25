@@ -11,16 +11,6 @@ public class RoleDTO {
 
     private List<PrivilegeDTO> privilegeDTOList = new ArrayList<>();
 
-    private List<UserDTO> userDTOList = new ArrayList<>();
-
-    public void setUserDTOList(List<UserDTO> userDTOList) {
-        this.userDTOList = userDTOList;
-    }
-
-    public List<UserDTO> getUserDTOList() {
-        return userDTOList;
-    }
-
     public void setPrivilegeDTOList(List<PrivilegeDTO> privilegeDTOList) {
         this.privilegeDTOList = privilegeDTOList;
     }

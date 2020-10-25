@@ -11,6 +11,6 @@ export class User {
   password: string;
   newPassword: string;
   addressDTO: Address;
-  roleDTOList: Role[];
+  roleDTO: Role;
   image: Observable<any>;
 }

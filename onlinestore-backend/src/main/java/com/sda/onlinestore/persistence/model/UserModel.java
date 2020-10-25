@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,8 +34,8 @@ public class UserModel {
 
     private String channel;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userList")
-    private List<RoleModel> roleList;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private RoleModel role;
 
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnoreProperties("customer")
@@ -46,12 +45,12 @@ public class UserModel {
     @JsonIgnoreProperties("user")
     private ImageModelUser image;
 
-    public List<RoleModel> getRoleList() {
-        return roleList;
+    public RoleModel getRole() {
+        return role;
     }
 
-    public void setRoleList(List<RoleModel> roleList) {
-        this.roleList = roleList;
+    public void setRole(RoleModel role) {
+        this.role = role;
     }
 
     public String getUrl() {

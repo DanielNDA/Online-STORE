@@ -2,9 +2,12 @@ package com.sda.onlinestore.service;
 
 import com.sda.onlinestore.common.utils.Hasher;
 import com.sda.onlinestore.persistence.dto.AddressDTO;
+import com.sda.onlinestore.persistence.dto.RoleDTO;
 import com.sda.onlinestore.persistence.dto.UserDTO;
 import com.sda.onlinestore.persistence.model.AddressModel;
+import com.sda.onlinestore.persistence.model.RoleModel;
 import com.sda.onlinestore.persistence.model.UserModel;
+import com.sda.onlinestore.persistence.repository.RoleRepository;
 import com.sda.onlinestore.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +22,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     public void save(UserDTO userDTO) {
         UserModel userModel = new UserModel();
         AddressDTO addressDTO = userDTO.getAddressDTO();
         AddressModel addressModel = new AddressModel();
+
+        RoleModel roleModel = new RoleModel();
+        roleModel.setName("USER");
+        roleRepository.save(roleModel);
 
         if (addressDTO != null) {
             addressModel.setId(addressDTO.getId());
@@ -37,6 +47,8 @@ public class UserService {
         userModel.setFirstName(userDTO.getFirstName());
         userModel.setLastName(userDTO.getLastName());
         userModel.setEmail(userDTO.getEmail());
+
+        userModel.setRole(roleModel);
 
         userRepository.save(userModel);
     }

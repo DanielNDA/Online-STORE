@@ -47,11 +47,11 @@ public class UserController {
 
     @DeleteMapping("/users/{id}")
     public void deleteById(@PathVariable(name = "id") Long id) {
-        List<RoleModel> roleList = roleRepository.findAll();
-        for (RoleModel role : roleList) {
-            role.getUserList().removeIf(a -> a.getId() == id);
-        }
-        roleRepository.saveAll(roleList);
+//        List<RoleModel> roleList = roleRepository.findAll();
+//        for (RoleModel role : roleList) {
+//            role.getUserList().removeIf(a -> a.getId() == id);
+//        }
+//        roleRepository.saveAll(roleList);
 
         userService.deleteById(id);
     }
@@ -74,9 +74,7 @@ public class UserController {
     @GetMapping("/user/{email}")
     public UserDTO findByEmail(@PathVariable(name = "email") String email) {
         UserDTO user = userService.findByEmail(email);
-        for (RoleDTO role : user.getRoleDTOList()) {
-            role.getPrivilegeDTOList().size();
-        }
+//        RoleDTO roleDTO = user.getRoleDTO();
         return user;
     }
 

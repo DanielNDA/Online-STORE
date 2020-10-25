@@ -16,9 +16,6 @@ public class RoleModel {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<PrivilegeModel> privilegeList = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<UserModel> userList;
-
     public List<PrivilegeModel> getPrivilegeList() {
         return privilegeList;
     }
@@ -27,13 +24,6 @@ public class RoleModel {
         this.privilegeList = privilegeList;
     }
 
-    public List<UserModel> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<UserModel> userList) {
-        this.userList = userList;
-    }
 
     public long getId() {
         return id;

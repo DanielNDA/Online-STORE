@@ -12,7 +12,7 @@ public class UserDTO {
 
     private String url;
 
-    private List<RoleDTO> roleDTOList;
+    private RoleDTO roleDTO;
 
     private String newPassword;
 
@@ -32,12 +32,12 @@ public class UserDTO {
         this.url = url;
     }
 
-    public List<RoleDTO> getRoleDTOList() {
-        return roleDTOList;
+    public void setRoleDTO(RoleDTO roleDTO) {
+        this.roleDTO = roleDTO;
     }
 
-    public void setRoleDTOList(List<RoleDTO> roleDTOList) {
-        this.roleDTOList = roleDTOList;
+    public RoleDTO getRoleDTO() {
+        return roleDTO;
     }
 
     public void setLastName(String lastName) {
