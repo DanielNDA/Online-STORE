@@ -21,7 +21,7 @@ export class UserViewComponent implements OnInit {
   isLoggedIn = false;
   image: Observable<any>;
   users: User[] = [];
-  orders: Order[];
+  orders: Order[] = [];
 
 
   constructor(private authService: AuthService,
@@ -44,6 +44,9 @@ export class UserViewComponent implements OnInit {
           this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
         }
       }
+    });
+    this.orderService.findOrders(this.currentUser.email).subscribe(data => {
+      this.orders = data;
     });
   }
 
