@@ -23,7 +23,7 @@
       <div class="col-5">
         <label>Assigned Users:</label>
         <select [(ngModel)]="selAsUsers" name="selAsUsers" id="selAsUsers" class="form-control selBox" multiple>
-          <option *ngFor="let user of role.userList" [ngValue]="user"><i class="fa-user fa"></i>{{user.email}} - {{user.firstName}} {{user.lastName}}</option>
+          <option *ngFor="let user of role.userDTOList" [ngValue]="user"><i class="fa-user fa"></i>{{user.email}} - {{user.firstName}} {{user.lastName}}</option>
         </select>
       </div>
     </div>

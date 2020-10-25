@@ -23,7 +23,7 @@
       <div class="col-5">
         <label>Assigned Privileges:</label>
         <select [(ngModel)]="selAsPrivileges" name="selAsPrivileges" id="selAsPrivileges" class="form-control" multiple>
-          <option *ngFor="let privilege of role.privilegeList" [ngValue]="privilege">{{privilege.name}}</option>
+          <option *ngFor="let privilege of role.privilegeDTOList" [ngValue]="privilege">{{privilege.name}}</option>
         </select>
       </div>
     </div>
