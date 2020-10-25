@@ -163,6 +163,15 @@ public class UserService {
                 addressDTO.setStreet(addressModel.getStreet());
                 addressDTO.setZipCode(addressModel.getZipCode());
             }
+            RoleModel roleModel = userModel.get().getRole();
+            RoleDTO roleDTO = new RoleDTO();
+
+            if(roleModel != null) {
+                roleDTO.setId(roleModel.getId());
+                roleDTO.setName(roleModel.getName());
+            }
+
+            userDTO.setRoleDTO(roleDTO);
             userDTO.setAddressDTO(addressDTO);
         }
         return userDTO;
