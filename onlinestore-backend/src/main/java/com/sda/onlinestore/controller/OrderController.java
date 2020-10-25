@@ -31,6 +31,10 @@ public class OrderController {
     public List<OrderDTO> findAll() {
         return orderService.findAll();
     }
+    @GetMapping("/orders/{username}")
+    public List<OrderDTO> findAllByUsername(@PathVariable(name = "id") String username) {
+        return orderService.findAllByUsername(username);
+    }
 
     @DeleteMapping("/delete-order/{id}")
     public void deleteById(@PathVariable(name = "id") Long id) {

@@ -38,7 +38,7 @@ public class OrderService {
     private OrderLineRepository orderLineRepository;
 
     public void addToCart(String email, Long productID) {
-        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserNameAndStatus(email,Status.HOLD);
+        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserNameAndStatus(email, Status.HOLD);
         UserModel userModel = userRepository.findUserModelByEmail(email).orElse(null);
         OrderModel order;
 
@@ -79,9 +79,7 @@ public class OrderService {
             order.getOrderLines().add(orderLineModel);
             order.setTotal(totalPrice(order.getOrderLines()));
             orderRepository.save(order);
-
         }
-
     }
 
     public void deleteById(Long id) {
@@ -95,78 +93,39 @@ public class OrderService {
     public OrderDTO findById(Long id) {
         Optional<OrderModel> order = orderRepository.findById(id);
         return convert(order.get());
-}
+    }
 
 
-    public List<OrderDTO> findAll(){
+    public List<OrderDTO> findAll() {
         List<OrderDTO> orderDTOS = new ArrayList<>();
         List<OrderModel> orderModels = orderRepository.findAll();
-        for (OrderModel om: orderModels) {
-            OrderDTO orderDTO = new OrderDTO();
-            orderDTO.setId(om.getId());
-            orderDTO.setTotal(om.getTotal());
-
-            List<OrderLineDTO> orderLinesDTO = new ArrayList<>();
-
-            for (OrderLineModel ol : om.getOrderLines()) {
-                OrderLineDTO old = new OrderLineDTO();
-                old.setId(ol.getId());
-                old.setPrice(ol.getPrice());
-                old.setQuantity(ol.getQuantity());
-
-                ProductDTO productDto = new ProductDTO();
-                ProductModel productModel = ol.getProductModel();
-
-                productDto.setId(productModel.getId());
-                productDto.setName(productModel.getName());
-                productDto.setDescription(productModel.getDescription());
-                productDto.setPrice(productModel.getPrice());
-                productDto.setProductType(productModel.getProductType().name());
-
-                CategoryDTO categoryDTO = new CategoryDTO();
-                CategoryModel categoryModel = productModel.getCategoryModel();
-
-                categoryDTO.setId(categoryModel.getId());
-                categoryDTO.setName(categoryModel.getName());
-                productDto.setCategoryDTO(categoryDTO);
-
-                ManufacturerDTO manufacturerDTO = new ManufacturerDTO();
-                ManufacturerModel manufacturerModel = productModel.getManufacturerModel();
-
-                manufacturerDTO.setId(manufacturerModel.getId());
-                manufacturerDTO.setName(manufacturerModel.getName());
-
-                productDto.setManufacturerDto(manufacturerDTO);
-                productDto.setCategoryDTO(categoryDTO);
-                old.setProductDTO(productDto);
-                orderLinesDTO.add(old);
-            }
-            AddressModel addressModel = om.getCustomer().getAddressModel();
-            AddressDTO addressDTO = new AddressDTO();
-            addressDTO.setId(addressModel.getId());
-            addressDTO.setCity(addressModel.getCity());
-            addressDTO.setStreet(addressModel.getStreet());
-            addressDTO.setZipCode(addressModel.getZipCode());
-            orderDTO.setDeliveryAddress(addressDTO);
-            orderDTO.setOrderLines(orderLinesDTO);
-            orderDTO.setStatus(om.getStatus().name());
+        for (OrderModel om : orderModels) {
+            OrderDTO orderDTO = convert(om);
             orderDTOS.add(orderDTO);
         }
         return orderDTOS;
     }
 
-    public OrderDTO update(String username, Long orderLineID, int quantity){
-        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserNameAndStatus(username,Status.HOLD);
-        if(orderModelOptional.isPresent()) {
-            OrderModel order = orderModelOptional.get();
+    public List<OrderDTO> findAllByUsername(String username) {
+        List<OrderDTO> orderDTOS = new ArrayList<>();
+        List<OrderModel> orderModels = orderRepository.findOrderModelsByUserName(username);
+        for (OrderModel om : orderModels) {
+            OrderDTO orderDTO = convert(om);
+            orderDTOS.add(orderDTO);
+        }
+        return orderDTOS;
+    }
 
-            for (OrderLineModel olm: order.getOrderLines()) {
-                if(olm.getId().equals(orderLineID)){
-                    if(quantity == 0){
+    public OrderDTO update(String username, Long orderLineID, int quantity) {
+        Optional<OrderModel> orderModelOptional = orderRepository.findOrderModelByUserNameAndStatus(username, Status.HOLD);
+        if (orderModelOptional.isPresent()) {
+            OrderModel order = orderModelOptional.get();
+            for (OrderLineModel olm : order.getOrderLines()) {
+                if (olm.getId().equals(orderLineID)) {
+                    if (quantity == 0) {
                         order.getOrderLines().remove(olm);
                         break;
-                    }
-                    else {
+                    } else {
                         olm.setQuantity(quantity);
                         olm.setPrice(olm.getQuantity() * olm.getProductModel().getPrice());
                         orderLineRepository.save(olm);
@@ -182,67 +141,38 @@ public class OrderService {
         return orderDTO;
     }
 
-    public Double totalPrice(List<OrderLineModel> orderLineModels){
+    public Double totalPrice(List<OrderLineModel> orderLineModels) {
         Double total = 0.0;
-        for (OrderLineModel olm: orderLineModels) {
+        for (OrderLineModel olm : orderLineModels) {
             total = total + olm.getProductModel().getPrice() * olm.getQuantity();
         }
         return total;
     }
 
-    public void removeOrderLine(String username, Long orderLineID){
+    public void removeOrderLine(String username, Long orderLineID) {
         update(username, orderLineID, 0);
     }
 
     public OrderDTO checkout(Long id) throws ParseException {
         Optional<OrderModel> order = orderRepository.findById(id);
-        OrderDTO orderDTO = new OrderDTO();
-        if (order.isPresent()) {
             order.get().setStatus(Status.DELIVERED);
-            SimpleDateFormat formatter= new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
             Date date = new Date(System.currentTimeMillis());
-            String s = formatter.format(date);
-            order.get().setDateOfOrder(new SimpleDateFormat("dd-MM-yyyy HH:mm").parse(s));
+            order.get().setDateOfOrder(new SimpleDateFormat("dd-MM-yyyy HH:mm").parse(formatter.format(date)));
             orderRepository.save(order.get());
+            return convert(order.get());
 
-            orderDTO.setId(order.get().getId());
-            orderDTO.setTotal(order.get().getTotal());
-
-            List<OrderLineDTO> orderLinesDTO = new ArrayList<>();
-            for (OrderLineModel ol : order.get().getOrderLines()) {
-                OrderLineDTO old = new OrderLineDTO();
-                old.setId(ol.getId());
-                old.setPrice(ol.getPrice());
-                old.setQuantity(ol.getQuantity());
-
-                ProductDTO productDto = new ProductDTO();
-                productDto.setId(ol.getProductModel().getId());
-                productDto.setName(ol.getProductModel().getName());
-                productDto.setPrice(ol.getProductModel().getPrice());
-                old.setProductDTO(productDto);
-                orderLinesDTO.add(old);
-            }
-            AddressModel addressModel = order.get().getCustomer().getAddressModel();
-            AddressDTO addressDTO = new AddressDTO();
-            addressDTO.setId(addressModel.getId());
-            addressDTO.setCity(addressModel.getCity());
-            addressDTO.setStreet(addressModel.getStreet());
-            addressDTO.setZipCode(addressModel.getZipCode());
-            orderDTO.setDeliveryAddress(addressDTO);
-            orderDTO.setOrderLines(orderLinesDTO);
-            orderDTO.setStatus(order.get().getStatus().name());
-        }
-        return orderDTO;
     }
 
     public OrderDTO findByUsername(String username) {
-        Optional<OrderModel> order = orderRepository.findOrderModelByUserNameAndStatus(username,Status.HOLD);
+        Optional<OrderModel> order = orderRepository.findOrderModelByUserNameAndStatus(username, Status.HOLD);
         OrderDTO orderDTO = convert(order.get());
         orderDTO.setUserName(username);
-            return orderDTO;
-           }
+        return orderDTO;
+    }
 
-    public OrderDTO convert(OrderModel order){
+    public OrderDTO convert(OrderModel order) {
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setId(order.getId());
         orderDTO.setTotal(order.getTotal());
@@ -271,6 +201,6 @@ public class OrderService {
         orderDTO.setOrderLines(orderLinesDTO);
         orderDTO.setStatus(order.getStatus().name());
 
-        return  orderDTO;
+        return orderDTO;
     }
 }
