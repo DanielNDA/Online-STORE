@@ -14,6 +14,10 @@ export class CategoryListComponent implements OnInit {
 
   parents: Category[] = [];
   subCategories: Category[] = [];
+  config = {
+    itemsPerPage: 4,
+    currentPage: 1
+  };
   searchValue = '';
 
   constructor(private route: ActivatedRoute,

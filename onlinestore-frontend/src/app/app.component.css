@@ -1,6 +1,6 @@
 #image {
   height: 100%;
-  background-color: #f6f6f6;
+  background-color: #555555;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -9,18 +9,18 @@
 
 div#transbox {
   margin: 30px;
-  background-color: #ffffff;
+  background-color: #555555;
   border: 1px solid grey;
   border-radius: 25px;
   opacity: 1.0;
 }
+/*#color {*/
+/*  background-color: #495057;*/
+/*}*/
 
-#footer {
-  position: static;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #92badd;
-  color: black;
-  text-align: center;
-}
+/*#footer {*/
+/*  position: inherit;*/
+/*  bottom: 0;*/
+/*  right: 0;*/
+/*  left: 0;*/
+/*}*/

@@ -1,0 +1,14 @@
+<nav class="main-nav position-fixed" *ngIf="isLoggedIn">
+  <ul class="main-nav-ul">
+    <li><a routerLink="/products"><img src="/assets/shopping-cart.svg" width="20" height="25" class="d-inline-block align-content-center" alt=""> Products</a>
+    <li><a class="disabled" href=""><img src="/assets/list.svg" width="20" height="25" class="d-inline-block align-content-center" alt=""> Categories<span class="sub-arrow"></span></a>
+      <ul>
+        <li *ngFor="let parent of parents"><a (click)="goToProductByCategory(parent.id)">{{parent.name}}</a>
+          <ul>
+              <li *ngFor="let subCategory of parent.subCategories"><a (click)="goToProductByCategory(subCategory.id)">{{subCategory.name}}</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>

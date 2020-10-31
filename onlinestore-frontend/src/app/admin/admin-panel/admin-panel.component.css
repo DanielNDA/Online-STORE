@@ -2,7 +2,7 @@
   display: block;
   width: 100%;
   border: none;
-  background-color: #4da59e;
+  background-color: #B3C7D6FF;
   padding: 14px 28px;
   font-size: 16px;
   cursor: pointer;
@@ -14,6 +14,6 @@
 }
 
 .block:hover {
-  background-color: #B3C7D6FF;
+  background-color: #7a9db8;
   color: #0d0d0d;
 }

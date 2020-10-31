@@ -19,7 +19,10 @@
 #social-em:hover {
   color: #f39c12;
 }
-#footer {
-  background-color: #B3C7D6FF;
+footer {
+  position: -webkit-sticky;
+  width: 100%;
+  height: 200px;
+  background-color: #7a9db8;
+  clear: both;
 }
-

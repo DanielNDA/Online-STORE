@@ -17,7 +17,10 @@ export class ProductListComponent implements OnInit {
 
   products: Product[];
   image: Observable<any>;
-  page = 1;
+  config = {
+    itemsPerPage: 6,
+    currentPage: 1
+  };
   currentUser: User;
   boolean: boolean;
 
@@ -68,7 +71,6 @@ export class ProductListComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   addToCart(productID: number) {
-    console.log(this.currentUser.email);
     this.orderService.addToCart(productID).subscribe(data => {
       this.getProducts();
     });
@@ -76,9 +78,6 @@ export class ProductListComponent implements OnInit {
   // tslint:disable-next-line:typedef
   hasRole(role: string) {
     this.boolean = this.authService.hasRole(role);
-    if (!this.boolean) {
-      this.router.navigate(['products']);
-    }
     return this.boolean;
   }
 }

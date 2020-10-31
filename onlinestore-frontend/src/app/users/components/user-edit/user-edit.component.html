@@ -6,7 +6,7 @@
           <div class="card-body">
             <div class="m-sm-4">
               <form (ngSubmit)="onSubmit()" #userForm="ngForm">
-                <div class="form-group d-inline-block" style="padding-right: 10px">
+                <div class="form-group d-inline-block" style="padding-right: 5px">
                   <label>First name</label>
                   <input class="form-control form-control-md" type="text" name="firstName" id="firstName" [(ngModel)]="currentUser.firstName"
                          placeholder="Enter your first name">
@@ -38,7 +38,7 @@
                          placeholder="Enter your preferred channel">
                 </div>
                 <hr>
-                <div class="form-group d-lg-inline-block" style="padding-right: 10px">
+                <div class="form-group d-lg-inline-block" style="padding-right: 5px">
                   <label>Country</label>
                   <input class="form-control form-control-md" type="text" name="country" id="country"
                          [(ngModel)]="currentUser.addressDTO.country" placeholder="Enter your country">
@@ -48,7 +48,7 @@
                   <input class="form-control form-control-md" type="text" name="city" id="city" [(ngModel)]="currentUser.addressDTO.city"
                          placeholder="Enter your city">
                 </div>
-                <div class="form-group d-lg-inline-block" style="padding-right: 10px">
+                <div class="form-group d-lg-inline-block" style="padding-right: 5px">
                   <label>Street</label>
                   <input class="form-control form-control-md" type="text" name="street" id="street"
                          [(ngModel)]="currentUser.addressDTO.street" placeholder="Enter your street">

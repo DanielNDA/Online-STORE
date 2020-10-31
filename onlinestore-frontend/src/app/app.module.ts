@@ -38,6 +38,8 @@ import {ManufacturerListComponent} from './manufacturer/components/manufacturer-
 import {ProductsCategoryComponent} from './products/components/products-category/products-category.component';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {DatePipe} from '@angular/common';
+import { SidebarComponent } from './common/sidebar/sidebar/sidebar.component';
+import {RouteReuseStrategy} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import {DatePipe} from '@angular/common';
     AdminPanelComponent,
     ManufacturerAddComponent,
     ManufacturerListComponent,
-    ProductsCategoryComponent
+    ProductsCategoryComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
