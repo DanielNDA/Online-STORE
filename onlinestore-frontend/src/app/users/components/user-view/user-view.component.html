@@ -2,13 +2,13 @@
   <div class="main-body">
     <nav aria-label="breadcrumb" class="main-breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item justify-content-center"><a routerLink="/products">Home</a></li>
-        <li class="breadcrumb-item active justify-content-center" aria-current="page">User Profile</li>
+        <li class="breadcrumb-item justify-content-center"><a style="color:black; text-decoration: none"routerLink="/products"><img src="/assets/home.svg" width="20" height="20" class="d-inline-block align-top" alt=""> Home</a></li>
+        <li class="breadcrumb-item active justify-content-center" style="cursor: default" aria-current="page">User Profile</li>
         <li (click)="open(content, currentUser.id)" class="ml-auto text-danger" style="cursor: pointer"><a>Delete Account</a></li>
 
       </ol>
     </nav>
-    <div class="row gutters-sm">
+    <div class="row gutters-sm" style="cursor: default">
       <div class="col-md-4 mb-3">
         <div class="card">
           <div class="card-body">

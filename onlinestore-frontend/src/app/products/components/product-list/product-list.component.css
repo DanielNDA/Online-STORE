@@ -28,14 +28,15 @@
 
 .custom-pagination .page-number{
   display: inline-block;
-  background: #afffe6;
+  background: #f6f6f6;
   margin: 0px 4px;
   border-radius: 25px;
 }
 
 .page-number.current{
-  background: #ffffff!important;
-  border: 2px solid #495057;
+  background: #4099FF!important;
+  border: 2px solid #555555;
+  color: white;
 }
 
 .page-number span{

@@ -3,6 +3,7 @@ import {User} from '../../users/model/user';
 import {UserService} from '../../users/service/user.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../users/service/auth.service';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-navbar',
@@ -15,11 +16,13 @@ export class NavbarComponent implements OnInit {
   isLoggedIn = false;
   currentUser: User;
   boolean: boolean;
+  closeResult = '';
 
 
   constructor(private authService: AuthService,
               private router: Router,
-              private userService: UserService) {
+              private userService: UserService,
+              private modalService: NgbModal) {
     this.currentUser = new User();
     this.currentUser.email = '';
   }
@@ -40,7 +43,6 @@ export class NavbarComponent implements OnInit {
   // tslint:disable-next-line:typedef
   logOut() {
     this.authService.logout();
-    this.router.navigate(['login']);
   }
 
   // tslint:disable-next-line:typedef
@@ -78,5 +80,28 @@ export class NavbarComponent implements OnInit {
   hasRole(role: string) {
     this.boolean = this.authService.hasRole(role);
     return this.boolean;
+  }
+
+  // tslint:disable-next-line:typedef
+  open(content, id) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      this.logOut();
+      if (result !== null) {
+        this.router.navigate(['login']);
+      }
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }

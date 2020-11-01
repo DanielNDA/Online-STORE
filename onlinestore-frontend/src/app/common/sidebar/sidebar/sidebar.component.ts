@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../../users/model/user';
 import {AuthService} from '../../../users/service/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -15,8 +15,8 @@ import {Product} from '../../../products/components/model/product';
 })
 export class SidebarComponent implements OnInit {
 
-
   isLoggedIn = false;
+  isMenuCollapsed: true;
   currentUser: User;
   boolean: boolean;
   parents: Category[] = [];
@@ -54,6 +54,7 @@ export class SidebarComponent implements OnInit {
       }
     });
   }
+
   // tslint:disable-next-line:typedef
   getCategories() {
     this.parents = [];
@@ -61,6 +62,7 @@ export class SidebarComponent implements OnInit {
       this.parents = data;
     });
   }
+
   // tslint:disable-next-line:typedef
   goToProductByCategory(id: number) {
     this.router.navigate(['products-category', id]);
