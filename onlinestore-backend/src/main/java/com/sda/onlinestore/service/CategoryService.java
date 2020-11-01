@@ -149,23 +149,35 @@ public class CategoryService {
         CategoryModel categoryModel = categoryRepository.findById(id).orElse(null);
         CategoryDTO categoryDTO = new CategoryDTO();
         CategoryDTO parent = new CategoryDTO();
-        CategoryModel parentModel = categoryModel.getCategoryModelParent();
-        parent.setId(parentModel.getId());
-        parent.setName(parentModel.getName());
+        CategoryModel parentModel = null;
+        if (categoryModel != null) {
+            parentModel = categoryModel.getCategoryModelParent();
+        }
+        if (parentModel != null) {
+            parent.setId(parentModel.getId());
+            parent.setName(parentModel.getName());
+        }
 
-        categoryDTO.setId(categoryModel.getId());
-        categoryDTO.setName(categoryModel.getName());
-        categoryDTO.setParent(parent);
+        if (categoryModel != null) {
+            categoryDTO.setId(categoryModel.getId());
+            categoryDTO.setName(categoryModel.getName());
+            categoryDTO.setParent(parent);
+        }
 
-        List<CategoryModel> subCategories = categoryModel.getSubCategories();
+        List<CategoryModel> subCategories = null;
+        if (categoryModel != null) {
+            subCategories = categoryModel.getSubCategories();
+        }
         List<CategoryDTO> subCategoriesDTO = new ArrayList<>();
 
-        for (CategoryModel subCategory : subCategories) {
-            CategoryDTO subCategoryDTO = new CategoryDTO();
+        if (subCategories != null) {
+            for (CategoryModel subCategory : subCategories) {
+                CategoryDTO subCategoryDTO = new CategoryDTO();
 
-            subCategoryDTO.setId(subCategory.getId());
-            subCategoryDTO.setName(subCategory.getName());
-            subCategoriesDTO.add(subCategoryDTO);
+                subCategoryDTO.setId(subCategory.getId());
+                subCategoryDTO.setName(subCategory.getName());
+                subCategoriesDTO.add(subCategoryDTO);
+            }
         }
         categoryDTO.setSubCategories(subCategoriesDTO);
         return categoryDTO;

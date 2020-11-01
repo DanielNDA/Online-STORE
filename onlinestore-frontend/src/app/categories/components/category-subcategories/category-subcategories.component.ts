@@ -1,47 +1,49 @@
 import {Component, OnInit} from '@angular/core';
+import {Category} from '../../model/category';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryService} from '../../service/category.service';
-import {Category} from '../../model/category';
-import {ProductService} from '../../../products/components/service/product.service';
 import {AuthService} from '../../../users/service/auth.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-category-list',
-  templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.css']
+  selector: 'app-category-subcategories',
+  templateUrl: './category-subcategories.component.html',
+  styleUrls: ['./category-subcategories.component.css']
 })
-export class CategoryListComponent implements OnInit {
+export class CategorySubcategoriesComponent implements OnInit {
 
-  parents: Category[] = [];
-  subCategories: Category[] = [];
+  categories: Category[];
+  closeResult = '';
+  parent: Category;
+  id: number;
+  searchValue = '';
   config = {
     itemsPerPage: 4,
     currentPage: 1
   };
-  searchValue = '';
   boolean: boolean;
-  closeResult = '';
+  allCategories: Category[];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private categoryService: CategoryService,
-              private productService: ProductService,
               private authService: AuthService,
               private modalService: NgbModal) {
   }
 
   // tslint:disable-next-line:typedef
-  ngOnInit(): void {
-    this.getCategories();
+  ngOnInit() {
+    this.parent = new Category();
+    this.id = this.route.snapshot.params.id;
+    this.categoryService.getById(this.id).subscribe(data => {
+      this.parent = data;
+      this.categories = this.parent.subCategories;
+    });
   }
 
   // tslint:disable-next-line:typedef
-  getCategories() {
-    this.parents = [];
-    this.categoryService.findAllParentNull().subscribe(data => {
-      this.parents = data;
-    });
+  goToCategories() {
+    this.router.navigate(['category-list']);
   }
 
   // tslint:disable-next-line:typedef
@@ -71,13 +73,11 @@ export class CategoryListComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  viewSubCategories(id: number) {
-    this.router.navigate(['subcategories-category', id]);
-  }
-
-  // tslint:disable-next-line:typedef
-  addCategory() {
-    this.router.navigate(['category-add']);
+  getCategories() {
+    this.allCategories = [];
+    this.categoryService.findAllParentNull().subscribe(data => {
+      this.allCategories = data;
+    });
   }
 
   // tslint:disable-next-line:typedef
@@ -99,4 +99,5 @@ export class CategoryListComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
 }
