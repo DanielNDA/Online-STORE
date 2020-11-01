@@ -41,8 +41,6 @@ import {DatePipe} from '@angular/common';
 import { SidebarComponent } from './common/sidebar/sidebar/sidebar.component';
 import {RouteReuseStrategy} from '@angular/router';
 import { CategorySubcategoriesComponent } from './categories/components/category-subcategories/category-subcategories.component';
-import { CartPopupComponent } from './cart/components/cart/cart-popup/cart-popup.component';
-import { CartBaseComponent } from './cart/components/cart/cart-popup/cart-base.component';
 
 @NgModule({
   declarations: [
