@@ -25,11 +25,17 @@ public class OrderController {
     public OrderDTO findById(@PathVariable(name = "id") Long id) {
         return orderService.findById(id);
     }
+    @GetMapping("/shopping-cart")
+    public OrderDTO findByUsername() {
+        String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return orderService.findByUsername(username);
+    }
 
     @GetMapping("/orders")
     public List<OrderDTO> findAll() {
         return orderService.findAll();
     }
+
     @GetMapping("/order-history")
     public List<OrderDTO> findAllByUsername() {
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
