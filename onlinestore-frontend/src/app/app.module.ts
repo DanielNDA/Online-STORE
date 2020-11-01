@@ -10,10 +10,10 @@ import {FormsModule} from '@angular/forms';
 
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpClientModule} from '@angular/common/http';
-import {OrderComponent} from './orders/components/order/order.component';
+import {CartComponent} from './cart/components/cart/cart.component';
 
-import {OrderAddComponent} from './orders/components/order-add/order-add.component';
-import {OrderUsersComponent} from './orders/components/order-users/order-users.component';
+import {CheckoutComponent} from './cart/components/checkout/checkout.component';
+import {OrderHistoryComponent} from './cart/components/order-history/order-history.component';
 import {ProductAddComponent} from './products/components/product-add/product-add.component';
 import {ProductEditComponent} from './products/components/product-edit/product-edit.component';
 import {ProductListComponent} from './products/components/product-list/product-list.component';
@@ -28,7 +28,7 @@ import {UserViewComponent} from './users/components/user-view/user-view.componen
 import {CategoryEditComponent} from './categories/components/category-edit/category-edit.component';
 import {LoginComponent} from './users/components/login/login.component';
 import {UserService} from './users/service/user.service';
-import {OrderService} from './orders/service/order.service';
+import {OrderService} from './cart/service/order.service';
 import {ProductService} from './products/components/service/product.service';
 import {HttpInterceptorService} from './users/service/http-interceptor.service';
 import {AdminPanelComponent} from './admin/admin-panel/admin-panel.component';
@@ -41,15 +41,17 @@ import {DatePipe} from '@angular/common';
 import { SidebarComponent } from './common/sidebar/sidebar/sidebar.component';
 import {RouteReuseStrategy} from '@angular/router';
 import { CategorySubcategoriesComponent } from './categories/components/category-subcategories/category-subcategories.component';
+import { CartPopupComponent } from './cart/components/cart/cart-popup/cart-popup.component';
+import { CartBaseComponent } from './cart/components/cart/cart-popup/cart-base.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserEditComponent,
     RegisterComponent,
-    OrderComponent,
-    OrderAddComponent,
-    OrderUsersComponent,
+    CartComponent,
+    CheckoutComponent,
+    OrderHistoryComponent,
     ProductAddComponent,
     ProductEditComponent,
     ProductListComponent,
@@ -67,7 +69,8 @@ import { CategorySubcategoriesComponent } from './categories/components/category
     ManufacturerListComponent,
     ProductsCategoryComponent,
     SidebarComponent,
-    CategorySubcategoriesComponent
+    CategorySubcategoriesComponent,
+    CartPopupComponent
   ],
   imports: [
     BrowserModule,

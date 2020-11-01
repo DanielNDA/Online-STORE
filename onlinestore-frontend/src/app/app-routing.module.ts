@@ -13,19 +13,19 @@ import {CategoryListComponent} from './categories/components/category-list/categ
 import {LoginComponent} from './users/components/login/login.component';
 import {AuthGuardService} from './users/service/auth-guard.service';
 import {AdminPanelComponent} from './admin/admin-panel/admin-panel.component';
-import {OrderComponent} from './orders/components/order/order.component';
+import {CartComponent} from './cart/components/cart/cart.component';
 import {ManufacturerAddComponent} from './manufacturer/components/manufacturer-add/manufacturer-add.component';
 import {ManufacturerListComponent} from './manufacturer/components/manufacturer-list/manufacturer-list.component';
 import {ProductsCategoryComponent} from './products/components/products-category/products-category.component';
-import {OrderAddComponent} from './orders/components/order-add/order-add.component';
-import {OrderUsersComponent} from './orders/components/order-users/order-users.component';
+import {CheckoutComponent} from './cart/components/checkout/checkout.component';
+import {OrderHistoryComponent} from './cart/components/order-history/order-history.component';
 import {CategorySubcategoriesComponent} from './categories/components/category-subcategories/category-subcategories.component';
 
 const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'view-cart', component: OrderComponent, canActivate: [AuthGuardService]},
+  {path: 'view-cart', component: CartComponent, canActivate: [AuthGuardService]},
   {path: 'category-add', component: CategoryFormComponent, canActivate: [AuthGuardService]},
   {path: 'category-edit/:id', component: CategoryEditComponent, canActivate: [AuthGuardService]},
   {path: 'category-list', component: CategoryListComponent, canActivate: [AuthGuardService]},
@@ -39,8 +39,8 @@ const routes: Routes = [
   {path: 'manufacturer-add', component: ManufacturerAddComponent, canActivate: [AuthGuardService]},
   {path: 'manufacturer-list', component: ManufacturerListComponent, canActivate: [AuthGuardService]},
   {path: 'products-category/:id', component: ProductsCategoryComponent, canActivate: [AuthGuardService]},
-  {path: 'order-details/:id', component: OrderAddComponent, canActivate: [AuthGuardService]},
-  {path: 'order-history', component: OrderUsersComponent, canActivate: [AuthGuardService]},
+  {path: 'order-details/:id', component: CheckoutComponent, canActivate: [AuthGuardService]},
+  {path: 'order-history', component: OrderHistoryComponent, canActivate: [AuthGuardService]},
   {path: 'subcategories-category/:id', component: CategorySubcategoriesComponent, canActivate: [AuthGuardService]}
 ];
 

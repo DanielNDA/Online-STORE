@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {User} from '../../../users/model/user';
 import {ProductService} from '../service/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {OrderService} from '../../../orders/service/order.service';
+import {OrderService} from '../../../cart/service/order.service';
 import {UserService} from '../../../users/service/user.service';
 import {AuthService} from '../../../users/service/auth.service';
 

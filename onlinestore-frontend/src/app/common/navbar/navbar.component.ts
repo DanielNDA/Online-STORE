@@ -4,6 +4,7 @@ import {UserService} from '../../users/service/user.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../users/service/auth.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {OrderService} from '../../cart/service/order.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,11 +18,14 @@ export class NavbarComponent implements OnInit {
   currentUser: User;
   boolean: boolean;
   closeResult = '';
+  public collapse: boolean = false;
+  public cart_num:number;
 
   constructor(private authService: AuthService,
               private router: Router,
               private userService: UserService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private orderService: OrderService) {
     this.currentUser = new User();
     this.currentUser.email = '';
   }
@@ -37,6 +41,10 @@ export class NavbarComponent implements OnInit {
         }
       }
     });
+    this.orderService.getByUsername()
+      .subscribe(res => {
+        this.cart_num = res.orderLines.length;
+      });
   }
 
   // tslint:disable-next-line:typedef
@@ -102,5 +110,11 @@ export class NavbarComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  toggleCartPopup = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.orderService.toggleCart();
   }
 }

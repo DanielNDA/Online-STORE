@@ -4,7 +4,7 @@ import {ActivatedRoute, ActivatedRouteSnapshot, DetachedRouteHandle, Router, Rou
 import {CategoryService} from '../../../categories/service/category.service';
 import {ProductService} from '../service/product.service';
 import {User} from '../../../users/model/user';
-import {OrderService} from '../../../orders/service/order.service';
+import {OrderService} from '../../../cart/service/order.service';
 import {AuthService} from '../../../users/service/auth.service';
 
 @Component({

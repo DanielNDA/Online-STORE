@@ -5,8 +5,8 @@ import {UserService} from '../../service/user.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Observable} from 'rxjs';
 import {AuthService} from '../../service/auth.service';
-import {OrderService} from '../../../orders/service/order.service';
-import {Order} from '../../../orders/model/order';
+import {OrderService} from '../../../cart/service/order.service';
+import {Order} from '../../../cart/model/order';
 
 @Component({
   selector: 'app-user-view',

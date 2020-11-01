@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../../users/model/user';
 import {OrderLine} from '../model/order-line';
 import {Order} from '../model/order';
@@ -15,6 +15,8 @@ export class OrderService {
   private updateURL: string;
   private checkoutURL: string;
   private ul: string;
+  public toggleCartSubject = new BehaviorSubject(false);
+
 
   constructor(private http: HttpClient) {
     this.cartURL = 'http://localhost:8080/add-to-cart';
@@ -66,5 +68,9 @@ export class OrderService {
   // tslint:disable-next-line:typedef
   public getOrderLines(id: number): Observable<OrderLine[]> {
     return this.http.get<OrderLine[]>(`${this.URL}/shopping-cart/${id}`);
+  }
+
+  toggleCart = () => {
+    this.toggleCartSubject.next(!this.toggleCartSubject.getValue());
   }
 }
