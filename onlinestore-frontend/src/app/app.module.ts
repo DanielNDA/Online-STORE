@@ -67,8 +67,7 @@ import { CategorySubcategoriesComponent } from './categories/components/category
     ManufacturerListComponent,
     ProductsCategoryComponent,
     SidebarComponent,
-    CategorySubcategoriesComponent,
-    CartPopupComponent
+    CategorySubcategoriesComponent
   ],
   imports: [
     BrowserModule,
