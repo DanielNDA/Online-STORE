@@ -18,7 +18,6 @@ export class NavbarComponent implements OnInit {
   boolean: boolean;
   closeResult = '';
 
-
   constructor(private authService: AuthService,
               private router: Router,
               private userService: UserService,

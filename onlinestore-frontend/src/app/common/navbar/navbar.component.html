@@ -23,7 +23,6 @@
         </a>
         <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
           <a ngbDropdownItem class="dropdown-item" (click)="viewProfile()" style="cursor: pointer">View Your Profile</a>
-          <a ngbDropdownItem class="dropdown-item"  (click)="editProfile()" style="cursor: pointer">Edit Your Profile</a>
           <a ngbDropdownItem class="dropdown-item"  (click)="goToShoppingCart()" style="cursor: pointer">View Your Cart</a>
         </div>
       </li>
@@ -45,7 +44,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" ngbAutofocus class="btn btn-danger" (click)="modal.close()">Log out</button>
+    <button type="button" ngbAutofocus class="btn btn-outline-info" (click)="modal.close()">Log out</button>
   </div>
 </ng-template>
 

@@ -58,6 +58,19 @@ export class UserViewComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
+  editProfile() {
+    this.userService.getByEmail(this.currentUser.email).subscribe(data => {
+      this.currentUser = data;
+      this.goToEditProfile(this.currentUser.id);
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  goToEditProfile(id: number) {
+    this.router.navigate(['profile-edit', id]);
+  }
+
+  // tslint:disable-next-line:typedef
   open(content, id) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

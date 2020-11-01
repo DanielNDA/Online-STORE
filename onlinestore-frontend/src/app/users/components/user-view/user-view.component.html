@@ -1,10 +1,11 @@
 <div class="container">
   <div class="main-body">
     <nav aria-label="breadcrumb" class="main-breadcrumb">
-      <ol class="breadcrumb">
+      <ol class="breadcrumb ">
         <li class="breadcrumb-item justify-content-center"><a style="color:black; text-decoration: none"routerLink="/products"><img src="/assets/home.svg" width="20" height="20" class="d-inline-block align-top" alt=""> Home</a></li>
-        <li class="breadcrumb-item active justify-content-center" style="cursor: default" aria-current="page">User Profile</li>
-        <li (click)="open(content, currentUser.id)" class="ml-auto text-danger" style="cursor: pointer"><a>Delete Account</a></li>
+        <li class="breadcrumb-item active justify-content-center" style="cursor: default; color: black" aria-current="page">User Profile</li>
+        <li (click)="editProfile()" class="ml-auto text-info" style="cursor: pointer; color: black; padding-right: 20px" aria-current="page">Edit Profile</li>
+        <li (click)="open(content, currentUser.id)" class="float-right text-danger" style="cursor: pointer" aria-current="page"><a>Delete Account</a></li>
 
       </ol>
     </nav>
