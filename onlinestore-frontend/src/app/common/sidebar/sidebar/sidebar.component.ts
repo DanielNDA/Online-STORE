@@ -29,6 +29,7 @@ export class SidebarComponent implements OnInit {
   searchValue = '';
   id: number;
   products: Product[];
+  expanded = false;
 
 
   constructor(private authService: AuthService,
@@ -66,5 +67,15 @@ export class SidebarComponent implements OnInit {
   // tslint:disable-next-line:typedef
   goToProductByCategory(id: number) {
     this.router.navigate(['products-category', id]);
+  }
+
+  // tslint:disable-next-line:typedef
+  onLeftClick() {
+    if (this.expanded === false) {
+      this.expanded = true;
+    } else if
+    (this.expanded === true){
+      this.expanded = false;
+    }
   }
 }

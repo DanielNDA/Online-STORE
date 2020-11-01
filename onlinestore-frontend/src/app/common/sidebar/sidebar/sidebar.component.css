@@ -27,7 +27,7 @@ li {
 .main-nav-ul ul{
   display: none;
 }
-.main-nav-ul li:hover ul {
+.main-nav-ul li ul {
   display: block;
 }
 
@@ -44,7 +44,7 @@ li {
   margin-right: 40px;
 }
 
-.main-nav-ul ul li:hover ul li{
+.main-nav-ul ul li ul li{
   display: block;
 }
 

@@ -35,7 +35,7 @@ export class OrderService {
 
   // tslint:disable-next-line:typedef
   public getByUsername(): Observable<Order> {
-    return this.http.get<Order>('http://localhost:8080/orders/shopping-cart');
+    return this.http.get<Order>('http://localhost:8080/shopping-cart');
   }
 
   // tslint:disable-next-line:typedef
