@@ -18,8 +18,6 @@ export class NavbarComponent implements OnInit {
   currentUser: User;
   boolean: boolean;
   closeResult = '';
-  public collapse: boolean = false;
-  public cart_num:number;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -41,10 +39,6 @@ export class NavbarComponent implements OnInit {
         }
       }
     });
-    this.orderService.getByUsername()
-      .subscribe(res => {
-        this.cart_num = res.orderLines.length;
-      });
   }
 
   // tslint:disable-next-line:typedef
@@ -110,11 +104,5 @@ export class NavbarComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
-  }
-
-  toggleCartPopup = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    this.orderService.toggleCart();
   }
 }

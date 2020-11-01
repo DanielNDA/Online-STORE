@@ -44,6 +44,7 @@ export class UserViewComponent implements OnInit {
           this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
           this.orderService.findOrders().subscribe(data1 => {
             this.orders = data1;
+            console.log(data1);
           });
         }
       }

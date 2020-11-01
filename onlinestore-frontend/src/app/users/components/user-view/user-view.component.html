@@ -4,7 +4,7 @@
       <ol class="breadcrumb ">
         <li class="breadcrumb-item justify-content-center"><a style="color:black; text-decoration: none"routerLink="/products"><img src="/assets/home.svg" width="20" height="20" class="d-inline-block align-top" alt=""> Home</a></li>
         <li class="breadcrumb-item active justify-content-center" style="cursor: default; color: black" aria-current="page">User Profile</li>
-        <li (click)="editProfile()" class="ml-auto text-info" style="cursor: pointer; color: black; padding-right: 20px" aria-current="page">Edit Profile</li>
+        <li (click)="editProfile()" class="ml-auto text-primary" style="cursor: pointer; color: black; padding-right: 15px" aria-current="page">Edit Profile</li>
         <li (click)="open(content, currentUser.id)" class="float-right text-danger" style="cursor: pointer" aria-current="page"><a>Delete Account</a></li>
 
       </ol>
@@ -79,25 +79,36 @@
         </div>
         <div class="bg-white card mb-4 order-list shadow-sm" *ngFor="let order of orders">
           <div class="gold-members p-4">
-            <a href="#">
-            </a>
             <div class="media">
               <div class="media-body">
-                <h6 class="mb-2">
-                  <a href="#"></a>
-                  <a href="#" class="text-black">{{order.status}}</a>
-                </h6>
-                <p class="text-gray mb-1"><i class="icofont-location-arrow"></i>{{order.deliveryAddress.country}}
-                </p>
-                <p class="text-gray mb-3"><i class="icofont-list"></i>#{{order.id}} <i class="icofont-clock-time ml-2"></i></p>
-                <p class="text-dark" *ngFor="let orderline of order.orderLines"> {{orderline.productDTO.name}}- {{orderline.price}}
-                </p>
-                <hr>
-                <div class="float-right">
-                  <a class="btn btn-sm btn-outline-primary" href="#"><i class="icofont-headphone-alt"></i> HELP</a>
-                  <a class="btn btn-sm btn-primary" href="#"><i class="icofont-refresh"></i> REORDER</a>
+                <div class="card-box">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                      <tr>
+                        <th>Order No.</th>
+                        <th>Delivery Date</th>
+                        <th>Status</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>Order {{order.id}}</td>
+                        <td>{{order.dateOfOrder | date:'short'}}</td>
+                        <td><span class="label label-info">{{order.status}}</span></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <p class="mb-0 text-black text-primary pt-2"><span class="text-black font-weight-bold"> Total Paid:</span> $500
+                  <hr>
+
+
+                <div class="float-right">
+                  <a class="btn btn-sm btn-dark" href="#"><i class="fa fa-support"></i> HELP</a>
+                  <a class="btn btn-sm btn-outline-dark" href="#"><i class="fa fa-first-order"></i> REORDER</a>
+                </div>
+                <p class="mb-0 text-black text-dark pt-2"><span class="text-black font-weight-bold"> Total Paid: </span> {{order.total}} RON
                 </p>
               </div>
             </div>
