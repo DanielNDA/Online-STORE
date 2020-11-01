@@ -87,15 +87,15 @@
                       <thead>
                       <tr>
                         <th>Order No.</th>
-                        <th>Delivery Date</th>
                         <th>Status</th>
+                        <th>Delivery Date</th>
                       </tr>
                       </thead>
                       <tbody>
                       <tr>
                         <td>Order {{order.id}}</td>
-                        <td>{{order.dateOfOrder | date:'short'}}</td>
                         <td><span class="label label-info">{{order.status}}</span></td>
+                        <td>{{order.dateOfOrder | date:'short'}}</td>
                       </tr>
                       </tbody>
                     </table>
