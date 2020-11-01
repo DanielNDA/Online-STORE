@@ -203,6 +203,7 @@ public class OrderService {
         addressDTO.setZipCode(addressModel.getZipCode());
         orderDTO.setDeliveryAddress(addressDTO);
         orderDTO.setOrderLines(orderLinesDTO);
+        orderDTO.setDateOfOrder(order.getDateOfOrder());
         orderDTO.setStatus(order.getStatus().name());
 
         return orderDTO;
