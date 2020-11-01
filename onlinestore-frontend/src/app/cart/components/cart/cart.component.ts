@@ -10,10 +10,10 @@ import {ProductService} from '../../../products/components/service/product.servi
 
 @Component({
   selector: 'app-order-list',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css']
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
 })
-export class OrderComponent implements OnInit {
+export class CartComponent implements OnInit {
   order: Order;
   id: number;
   shippingCost: number;

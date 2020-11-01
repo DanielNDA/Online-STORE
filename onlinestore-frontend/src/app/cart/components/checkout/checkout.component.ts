@@ -10,10 +10,10 @@ import {DatePipe, formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-order-add',
-  templateUrl: './order-add.component.html',
-  styleUrls: ['./order-add.component.css']
+  templateUrl: './checkout.component.html',
+  styleUrls: ['./checkout.component.css']
 })
-export class OrderAddComponent implements OnInit {
+export class CheckoutComponent implements OnInit {
   order: Order;
   id: number;
   currentUser: User;

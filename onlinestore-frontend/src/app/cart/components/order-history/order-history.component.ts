@@ -8,10 +8,10 @@ import {ProductService} from '../../../products/components/service/product.servi
 
 @Component({
   selector: 'app-order-users',
-  templateUrl: './order-users.component.html',
-  styleUrls: ['./order-users.component.css']
+  templateUrl: './order-history.component.html',
+  styleUrls: ['./order-history.component.css']
 })
-export class OrderUsersComponent implements OnInit {
+export class OrderHistoryComponent implements OnInit {
   orders: Order[];
 
   constructor(private orderService: OrderService,

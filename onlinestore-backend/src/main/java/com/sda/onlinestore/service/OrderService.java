@@ -108,7 +108,7 @@ public class OrderService {
 
     public List<OrderDTO> findAllByUsername(String username) {
         List<OrderDTO> orderDTOS = new ArrayList<>();
-        List<OrderModel> orderModels = orderRepository.findAllByUserName(username);
+        List<OrderModel> orderModels = orderRepository.findAllByUserNameAndStatus(username, Status.DELIVERED);
         for (OrderModel om : orderModels) {
             OrderDTO orderDTO = convert(om);
             orderDTOS.add(orderDTO);
