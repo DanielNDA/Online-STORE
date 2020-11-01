@@ -167,8 +167,12 @@ public class OrderService {
 
     public OrderDTO findByUsername(String username) {
         Optional<OrderModel> order = orderRepository.findOrderModelByUserNameAndStatus(username, Status.HOLD);
-        OrderDTO orderDTO = convert(order.get());
-        orderDTO.setUserName(username);
+        OrderDTO orderDTO = new OrderDTO();
+        if(order.isPresent()) {
+            orderDTO = convert(order.get());
+            orderDTO.setUserName(username);
+            return orderDTO;
+        }
         return orderDTO;
     }
 

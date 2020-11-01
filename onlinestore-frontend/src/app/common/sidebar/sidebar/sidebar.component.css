@@ -27,7 +27,7 @@ li {
 .main-nav-ul ul {
   display: none;
 }
-.main-nav-ul li ul {
+.main-nav-ul li:hover ul {
   display: block;
 }
 
