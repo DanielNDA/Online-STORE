@@ -23,6 +23,7 @@ export class ProductListComponent implements OnInit {
   };
   currentUser: User;
   boolean: boolean;
+  searchValue = '';
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
@@ -76,6 +77,7 @@ export class ProductListComponent implements OnInit {
     });
   }
   // tslint:disable-next-line:typedef
+
   hasRole(role: string) {
     this.boolean = this.authService.hasRole(role);
     return this.boolean;
