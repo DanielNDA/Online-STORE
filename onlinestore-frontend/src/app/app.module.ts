@@ -40,6 +40,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {DatePipe} from '@angular/common';
 import { SidebarComponent } from './common/sidebar/sidebar/sidebar.component';
 import {RouteReuseStrategy} from '@angular/router';
+import { CategorySubcategoriesComponent } from './categories/components/category-subcategories/category-subcategories.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {RouteReuseStrategy} from '@angular/router';
     ManufacturerAddComponent,
     ManufacturerListComponent,
     ProductsCategoryComponent,
-    SidebarComponent
+    SidebarComponent,
+    CategorySubcategoriesComponent
   ],
   imports: [
     BrowserModule,

@@ -52,7 +52,4 @@ export class CategoryEditComponent implements OnInit {
     this.router.navigate(['category-list']);
   }
 
-  hasRole(role: string) {
-
-  }
 }

@@ -24,7 +24,7 @@ li {
 .main-nav a:hover {
   background-color: #7a9db8;
 }
-.main-nav-ul ul {
+.main-nav-ul ul{
   display: none;
 }
 .main-nav-ul li:hover ul {

@@ -1,9 +1,9 @@
-<div class="card my-4" *ngIf="hasRole('ADMIN')">
+<div class="card my-5" *ngIf="hasRole('ADMIN')">
   <div class="card-body">
     <table class="table table-bordered table-striped">
       <thead class="thead-light">
       <tr>
-        <th class="align-middle" scope="col">Category</th>
+        <th class="align-middle" scope="col">Category - {{parent.name}}</th>
         <th class="align-middle" scope="col">
           <div class="row d-flex align-items-center">
             <div class="col-3 float-right">
@@ -16,30 +16,35 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let parent of parents | filter: searchValue | paginate: config" style="cursor: pointer">
-        <td>{{ parent.name }}</td>
+      <tr *ngFor="let subCategory of categories | filter: searchValue | paginate: config" style="cursor: pointer">
+        <td class="align-items-center">{{ subCategory.name }}</td>
         <td>
           <div class="btn-group">
-            <button (click)="open(content, parent.id)" class="btn btn-outline-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>
+            <button (click)="open(content, subCategory.id)" class="btn btn-outline-danger small"><i class="fa fa-trash-o" aria-hidden="true"></i>
             </button>
-            <button (click)="viewSubCategories(parent.id)" class="btn btn-outline-warning"><i class="fa fa-bookmark" aria-hidden="true"></i>
-            </button>
-            <button (click)="editCategory(parent.id)" class="btn btn-outline-info"><i class="fa fa-pencil" aria-hidden="true"></i>
+            <button (click)="editCategory(subCategory.id)" class="btn btn-outline-info"><i class="fa fa-pencil" aria-hidden="true"></i>
             </button>
           </div>
         </td>
       </tr>
       </tbody>
     </table>
+    <div class="btn-group">
+      <a (click)="goToCategories()"
+         class="btn btn-secondary mx-1">Back
+      </a>
+    </div>
   </div>
 </div>
 <div id="pagination">
   <pagination-template #p="paginationApi" (pageChange)="config.currentPage = $event">
+
+
     <div class="custom-pagination">
       <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
         <span *ngIf="!p.isFirstPage()" (click)="p.previous()">
           <
-        </span>
+            </span>
       </div>
       <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
         <span (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
@@ -51,6 +56,7 @@
         <span *ngIf="!p.isLastPage()" (click)="p.next()"> > </span>
       </div>
     </div>
+
   </pagination-template>
 </div>
 

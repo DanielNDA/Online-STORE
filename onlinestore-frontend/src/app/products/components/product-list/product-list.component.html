@@ -1,31 +1,41 @@
 <div class="container" style="padding-top: 15px">
   <div class="row">
-    <div class="col-sm-4 mb-1 product" *ngFor="let product of products | paginate: config">
-        <div class="card">
-          <img *ngIf="product.thumbnail | async as thumbnail"
-               [src]="thumbnail[0].url"
-               style="width:100%; height: 235px">
-          <br>
-          <small class="text-muted">{{product.categoryDTO.name}}</small>
-          <a style="color: black" class="product-name"> {{product.name}}</a>
-          <div class="small m-t-xs">
-            {{product.description}}</div>
-          <div class="small m-t-s">
-            <b>{{product.price}}</b> RON / {{product.productType.toLowerCase()}}
-          </div>
-          <hr>
-          <div class="btn-group d-lg-inline-block" style="padding-bottom: 15px">
-            <button (click)="addToCart(product.id)" class="btn btn-outline-info rounded-pill mx-2"><img
-              src="assets/add-to-cart2.svg.svg" width="20" height="25" class="d-inline-block align-content-center" alt="">
-            </button>
-            <button *ngIf="hasRole('ADMIN')" (click)="editProduct(product.id)" class="btn btn-outline-primary rounded-pill"><img
-              src="assets/pen.svg" width="20" height="25" class="d-inline-block align-content-center" alt="">
-            </button>
-            <button *ngIf="hasRole('ADMIN')" (click)="deleteProduct(product.id)" class="btn btn-outline-danger rounded-pill mx-2"><img
-              src="assets/delete.svg" width="20" height="25" class="d-inline-block align-content-center" alt="">
-            </button>
-          </div>
+    <div class="col-sm-4 mb-1 product">
+      <div class="card">
+        <input type="text" [(ngModel)]="searchValue" class="input-group-text text-left"
+               placeholder="Search for product">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 mb-1 product" *ngFor="let product of products | filter: searchValue | paginate: config">
+      <div class="card">
+        <img *ngIf="product.thumbnail | async as thumbnail"
+             [src]="thumbnail[0].url"
+             style="width:100%; height: 235px">
+        <br>
+        <small class="text-muted">{{product.categoryDTO.name}}</small>
+        <a style="color: black" class="product-name"> {{product.name}}</a>
+        <div class="small m-t-xs">
+          {{product.description}}</div>
+        <div class="small m-t-s">
+          <b>{{product.price}}</b> RON / {{product.productType.toLowerCase()}}
         </div>
+        <hr>
+        <div class="btn-group d-lg-inline-block" style="padding-bottom: 15px">
+          <button (click)="addToCart(product.id)" class="btn btn-outline-info rounded-pill mx-2"><img
+            src="assets/add-to-cart2.svg.svg" width="20" height="25" class="d-inline-block align-content-center" alt="">
+          </button>
+          <button *ngIf="hasRole('ADMIN')" (click)="editProduct(product.id)"
+                  class="btn btn-outline-primary rounded-pill"><img
+            src="assets/pen.svg" width="20" height="25" class="d-inline-block align-content-center" alt="">
+          </button>
+          <button *ngIf="hasRole('ADMIN')" (click)="deleteProduct(product.id)"
+                  class="btn btn-outline-danger rounded-pill mx-2"><img
+            src="assets/delete.svg" width="20" height="25" class="d-inline-block align-content-center" alt="">
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
