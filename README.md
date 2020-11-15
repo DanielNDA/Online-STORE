@@ -26,11 +26,11 @@ products and unlike the user, he can monitor the order history.
 1. Install all dependencies with NPM.
 ``` 
 npm install
-
+```
 2. Start the project. Once started, you can view the application by opening <https://localhost:4200>
 ``` 
 ng serve
-
+```
 
 ##Screenshots
 <p align="center">
@@ -45,5 +45,5 @@ ng serve
 #Placing an order
   <img src=https://i.imgur.com/evulJdw.gifv>
 #Logout
-  <img src=https://i.imgur.com/LxnZkwn.gif>
+  <a href="https://imgur.com/LxnZkwn"><img src="https://i.imgur.com/LxnZkwn.gif" title="source: imgur.com" /></a>
 </p>
