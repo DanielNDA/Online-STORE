@@ -1,15 +1,17 @@
-<div class="card my-5" *ngIf="hasRole('ADMIN')">
+<div class="card my-4" *ngIf="hasRole('ADMIN')">
   <div class="card-body">
     <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
+      <thead class="thead-light">
       <tr>
-        <th class="align-middle" scope="col">#</th>
-        <th class="align-middle" scope="col">Manufacturer</th>
-        <th class="align-middle" scope="col">
+        <th class="align-middle text-dark" scope="col">Manufacturers</th>
+        <th class="align-middle text-dark" scope="col">
           <div class="row d-flex align-items-center">
             <div class="col">
               <div class="input-group">
-
+                <input type="text" [(ngModel)]="searchValue" class="input-group-text text-left col-3" placeholder="Search for category. . .">
+                <div class="input-group-append ml-auto">
+                  <a (click)="addNewManufacturer()" class="nav-link text-dark" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="New Category"><img src="/assets/plusnew.svg" width="20" height="20" class="d-inline-block align-content-center" alt=""></a>
+                </div>
               </div>
             </div>
           </div>
@@ -17,14 +19,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let manufacturer of manufacturers ">
-        <td>{{ manufacturer.id }}</td>
+      <tr *ngFor="let manufacturer of manufacturers | filter: searchValue | paginate: config" style="cursor: pointer">
         <td>{{ manufacturer.name }}</td>
         <td>
           <div class="btn-group">
-            <button (click)="delete(manufacturer.id)" class="btn btn-outline-dark"><i class="fa fa-trash"
-                                                                                        aria-hidden="true"></i>
-            </button>
+            <a (click)="delete(manufacturer.id)" class="nav-link text-dark" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Remove Category"><img src="/assets/delete.svg" width="20" height="20" class="d-inline-block align-content-center" alt=""></a>
           </div>
         </td>
       </tr>
@@ -32,3 +31,91 @@
     </table>
   </div>
 </div>
+<div id="pagination">
+  <pagination-template #p="paginationApi" (pageChange)="config.currentPage = $event">
+    <div class="custom-pagination">
+      <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+        <span *ngIf="!p.isFirstPage()" (click)="p.previous()">
+          <
+        </span>
+      </div>
+      <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+        <span (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
+        <div *ngIf="p.getCurrent() === page.value">
+          <span>{{ page.label }}</span>
+        </div>
+      </div>
+      <div class="pagination-next" [class.disabled]="p.isLastPage()">
+        <span *ngIf="!p.isLastPage()" (click)="p.next()"> > </span>
+      </div>
+    </div>
+  </pagination-template>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirm deletion</h4>
+    <button class="btn btn-outline-light" (click)="modal.dismiss()">X
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 text-center">
+        Are you sure you want to delete this category?
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" ngbAutofocus class="btn btn-danger" (click)="modal.close()">Confirm Delete</button>
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="card my-5" *ngIf="hasRole('ADMIN')">-->
+<!--  <div class="card-body">-->
+<!--    <table class="table table-bordered table-striped">-->
+<!--      <thead class="thead-dark">-->
+<!--      <tr>-->
+<!--        <th class="align-middle" scope="col">#</th>-->
+<!--        <th class="align-middle" scope="col">Manufacturer</th>-->
+<!--        <th class="align-middle" scope="col">-->
+<!--          <div class="row d-flex align-items-center">-->
+<!--            <div class="col">-->
+<!--              <div class="input-group">-->
+
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr *ngFor="let manufacturer of manufacturers ">-->
+<!--        <td>{{ manufacturer.id }}</td>-->
+<!--        <td>{{ manufacturer.name }}</td>-->
+<!--        <td>-->
+<!--          <div class="btn-group">-->
+<!--            <button (click)="delete(manufacturer.id)" class="btn btn-outline-dark"><i class="fa fa-trash"-->
+<!--                                                                                        aria-hidden="true"></i>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
+<!--  </div>-->
+<!--</div>-->
