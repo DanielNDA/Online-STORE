@@ -22,6 +22,7 @@ export class UserViewComponent implements OnInit {
   image: Observable<any>;
   users: User[] = [];
   orders: Order[] = [];
+  lastOrder: Order;
 
 
   constructor(private authService: AuthService,
@@ -32,6 +33,7 @@ export class UserViewComponent implements OnInit {
               private orderService: OrderService) {
     this.currentUser = new User();
     this.currentUser.email = '';
+    this.lastOrder = new Order();
   }
 
   ngOnInit(): void {
@@ -44,7 +46,7 @@ export class UserViewComponent implements OnInit {
           this.currentUser.image = this.userService.getUserImage(this.currentUser.id);
           this.orderService.findOrders().subscribe(data1 => {
             this.orders = data1;
-            console.log(data1);
+            this.lastOrder = this.orders[this.orders.length - 1];
           });
         }
       }
@@ -94,5 +96,10 @@ export class UserViewComponent implements OnInit {
   // tslint:disable-next-line:typedef
   private goToHomePage() {
     this.router.navigate(['products']);
+  }
+
+  // tslint:disable-next-line:typedef
+  viewOrders(id: number) {
+    this.router.navigate(['orders-user', id]);
   }
 }

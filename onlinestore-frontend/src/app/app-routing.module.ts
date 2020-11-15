@@ -20,6 +20,8 @@ import {ProductsCategoryComponent} from './products/components/products-category
 import {CheckoutComponent} from './cart/components/checkout/checkout.component';
 import {OrderHistoryComponent} from './cart/components/order-history/order-history.component';
 import {CategorySubcategoriesComponent} from './categories/components/category-subcategories/category-subcategories.component';
+import {UserOrdersComponent} from './users/components/user-orders/user-orders.component';
+import {UserOrderOrderlinesComponent} from './users/components/user-order-orderlines/user-order-orderlines.component';
 
 const routes: Routes = [
   {path: 'register', component: RegisterComponent},
@@ -41,7 +43,9 @@ const routes: Routes = [
   {path: 'products-category/:id', component: ProductsCategoryComponent, canActivate: [AuthGuardService]},
   {path: 'order-details/:id', component: CheckoutComponent, canActivate: [AuthGuardService]},
   {path: 'order-history', component: OrderHistoryComponent, canActivate: [AuthGuardService]},
-  {path: 'subcategories-category/:id', component: CategorySubcategoriesComponent, canActivate: [AuthGuardService]}
+  {path: 'subcategories-category/:id', component: CategorySubcategoriesComponent, canActivate: [AuthGuardService]},
+  {path: 'orders-user/:id', component: UserOrdersComponent, canActivate: [AuthGuardService]},
+  {path: 'user-order-orderlines/:id', component: UserOrderOrderlinesComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

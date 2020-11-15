@@ -3,12 +3,15 @@
     <table class="table table-bordered table-striped">
       <thead class="thead-light">
       <tr>
-        <th class="align-middle" scope="col">Category</th>
-        <th class="align-middle" scope="col">
+        <th class="align-middle text-dark" scope="col">Categories</th>
+        <th class="align-middle text-dark" scope="col">
           <div class="row d-flex align-items-center">
-            <div class="col-3 float-right">
+            <div class="col">
               <div class="input-group">
-                <input type="text" [(ngModel)]="searchValue" class="input-group-text text-left" placeholder="Search for category. . .">
+                <input type="text" [(ngModel)]="searchValue" class="input-group-text text-left col-3" placeholder="Search for category. . .">
+                <div class="input-group-append ml-auto">
+                  <a (click)="addNewCategory()" class="nav-link text-dark" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="New Category"><img src="/assets/plusnew.svg" width="20" height="20" class="d-inline-block align-content-center" alt=""></a>
+                </div>
               </div>
             </div>
           </div>
@@ -20,12 +23,9 @@
         <td>{{ parent.name }}</td>
         <td>
           <div class="btn-group">
-            <button (click)="open(content, parent.id)" class="btn btn-outline-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>
-            </button>
-            <button (click)="viewSubCategories(parent.id)" class="btn btn-outline-warning"><i class="fa fa-bookmark" aria-hidden="true"></i>
-            </button>
-            <button (click)="editCategory(parent.id)" class="btn btn-outline-info"><i class="fa fa-pencil" aria-hidden="true"></i>
-            </button>
+            <a (click)="open(content, parent.id)" class="nav-link text-dark" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Remove Category"><img src="/assets/delete.svg" width="20" height="20" class="d-inline-block align-content-center" alt=""></a>
+            <a (click)="viewSubCategories(parent.id)" class="nav-link text-dark" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="View Subcategories"><img src="/assets/foldernew.svg" width="20" height="20" class="d-inline-block align-content-center" alt=""></a>
+            <a (click)="editCategory(parent.id)" class="nav-link text-dark" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Edit Category"><img src="/assets/pen.svg" width="20" height="20" class="d-inline-block align-content-center" alt=""></a>
           </div>
         </td>
       </tr>

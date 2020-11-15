@@ -18,7 +18,7 @@ export class CategorySubcategoriesComponent implements OnInit {
   id: number;
   searchValue = '';
   config = {
-    itemsPerPage: 4,
+    itemsPerPage: 6,
     currentPage: 1
   };
   boolean: boolean;

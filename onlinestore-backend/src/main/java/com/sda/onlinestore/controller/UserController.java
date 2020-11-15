@@ -1,6 +1,7 @@
 package com.sda.onlinestore.controller;
 
 import com.sda.onlinestore.common.utils.AuthenticationBean;
+import com.sda.onlinestore.exceptions.EmailAlreadyRegisteredException;
 import com.sda.onlinestore.persistence.dto.UserDTO;
 import com.sda.onlinestore.persistence.dto.file.ResponseFile;
 import com.sda.onlinestore.persistence.dto.file.ResponseMessage;

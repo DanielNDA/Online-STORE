@@ -1,5 +1,6 @@
 package com.sda.onlinestore.service;
 
+import com.sda.onlinestore.exceptions.EmailAlreadyRegisteredException;
 import com.sda.onlinestore.persistence.model.ImageModelUser;
 import com.sda.onlinestore.persistence.model.UserModel;
 import com.sda.onlinestore.persistence.repository.ImageRepositoryUser;
@@ -24,7 +25,7 @@ public class ImageServiceUser {
     @Autowired
     private UserRepository userRepository;
 
-    public ImageModelUser store(MultipartFile file) throws IOException, InterruptedException {
+    public ImageModelUser store(MultipartFile file) throws IOException, InterruptedException, EmailAlreadyRegisteredException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         ImageModelUser image = new ImageModelUser(fileName, file.getContentType(), file.getBytes());
         TimeUnit.SECONDS.sleep(3);

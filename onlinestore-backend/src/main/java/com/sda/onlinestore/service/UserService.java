@@ -1,6 +1,7 @@
 package com.sda.onlinestore.service;
 
 import com.sda.onlinestore.common.utils.Hasher;
+import com.sda.onlinestore.exceptions.EmailAlreadyRegisteredException;
 import com.sda.onlinestore.persistence.dto.AddressDTO;
 import com.sda.onlinestore.persistence.dto.RoleDTO;
 import com.sda.onlinestore.persistence.dto.UserDTO;
@@ -25,14 +26,37 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public void save(UserDTO userDTO) {
+    public void save(UserDTO userDTO){
         UserModel userModel = new UserModel();
+
         AddressDTO addressDTO = userDTO.getAddressDTO();
         AddressModel addressModel = new AddressModel();
 
-        RoleModel roleModel = new RoleModel();
-        roleModel.setName("USER");
-        roleRepository.save(roleModel);
+        RoleModel roleAdmin = new RoleModel();
+        RoleModel roleUser = new RoleModel();
+        String adminRole = "ADMIN";
+        String userRole = "USER";
+
+        List<UserModel> users = userRepository.findAll();
+        int size = users.size();
+
+        if (size == 0) {
+            roleAdmin.setName(adminRole);
+            roleRepository.save(roleAdmin);
+            userModel.setRole(roleAdmin);
+        } else if (size == 1) {
+            roleUser.setName(userRole);
+            roleRepository.save(roleUser);
+            userModel.setRole(roleUser);
+        } else {
+            RoleModel roleModel = new RoleModel();
+            Optional<RoleModel> userRoleModel = roleRepository.findByName(userRole);
+            if (userRoleModel.isPresent()) {
+                RoleModel role = userRoleModel.get();
+                roleModel.setName(role.getName());
+                userModel.setRole(role);
+            }
+        }
 
         if (addressDTO != null) {
             addressModel.setId(addressDTO.getId());
@@ -40,15 +64,15 @@ public class UserService {
             addressModel.setCity(addressDTO.getCity());
             addressModel.setStreet(addressDTO.getStreet());
             addressModel.setZipCode(addressDTO.getZipCode());
+
             userModel.setAddressModel(addressModel);
         }
+
         userModel.setPassword(Hasher.encode(userDTO.getPassword()));
         userModel.setChannel(userDTO.getChannel());
         userModel.setFirstName(userDTO.getFirstName());
         userModel.setLastName(userDTO.getLastName());
         userModel.setEmail(userDTO.getEmail());
-
-        userModel.setRole(roleModel);
 
         userRepository.save(userModel);
     }
@@ -166,7 +190,7 @@ public class UserService {
             RoleModel roleModel = userModel.get().getRole();
             RoleDTO roleDTO = new RoleDTO();
 
-            if(roleModel != null) {
+            if (roleModel != null) {
                 roleDTO.setId(roleModel.getId());
                 roleDTO.setName(roleModel.getName());
             }

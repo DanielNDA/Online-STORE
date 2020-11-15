@@ -16,7 +16,7 @@ export class CategoryListComponent implements OnInit {
   parents: Category[] = [];
   subCategories: Category[] = [];
   config = {
-    itemsPerPage: 4,
+    itemsPerPage: 6,
     currentPage: 1
   };
   searchValue = '';
@@ -54,6 +54,11 @@ export class CategoryListComponent implements OnInit {
     this.categoryService.delete(id).subscribe(data => {
       this.getCategories();
     });
+  }
+
+  // tslint:disable-next-line:typedef
+  addNewCategory() {
+    this.router.navigate(['category-add']);
   }
 
   // tslint:disable-next-line:typedef

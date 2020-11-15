@@ -1,0 +1,49 @@
+<div class="card my-4">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-light">
+      <tr>
+        <th class="align-middle text-dark" scope="col">Orders</th>
+        <th class="align-middle text-dark" scope="col">Status</th>
+        <th class="align-middle text-dark" scope="col">Order date</th>
+        <th class="align-middle text-dark" scope="col">Total</th>
+        <th class="align-middle text-dark" scope="col">Order Lines</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of orders | filter: searchValue | paginate: config" style="cursor: pointer">
+        <td>{{ order.id }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.dateOfOrder | date:'short'}}</td>
+        <td>{{ order.total }} RON</td>
+        <td>
+          <div class="btn-group">
+            <a (click)="viewOrderLines(order.id)" class="nav-link text-dark" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="View Order Lines"><img src="/assets/order.svg" width="20" height="20" class="d-inline-block align-content-center" alt=""></a>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div id="pagination">
+  <pagination-template #p="paginationApi" (pageChange)="config.currentPage = $event">
+    <div class="custom-pagination">
+      <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+        <span *ngIf="!p.isFirstPage()" (click)="p.previous()">
+          <
+        </span>
+      </div>
+      <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+        <span (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
+        <div *ngIf="p.getCurrent() === page.value">
+          <span>{{ page.label }}</span>
+        </div>
+      </div>
+      <div class="pagination-next" [class.disabled]="p.isLastPage()">
+        <span *ngIf="!p.isLastPage()" (click)="p.next()"> > </span>
+      </div>
+    </div>
+  </pagination-template>
+</div>
+

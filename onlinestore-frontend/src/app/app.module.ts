@@ -38,9 +38,10 @@ import {ManufacturerListComponent} from './manufacturer/components/manufacturer-
 import {ProductsCategoryComponent} from './products/components/products-category/products-category.component';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {DatePipe} from '@angular/common';
-import { SidebarComponent } from './common/sidebar/sidebar/sidebar.component';
-import {RouteReuseStrategy} from '@angular/router';
-import { CategorySubcategoriesComponent } from './categories/components/category-subcategories/category-subcategories.component';
+import {SidebarComponent} from './common/sidebar/sidebar/sidebar.component';;
+import {CategorySubcategoriesComponent} from './categories/components/category-subcategories/category-subcategories.component';
+import { UserOrdersComponent } from './users/components/user-orders/user-orders.component';
+import { UserOrderOrderlinesComponent } from './users/components/user-order-orderlines/user-order-orderlines.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,9 @@ import { CategorySubcategoriesComponent } from './categories/components/category
     ManufacturerListComponent,
     ProductsCategoryComponent,
     SidebarComponent,
-    CategorySubcategoriesComponent
+    CategorySubcategoriesComponent,
+    UserOrdersComponent,
+    UserOrderOrderlinesComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,7 @@ import { CategorySubcategoriesComponent } from './categories/components/category
     FormsModule,
     HttpClientModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
   ],
   providers: [OrderService, ProductService, UserService, DatePipe,
     {

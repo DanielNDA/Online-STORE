@@ -8,7 +8,7 @@
           <div class="row d-flex align-items-center">
             <div class="col-3 float-right">
               <div class="input-group">
-                <input type="text" [(ngModel)]="searchValue" class="input-group-text text-left" placeholder="Search for category. . .">
+                <input type="text" [(ngModel)]="searchValue" class="input-group-text text-left" placeholder="Search for subcategory. . .">
               </div>
             </div>
           </div>
@@ -20,10 +20,9 @@
         <td class="align-items-center">{{ subCategory.name }}</td>
         <td>
           <div class="btn-group">
-            <button (click)="open(content, subCategory.id)" class="btn btn-outline-danger small"><i class="fa fa-trash-o" aria-hidden="true"></i>
-            </button>
-            <button (click)="editCategory(subCategory.id)" class="btn btn-outline-info"><i class="fa fa-pencil" aria-hidden="true"></i>
-            </button>
+            <a (click)="open(content, parent.id)" class="nav-link text-dark" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Remove Category"><img src="/assets/delete.svg" width="20" height="20" class="d-inline-block align-content-center" alt=""></a>
+
+            <a (click)="editCategory(parent.id)" class="nav-link text-dark" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Edit Category"><img src="/assets/pen.svg" width="20" height="20" class="d-inline-block align-content-center" alt=""></a>
           </div>
         </td>
       </tr>
