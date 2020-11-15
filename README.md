@@ -52,3 +52,8 @@ Logout
 <br>
   <a href="https://imgur.com/LxnZkwn"><img src="https://i.imgur.com/LxnZkwn.gif" title="source: imgur.com" /></a>
 </p>
+
+## Schema
+<p align="center">
+  <img src=https://i.imgur.com/4ibqQDo.png>
+</p>
