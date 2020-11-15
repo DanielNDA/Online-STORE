@@ -9,7 +9,7 @@ public class OrderLineModel {
     private Long id;
     private Integer quantity;
     private Double price;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private ProductModel productModel;
 
     public Long getId() {
