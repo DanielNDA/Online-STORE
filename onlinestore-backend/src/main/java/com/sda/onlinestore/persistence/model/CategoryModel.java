@@ -20,7 +20,7 @@ public class CategoryModel {
     @JsonIgnoreProperties("subCategories")
     private CategoryModel categoryModelParent;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryModelParent")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryModelParent", orphanRemoval = true)
     @JsonIgnoreProperties("categoryModelParent")
     private List<CategoryModel> subCategories = new ArrayList<>();
 

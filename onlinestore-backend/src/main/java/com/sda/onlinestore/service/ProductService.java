@@ -5,10 +5,7 @@ import com.sda.onlinestore.persistence.dto.CategoryDTO;
 import com.sda.onlinestore.persistence.dto.ManufacturerDTO;
 import com.sda.onlinestore.persistence.dto.ProductDTO;
 import com.sda.onlinestore.persistence.model.*;
-import com.sda.onlinestore.persistence.repository.CategoryRepository;
-import com.sda.onlinestore.persistence.repository.ImageProductRepository;
-import com.sda.onlinestore.persistence.repository.ManufacturerRepository;
-import com.sda.onlinestore.persistence.repository.ProductRepository;
+import com.sda.onlinestore.persistence.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +22,8 @@ public class ProductService {
     private CategoryRepository categoryRepository;
     @Autowired
     private ManufacturerRepository manufacturerRepository;
+    @Autowired
+    private OrderRepository orderRepository;
     @Autowired
     private ImageProductService imageProductService;
     @Autowired
@@ -141,9 +140,20 @@ public class ProductService {
 
     public void deleteById(Long id) {
         ProductModel productModel = productRepository.findById(id).orElse(null);
-        CategoryModel categoryModel = productModel.getCategoryModel();
-        categoryModel.getProducts().removeIf(a->a.getId().equals(id));
-        categoryRepository.save(categoryModel);
+        CategoryModel categoryModel = null;
+        if (productModel != null) {
+            categoryModel = productModel.getCategoryModel();
+        }
+        if (categoryModel != null) {
+            categoryModel.getProducts().removeIf(a -> a.getId().equals(id));
+        }
+        List<OrderModel> orderModels = orderRepository.findAll();
+        for (OrderModel order: orderModels) {
+            order.getOrderLines().removeIf(orderLine -> orderLine.getProductModel().getId().equals(id));
+        }
+        if (categoryModel != null) {
+            categoryRepository.save(categoryModel);
+        }
 
         productRepository.deleteById(id);
     }
