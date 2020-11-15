@@ -24,9 +24,7 @@ products and unlike the user, he can monitor the order history.
 
 ## Getting Started
 1. Modify application.properties from resources package with your configurations.
-
 2. Install all dependencies with NPM.
-``` 
 npm install
 ```
 3. Start the project. Once started, you can view the application by opening <https://localhost:4200> in your browser.
