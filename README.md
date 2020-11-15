@@ -36,16 +36,16 @@ ng serve
 
 ## Screenshots
 <p align="center">
-# Register & Login Form
+Register & Login Form
   <img src=https://i.imgur.com/Id94uwu.png>
   <img src=https://i.imgur.com/ezLlRYT.png>
-# Administrator Panel
+Administrator Panel
   <img src=https://i.imgur.com/9aYynta.png>
-# Product list
+Product list
   <img src=https://i.imgur.com/ubegnM9.png>
   <img src=https://i.imgur.com/BszlydI.png>
-# Placing an order
+Placing an order
   <a href="https://imgur.com/evulJdw"><img src="https://i.imgur.com/evulJdw.gif" title="source: imgur.com" /></a>
-# Logout
+Logout
   <a href="https://imgur.com/LxnZkwn"><img src="https://i.imgur.com/LxnZkwn.gif" title="source: imgur.com" /></a>
 </p>
