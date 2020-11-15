@@ -13,6 +13,12 @@ export class ManufacturerListComponent implements OnInit {
 
   manufacturers: Manufacturer[];
   boolean: boolean;
+  searchValue = '';
+  closeResult = '';
+  config = {
+    itemsPerPage: 6,
+    currentPage: 1
+  };
 
   constructor(private manufacturerService: ManufacturerService,
               private route: ActivatedRoute,
@@ -46,5 +52,10 @@ export class ManufacturerListComponent implements OnInit {
       this.router.navigate(['products']);
     }
     return this.boolean;
+  }
+
+  // tslint:disable-next-line:typedef
+  addNewManufacturer() {
+    this.router.navigate(['manufacturer-add']);
   }
 }
