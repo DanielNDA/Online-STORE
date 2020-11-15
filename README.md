@@ -24,7 +24,7 @@ products and unlike the user, he can monitor the order history.
 
 ## Getting Started
 1. Modify application.properties from resources package with your configurations.
-```
+
 2. Install all dependencies with NPM.
 ``` 
 npm install
@@ -34,7 +34,6 @@ npm install
 ng serve
 ```
 4. Log in into your administrator account, you can find it in accounts table.
-``` 
 
 ##Screenshots
 <p align="center">
@@ -49,5 +48,5 @@ ng serve
 #Placing an order
   <img src=https://i.imgur.com/evulJdw.gifv>
 #Logout
-  <img src=https://i.imgur.com/LxnZkwn.gifv>
+  <img src=https://i.imgur.com/LxnZkwn.gif>
 </p>
