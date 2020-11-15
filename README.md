@@ -47,6 +47,7 @@ Product list
 Placing an order
 <br>
   <a href="https://imgur.com/evulJdw"><img src="https://i.imgur.com/evulJdw.gif" title="source: imgur.com" /></a>
+<br>
 Logout
 <br>
   <a href="https://imgur.com/LxnZkwn"><img src="https://i.imgur.com/LxnZkwn.gif" title="source: imgur.com" /></a>
